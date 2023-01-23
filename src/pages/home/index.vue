@@ -3,7 +3,7 @@
         <HeaderMenu/>
         <AsideMenu/>
         <FooterMenu/>
-        <div class="main-Page bg-white">
+        <div class="main-Page bg-white mainPage">
             <router-view/>
         </div>
     </div>
