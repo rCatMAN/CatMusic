@@ -11,8 +11,8 @@
 
 <script setup lang="ts">
 import AsideMenu from "../../components/aside-menu/index.vue"
-import HeaderMenu from "../../components/header-menu/index.vue"
-import FooterMenu from "../../components/footer-menu/index.vue"
+import HeaderMenu from "../../components/header/index.vue"
+import FooterMenu from "../../components/footer/index.vue"
 </script>
 
 <style>
