@@ -25,6 +25,7 @@ import FooterMenu from "../../components/FooterMenu/index.vue"
     top: 50%;
     left: 50%;
     border-radius: 30px;
+    box-shadow:0 5px 17px 9px #0000001a;
 }
 .mainPage{
     position: absolute;
