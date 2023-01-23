@@ -3,17 +3,16 @@
         <HeaderMenu/>
         <AsideMenu/>
         <FooterMenu/>
-        <div class="mainPage bg-white">
+        <div class="main-Page bg-white">
             <router-view/>
         </div>
     </div>
 </template>
 
-
 <script setup lang="ts">
-import AsideMenu from "../../components/AsideMenu/index.vue"
-import HeaderMenu from "../../components/HeaderMenu/index.vue"
-import FooterMenu from "../../components/FooterMenu/index.vue"
+import AsideMenu from "../../components/aside-menu/index.vue"
+import HeaderMenu from "../../components/header/index.vue"
+import FooterMenu from "../../components/footer/index.vue"
 </script>
 
 <style>

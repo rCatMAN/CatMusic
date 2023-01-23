@@ -18,6 +18,10 @@ const toPage = ()=>{
 </div>
 </template>
 
+<script setup lang='ts'>
+
+</script>
+
 <style scoped>
 .Header{
     border-bottom: 2px solid var(--primary-color);

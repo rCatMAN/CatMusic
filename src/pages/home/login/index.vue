@@ -1,7 +1,3 @@
-<script setup lang='ts'>
-
-</script>
-
 <template>
 <div class="bg-white w-full h-full">
     <div class="flex items-center justify-between" style="height: 100%;margin-right: 14%;margin-left: 14%;" >
@@ -23,6 +19,10 @@
     </div>
 </div>
 </template>
+
+<script setup lang='ts'>
+
+</script>
 
 <style scoped>
 .background{

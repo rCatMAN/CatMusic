@@ -1,12 +1,12 @@
-<script setup lang='ts'>
-
-</script>
-
 <template>
 <div class="fixed bottom-0 right-0 h-20 bg-white footer">
 
 </div>
 </template>
+
+<script setup lang='ts'>
+
+</script>
 
 <style scoped>
 .footer{

@@ -1,9 +1,9 @@
 import {createRouter, createWebHashHistory} from "vue-router"
 import Login from "../pages/home/login/index.vue"
 import Home from "../pages/home/index.vue"
-import MusicHall from "../pages/home/explore/MusicHall/index.vue"
-import Videos from "../pages/home/explore/Videos/index.vue"
-import Radios from "../pages/home/explore/Radio/index.vue"
+import MusicHall from "../pages/home/explore/music-hall/index.vue"
+import Videos from "../pages/home/explore/videos/index.vue"
+import Radios from "../pages/home/explore/radio/index.vue"
 const routes = [
     {
         path:"/login",
@@ -34,8 +34,7 @@ const routes = [
     }
 ]
 const router = createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: createWebHashHistory(),
-    routes, // `routes: routes` 的缩写
+    routes, 
   })
 export default router
