@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import AsideMenu from "../../components/AsideMenu/index.vue"
-import HeaderMenu from "../../components/HeaderMenu/index.vue"
-import FooterMenu from "../../components/FooterMenu/index.vue"
+import AsideMenu from "../../components/aside-menu/index.vue"
+import HeaderMenu from "../../components/header-menu/index.vue"
+import FooterMenu from "../../components/footer-menu/index.vue"
 </script>
 
 <style>
