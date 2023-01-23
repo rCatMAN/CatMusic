@@ -1,12 +1,12 @@
-<script setup lang='ts'>
-
-</script>
-
 <template>
 <div class="page bg-red-500 overflow-hidden">
 这是注册页面
 </div>
 </template>
+
+<script setup lang='ts'>
+
+</script>
 
 <style scoped>
 .page{
