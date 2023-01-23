@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-black homePage overflow-hidden">
+    <div class="bg-black">
         <HeaderMenu/>
         <AsideMenu/>
         <FooterMenu/>
@@ -17,16 +17,6 @@ import FooterMenu from "../../components/FooterMenu/index.vue"
 </script>
 
 <style>
-.homePage{
-    width: 1500px;
-    height: 868px;
-    transform: translate(-50%, -50%);
-    position: relative;
-    top: 50%;
-    left: 50%;
-    border-radius: 30px;
-    box-shadow:0 5px 17px 9px #0000001a;
-}
 .mainPage{
     position: absolute;
     width:calc(100% - 13rem);
