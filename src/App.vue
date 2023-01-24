@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import Home from "./pages/home/index.vue";
 import ScrollLyric from "./components/scroll-lyric/index.vue";
 </script>
 
 <template>
-  <ScrollLyric></ScrollLyric>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
+  <div class="bg-gray-300" style="width: 100vw; height: 100vh">
+    <router-view />
+    <ScrollLyric></ScrollLyric>
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
