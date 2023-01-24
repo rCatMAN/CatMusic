@@ -2,7 +2,10 @@
   <div style="height: 50vh" class="overflow-scroll" ref="containerRef">
     <div v-for="(line, lineIndex) in data" class="h-10 flex">
       <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
+        <!-- 歌词原字体元素 -->
         <div class="lyric-text">{{ text }}</div>
+
+        <!-- 歌词播放填充字体元素 -->
         <div
           class="lyric-text fill-color"
           :style="{
@@ -20,32 +23,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { yrc } from "./test.json";
-import { reactive } from "vue";
-import { LetterData, LyricData } from "./types";
+import { LyricData } from "./types";
 
 const containerRef = ref<HTMLDivElement>();
-
-// defineProps<{
-//   height: string;
-//   data: unknown[];
-//   currentData: string;
-// }>();
+let tempTimeRecorder: NodeJS.Timer | null = null;
+// 当前播放时间
 const currentTime = ref(10000);
 
+// 测试用：临时启动一个计时器模拟歌曲播放时间
 const tempTimeRecord = () => {
-  setInterval(() => {
+  tempTimeRecorder = setInterval(() => {
     currentTime.value += 100;
-    // console.log("currentTime.value: ", currentTime.value);
   }, 100);
 };
 
 onMounted(() => {
+  // 启动计时器
   tempTimeRecord();
-  console.log("containerRef: ", containerRef.value?.scrollHeight);
 });
-// const data = reactive([testData.yrc.lyric]);
+
+onUnmounted(() => {
+  // 清除计时器
+  clearInterval(tempTimeRecorder as NodeJS.Timer);
+});
 
 // 解析歌词数据
 const praseData = (data: string) => {
@@ -58,8 +60,6 @@ const praseData = (data: string) => {
     const [startTime, lineDuration] = time.split(",");
 
     let lineData;
-    let lastTextDuration = 100;
-    let tempLineDuration = +lineDuration;
 
     if (lyric) {
       // 将单行歌词解析单个字的数据
@@ -71,7 +71,6 @@ const praseData = (data: string) => {
         if (time) {
           // 从时间中获取开始时间 startTime 和持续时间 duration
           [startTime, TextDuration] = time.split(",");
-          tempLineDuration -= +TextDuration;
         }
 
         return {
@@ -89,6 +88,7 @@ const praseData = (data: string) => {
 
 const data = praseData(yrc.lyric);
 
+// 计算当前播放的行数
 const currentLineIndex = computed(() =>
   data.findIndex((line, index) => {
     if (line && line.startTime && line.duration) {
@@ -103,6 +103,7 @@ const currentLineIndex = computed(() =>
   })
 );
 
+// 判断歌词是否需要触发激活效果
 const isActiveText = (lineIndex: number, startTime?: number) => {
   if (startTime && lineIndex === currentLineIndex.value) {
     if (startTime <= currentTime.value) {
@@ -112,8 +113,6 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
   }
   return false;
 };
-
-console.log("yrc.lyric: ", yrc.lyric);
 </script>
 
 <style scoped>
