@@ -1,13 +1,7 @@
-<script setup lang="ts">
-import Home from "./pages/home/index.vue";
-</script>
-
 <template>
- <div class="bg-gray-300" style="width:100vw;height:100vh">
-    <router-view/>
- </div>
+  <div class="bg-gray-300" style="width: 100vw; height: 100vh">
+    <router-view />
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
