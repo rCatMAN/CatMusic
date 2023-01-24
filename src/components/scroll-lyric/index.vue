@@ -1,0 +1,144 @@
+<template>
+  <div style="height: 50vh" class="overflow-scroll" ref="containerRef">
+    <div v-for="(line, lineIndex) in data" class="h-10 flex">
+      <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
+        <!-- 歌词原字体元素 -->
+        <div class="lyric-text">{{ text }}</div>
+
+        <!-- 歌词播放填充字体元素 -->
+        <div
+          class="lyric-text fill-color"
+          :style="{
+            transition: `all ${
+              lineIndex === currentLineIndex ? duration / 1000 : 0.2
+            }s ease-in-out`,
+          }"
+          :class="isActiveText(lineIndex, startTime) ? 'active' : ''"
+        >
+          {{ text }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { yrc } from "./test.json";
+import { LyricData } from "./types";
+
+const containerRef = ref<HTMLDivElement>();
+let tempTimeRecorder: NodeJS.Timer | null = null;
+// 当前播放时间
+const currentTime = ref(10000);
+
+// 测试用：临时启动一个计时器模拟歌曲播放时间
+const tempTimeRecord = () => {
+  tempTimeRecorder = setInterval(() => {
+    currentTime.value += 100;
+  }, 100);
+};
+
+onMounted(() => {
+  // 启动计时器
+  tempTimeRecord();
+});
+
+onUnmounted(() => {
+  // 清除计时器
+  clearInterval(tempTimeRecorder as NodeJS.Timer);
+});
+
+// 解析歌词数据
+const praseData = (data: string) => {
+  // 将歌词字符串分割为一行行
+  const lines = data.split("[").map((line) => {
+    // 从行中的数据取出行的时间数据 lineTime 和歌词数据 duration
+    const [time, lyric] = line.split("]");
+
+    // 从时间中获取开始时间 startTime 和持续时间 duration
+    const [startTime, lineDuration] = time.split(",");
+
+    let lineData;
+
+    if (lyric) {
+      // 将单行歌词解析单个字的数据
+      lineData = lyric.split("(").map((item) => {
+        // 获取单字数据的文本数据 text 和时间数据 time
+        const [time, text] = item.split(")");
+        let startTime, TextDuration;
+
+        if (time) {
+          // 从时间中获取开始时间 startTime 和持续时间 duration
+          [startTime, TextDuration] = time.split(",");
+        }
+
+        return {
+          text,
+          startTime: parseInt(startTime || ""),
+          duration: parseInt(TextDuration || ""),
+        };
+      });
+    }
+    return { startTime: parseInt(startTime), duration: parseInt(lineDuration), lineData };
+  });
+
+  return lines as LyricData;
+};
+
+const data = praseData(yrc.lyric);
+
+// 计算当前播放的行数
+const currentLineIndex = computed(() =>
+  data.findIndex((line, index) => {
+    if (line && line.startTime && line.duration) {
+      const { startTime, duration } = line;
+      const endTime = startTime + duration;
+      if (startTime <= currentTime.value && currentTime.value <= endTime) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  })
+);
+
+// 判断歌词是否需要触发激活效果
+const isActiveText = (lineIndex: number, startTime?: number) => {
+  if (startTime && lineIndex === currentLineIndex.value) {
+    if (startTime <= currentTime.value) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+</script>
+
+<style scoped>
+.lyric-text {
+  position: relative;
+  font-size: 20px;
+  color: rgb(230, 230, 230);
+  background-clip: text;
+  letter-spacing: 6px;
+  transform: translateY(0);
+}
+
+.lyric-text.fill-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+  background: linear-gradient(to right, gray, rgb(230, 230, 230));
+  -webkit-background-clip: text;
+  width: 0%;
+  overflow: hidden;
+}
+
+.lyric-text.fill-color.active {
+  width: 100%;
+  font-weight: bold;
+  transform: translateY(-3px);
+}
+</style>

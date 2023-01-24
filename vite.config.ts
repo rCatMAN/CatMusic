@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -12,6 +12,11 @@ export default defineConfig({
       // 定义 symbolId 格式
       symbolId: 'icon-[dir]-[name]',
     }),
-  
   ],
+  resolve: {
+    alias: {
+      "@": join(__dirname, "src"),
+    },
+  },
 })
+

@@ -1,13 +1,11 @@
-<script setup lang='ts'>
-
-</script>
-
 <template>
-<div>
-这是音乐馆
-</div>
+  <div>
+    <ScrollLyric></ScrollLyric>
+  </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import ScrollLyric from "@/components/scroll-lyric/index.vue";
+</script>
 
-</style>
+<style scoped></style>
