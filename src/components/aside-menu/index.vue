@@ -1,7 +1,7 @@
 <template>
-  <div class="left-0 bottom-0 fixed w-52 bg-white Aside-box">
+  <div class="left-0 bottom-0 fixed w-52 bg-white aside-box">
 
-    <RouterMenu/>
+    <RouterMenu />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import RouterMenu from './RouterMenu.vue';
 </script>
 
 <style scoped>
-.Aside-box{
+.aside-box {
   height: calc(100% - 4rem);
   border-right: 2px solid var(--primary-color);
 }
