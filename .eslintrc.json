@@ -10,6 +10,13 @@
     "parser": "@typescript-eslint/parser",
     "sourceType": "module"
   },
-  "plugins": ["vue", "@typescript-eslint"],
-  "rules": {}
+  "plugins": ["vue", "@typescript-eslint", "import"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "eol-last": ["error", "always"]
+  }
 }
