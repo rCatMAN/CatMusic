@@ -54,11 +54,13 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { LoginStatusApi } from '@/request/api';
 const router = useRouter()
 let phoneNum = ref<string>("")
 let passWord = ref<string>("")
 const clic = ()=>{
-    console.log(phoneNum.value)
+    let res = LoginStatusApi()
+    console.log("api",res)
 }
 const backPage = ()=>{
     router.back()
@@ -151,7 +153,7 @@ const backPage = ()=>{
 }
 .iconBox:hover{
     transition-property: all;
-    transition-timing-function: ease-out;
+    transition-timing-function: ease-in-out;
     transition-duration: .25s;
     box-shadow: none;
     color: white;
