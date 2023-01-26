@@ -53,6 +53,7 @@
     background-color: var(--primary-color);
     box-shadow: 0 20px 30px -10px var(--primary-color);
     border-radius: 14px;
+    transform: rotate3d(0, 1, 0, 180deg);
 }
 
 .send-code-button:hover {
@@ -124,4 +125,8 @@
 
 .icon-box:active {
     transform: scale(0.7);
+}
+
+.active {
+    transform: rotate3d(0, 1, 0, 0deg);
 }

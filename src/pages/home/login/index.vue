@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white w-full h-full select-none relative">
-        <SvgIcon @click="backPage" iconClass="back" class="icon-color text-black absolute cursor-pointer"
+        <SvgIcon @click="router.back()" iconClass="back" class="icon-color text-black absolute cursor-pointer"
             style="left: 5%;top:5%;" />
         <div class="flex items-center justify-between" style="height: 100%;margin-right: 17%;margin-left: 17%;">
             <div class="title relative ">
@@ -24,20 +24,20 @@
                     <input v-model="phoneNum" class="select-text" type="text" id="phone">
                     <label for="phone" class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
                         style="left: 10%;transform: translateY(-50%);"
-                        :style="{ top: phoneNum ? '-30%' : '50%' }">Phone</label>
+                        :style="{ top: phoneNum ? '-30%' : '50%', color: phoneNum ? 'var(--primary-color)' : '' }">Phone</label>
                     <div v-show="loginMode === 0"
                         class="send-code-button absolute flex items-center justify-center cursor-pointer">
                         <span class="font-semibold text-xs">Send Code</span>
                     </div>
                 </div>
                 <div class=" mt-8 relative">
-                    <input v-model="passWord" class="select-text" type="password" id="password">
+                    <input v-model="password" class="select-text" type="password" id="password">
                     <label for="password" class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
                         style="left: 10%;transform: translateY(-50%);"
-                        :style="{ top: passWord ? '-30%' : '50%' }">PassWord</label>
+                        :style="{ top: password ? '-30%' : '50%', color: password ? 'var(--primary-color)' : '' }">PassWord</label>
                 </div>
-                <div @click="Login(passWord, phoneNum)"
-                    class="login-button flex items-center justify-center cursor-pointer mt-16" style="">
+                <div @click="Login()" class="login-button flex items-center justify-center cursor-pointer mt-16"
+                    style="">
                     <span class="font-semibold">Sign In</span>
                 </div>
                 <div class="options mt-12" style="width: 300px;">
@@ -66,23 +66,27 @@
 import './style.css'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { PhoneLoginApi } from '@/request/api';
+import { phoneLoginApi } from '@/request/api';
+enum LoginMode {
+    PhoneAndPassword,
+    PhoneAndSMS,
+    QrCode,
+}
 const router = useRouter()
-let phoneNum = ref<string>()
-let passWord = ref<number>()
-let loginMode = ref<number>(0)
-const Login = (password: number | undefined, phone: string | undefined) => {
-    if (!password || !phone) {
-        alert("密码不能空")
-    } else {
-        PhoneLoginApi(password, phone).then((res) => {
+const phoneNum = ref<string>()
+const password = ref<number>()
+const loginMode = ref(LoginMode.PhoneAndPassword)
+
+const Login = () => {
+    if (password.value && phoneNum.value) {
+        phoneLoginApi(phoneNum.value, password.value).then((res) => {
             console.log("api", res)
         })
+    } else {
+        alert("账号或密码不能空")
     }
 }
-const backPage = () => {
-    router.back()
-}
+
 </script>
 
 <style scoped>

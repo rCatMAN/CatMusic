@@ -1,5 +1,10 @@
-import instance from "./request"
+import request from "./request"
+import { Response } from './type'
+export const phoneLoginApi = (phone: string, password: number) =>
+    request<Response>({
+        method: 'post',
+        url: '/login/cellphone',
+        data: { phone, password }
 
-export const PhoneLoginApi = (password: number | undefined, phone: string | undefined) => instance.post(`/login/cellphone?password=${password}&phone=${phone}`)
+    })
 
-export const LoginStatusApi = () => instance.get("/login/status")
