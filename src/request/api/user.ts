@@ -1,5 +1,5 @@
-import request from "./request"
-import { Response } from './type'
+import request from "../request"
+import { Response } from '../type'
 export const phoneLoginApi = (phone: string, password: number) =>
     request<Response>({
         method: 'post',
@@ -7,4 +7,3 @@ export const phoneLoginApi = (phone: string, password: number) =>
         data: { phone, password }
 
     })
-

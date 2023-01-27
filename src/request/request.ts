@@ -2,13 +2,12 @@ import axios from "axios"
 
 const request = axios.create({
     headers: {
-        //php 的 post 传输请求头一定要这个 不然报错 接收不到值
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin-Type": '*'
     },
-    baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',// 所有的请求地址前缀部分
-    timeout: 80000, // 请求超时时间(毫秒)
-    withCredentials: true,// 异步请求携带cookie
+    baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
+    timeout: 80000,
+    withCredentials: true,
     // headers: {
     // 设置后端需要的传参类型
     // 'Content-Type': 'application/json',

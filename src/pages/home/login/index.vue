@@ -36,7 +36,7 @@
                         style="left: 10%;transform: translateY(-50%);"
                         :style="{ top: password ? '-30%' : '50%', color: password ? 'var(--primary-color)' : '' }">PassWord</label>
                 </div>
-                <div @click="Login()" class="login-button flex items-center justify-center cursor-pointer mt-16"
+                <div @click="login" class="flex items-center justify-center cursor-pointer mt-16 login-button "
                     style="">
                     <span class="font-semibold">Sign In</span>
                 </div>
@@ -66,7 +66,7 @@
 import './style.css'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { phoneLoginApi } from '@/request/api';
+import { phoneLoginApi } from '@/request/api/user';
 enum LoginMode {
     PhoneAndPassword,
     PhoneAndSMS,
@@ -77,7 +77,7 @@ const phoneNum = ref<string>()
 const password = ref<number>()
 const loginMode = ref(LoginMode.PhoneAndPassword)
 
-const Login = () => {
+const login = () => {
     if (password.value && phoneNum.value) {
         phoneLoginApi(phoneNum.value, password.value).then((res) => {
             console.log("api", res)
