@@ -5,11 +5,20 @@
     "es2021": true
   },
   "extends": ["plugin:vue/essential", "airbnb-base", "prettier"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "parser": "@typescript-eslint/parser",
     "sourceType": "module"
   },
-  "plugins": ["vue", "@typescript-eslint"],
-  "rules": {}
+  "plugins": ["vue", "@typescript-eslint", "import"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "eol-last": ["error", "always"]
+  },
+  "ignorePatterns": ["commitlint.config.js"]
 }
