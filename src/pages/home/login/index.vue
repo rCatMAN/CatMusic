@@ -60,8 +60,9 @@
                         </div>
                     </div>
                 </div>
-                <div v-show="loginMode === 2">
+                <div v-show="loginMode === 2" class="bg-red-500 opacity-30" style="width: 400px;height: 480px;">
                 </div>
+
             </div>
         </div>
     </div>
