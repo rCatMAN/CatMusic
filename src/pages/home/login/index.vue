@@ -61,8 +61,10 @@
                     </div>
                 </div>
                 <div v-show="loginMode === 2" class="bg-red-500 opacity-30" style="width: 400px;height: 480px;">
+                    <div class=" relative">
+                            <Qrcode/>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -73,6 +75,7 @@ import './style.css'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { phoneLoginApi } from '@/request/api/user';
+import Qrcode from '@/components/qrcode/QrcodeLogin.vue'
 enum LoginMode {
     PhoneAndPassword,
     PhoneAndSMS,
