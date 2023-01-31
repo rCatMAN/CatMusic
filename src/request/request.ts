@@ -5,7 +5,8 @@ const request = axios.create({
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin-Type": '*'
     },
-    baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
+    // baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
+    baseURL: 'http://127.0.0.1:5173/',
     timeout: 80000,
     withCredentials: true,
     // headers: {

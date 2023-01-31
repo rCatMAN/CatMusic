@@ -3,4 +3,5 @@ export type Response<T = any> = {
     data: T
     message: string;
     cookie: string;
+    result: T
 }

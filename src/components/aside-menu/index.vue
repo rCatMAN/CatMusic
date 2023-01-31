@@ -1,6 +1,5 @@
 <template>
   <div class="left-0 bottom-0 fixed w-52 bg-white aside-box">
-
     <RouterMenu />
   </div>
 </template>

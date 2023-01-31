@@ -13,7 +13,6 @@ const size = ref(150)
 const qrUrl = ref()
 let intervalId: any
 onMounted(async () => {
-    // document.cookie = "MUSIC_A_T=1470504680938; HttpOnly;"
     const { data: keyRes } = await qrcodeKeyApi()
     if (keyRes.code === 200) {
         console.log(1, keyRes)

@@ -1,7 +1,7 @@
 <template>
-    <div class="flex items-center flex-col justify-around mt-8 explore-menu">
+    <div class="flex items-center flex-col justify-around mt-8 menu-Box">
         <div v-for="(item, index) in routerMenuList" :key="index" @click="toPage(item.path)"
-            class="router-button-box w-3/4 h-10 rounded-xl cursor-pointer flex items-center justify-center text-sm"
+            class="router-button-box w-3/4 h-9 rounded-xl cursor-pointer flex items-center justify-center text-sm"
             :class="route.path === item.path ? 'router-button-box-down' : ''">
             <span class="font-bold">{{ item.name }}</span>
         </div>
@@ -15,7 +15,7 @@ const route = useRoute()
 const routerMenuList = [
     {
         path: "/musichall",
-        name: "音乐馆",
+        name: "探索音乐",
     },
     {
         path: "/radios",
@@ -35,7 +35,7 @@ const toPage = (path: string) => {
 </script>
 
 <style scoped>
-.explore-menu {
+.menu-Box {
     height: 200px
 }
 
