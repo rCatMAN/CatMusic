@@ -21,7 +21,11 @@ export const qrcodeCheckApi = {
             ),
     Interval: 2000,
 }
-export const getLoginStatus = () =>
-    request.post<Response>(
+export const getLoginStatusApi = () =>
+    request.get<Response>(
         `/music/login/status?timerstamp=${Date.parse(new Date().toString())}`,
+    )
+export const signOutApi = ()=>
+    request.get<Response>(
+        `/music/logout?timerstamp=${Date.parse(new Date().toString())}`,
     )

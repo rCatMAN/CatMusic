@@ -6,7 +6,7 @@ const request = axios.create({
         "Access-Control-Allow-Origin-Type": '*'
     },
     // baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
-    baseURL: 'http://127.0.0.1:5173/',
+    baseURL: 'http://localhost:5173/',
     timeout: 80000,
     withCredentials: true,
     // headers: {

@@ -1,5 +1,37 @@
+.wave-animation{
+background-color: var(--primary-color);
+width: 100vw;
+height: 100vh;
+top: 50%;
+left: 50%;
+opacity: 0.3;
+transform: translate(-50%,-50%);
+
+z-index: 1;
+overflow: hidden;
+}
+.wave-animation::before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:50%;
+    width:600vh;
+    height:600vh;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 40%;
+    transform: translate(-50%,-90%);
+    z-index: 1;
+    animation: wave 80s linear infinite;
+}
+
+@keyframes wave{
+    100% {
+        transform:translate(-50%,-90%) rotate(360deg);
+    }
+}
+
 .background {
-    z-index: -1;
+    z-index: 5;
     background-image: linear-gradient(0deg, #a18cd1 0%, #fbc2eb 100%);
     filter: blur(70px);
 }
@@ -89,14 +121,14 @@
     height: 1px;
     width: 100%;
     background-color: hsla(220, 9%, 46%, .5);
-    z-index: 1;
+    z-index: 5;
 }
 
 .separator span {
     background-color: white;
     padding-left: 10px;
     padding-right: 10px;
-    z-index: 1;
+    z-index: 5;
 }
 
 .icon-box {

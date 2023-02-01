@@ -1,8 +1,10 @@
 <template>
-    <div class="bg-white w-full h-full select-none relative">
+    <div class="wave-animation absolute " >
+    </div>
+    <div class=" w-full h-full select-none relative z-10">
         <SvgIcon @click="router.back()" iconClass="back" class="icon-color text-black absolute cursor-pointer"
             style="left: 5%;top:5%;" />
-        <div class="flex items-center justify-between" style="height: 100%;margin-right: 17%;margin-left: 17%;">
+        <div class="flex items-center justify-between z-10" style="height: 100%;margin-right: 17%;margin-left: 17%;">
             <div class="title relative ">
                 <div class="background" style="width: 430px;height: 200px;">
                 </div>
@@ -45,7 +47,7 @@
                     <div class="options mt-12" style="width: 300px;">
                         <div
                             class="separator relative w-full flex items-center justify-center text-sm font-extralight text-gray-500">
-                            <span>or continue with</span>
+                            <!-- <span>or continue with</span> -->
                         </div>
                         <div class="mt-8 flex items-center justify-around" style="width: 300px;">
                             <div class="icon-box">
@@ -60,8 +62,11 @@
                         </div>
                     </div>
                 </div>
-                <div v-show="loginMode === 2" class="bg-red-500 opacity-30" style="width: 400px;height: 480px;">
-                    <div class=" relative">
+                <div v-show="loginMode === 2" class=" relative flex flex-col items-center" style="width: 400px;height: 480px;">
+                    <div class="mt-8 font-semibold">
+                        <span>请使用网易云手机app扫描二维码登录</span>
+                    </div>
+                    <div class="mt-8">
                         <Qrcode v-if="loginMode === 2" />
                     </div>
                 </div>

@@ -24,7 +24,7 @@ const songList = ref()
 const selectedIndex = ref()
 onMounted(async () => {
     const { data: songListRes } = await personalizedListApi()
-    console.log(songListRes)
+    console.log("songlist",songListRes)
     songList.value = songListRes.result
 })
 </script>
