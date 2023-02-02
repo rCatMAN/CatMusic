@@ -25,20 +25,13 @@ let intervalId: any
 onMounted(async () => {
     const { data: keyRes } = await qrcodeKeyApi()
     if (keyRes.code === 200) {
-        console.log(1, keyRes)
         const { data: createRes } = await qrcodeCreateApi(keyRes.data.unikey)
         if (createRes.code === 200) {
             qrUrl.value = createRes.data.qrimg
-            console.log(2, createRes)
-            console.log(2, qrUrl.value)
-            let i = 3
             intervalId = setInterval(async () => {
                 const { data: checkRes } = await qrcodeCheckApi.checkHook(keyRes.data.unikey)
-                console.log(i, checkRes)
-                i++
                 if (checkRes.code === 803) {
                     clearInterval(intervalId)
-                    console.log(checkRes.cookie)
                     localStorage.setItem('cookie', checkRes.cookie)
                     checkCode.value = 803
                     router.push({
@@ -56,7 +49,9 @@ onMounted(async () => {
     }
 })
 onUnmounted(() => {
-    clearInterval(intervalId)
+    if(intervalId){
+        clearInterval(intervalId)
+    }
 })
 </script>
 

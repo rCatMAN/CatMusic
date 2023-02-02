@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="form flex flex-col items-center relative top-7 rounded-3xl" style="width: 400px;height: 480px;">
-                <div @click="switchLoginMde"
+                <div @click="switchLoginMode"
                     class="switch-login-mode absolute flex items-center justify-center cursor-pointer">
                     <span class="font-semibold text-xs">Switch LoginMode</span>
                 </div>
@@ -89,12 +89,13 @@ enum LoginMode {
 const router = useRouter()
 const phoneNum = ref<string>()
 const password = ref<number>()
-const loginMode = ref(LoginMode.PhoneAndPassword)
-const switchLoginMde = () => {
-    loginMode.value++
-    if (loginMode.value > LoginMode.QrCode) {
-        loginMode.value = LoginMode.PhoneAndPassword
-    }
+const loginMode = ref(LoginMode.PhoneAndSMS)
+const switchLoginMode = () => {
+    // loginMode.value++
+    // if (loginMode.value > LoginMode.QrCode) {
+    //     loginMode.value = LoginMode.PhoneAndPassword
+    // }
+    loginMode.value = loginMode.value === LoginMode.QrCode? LoginMode.PhoneAndSMS : LoginMode.QrCode
 }
 const login = () => {
     if (password.value && phoneNum.value) {

@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user',{
         },
         async signOut(){
             const { data:res } = await signOutApi()
-            console.log("执行了signout",res)
+            console.log("退出登录   ",res)
             if(res.code === 200){
                 this.setLoginStatus()
             }
