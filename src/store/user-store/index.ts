@@ -1,11 +1,11 @@
-import { defineStore} from "pinia"
-import { getLoginStatusApi,signOutApi } from  "@/request/api/user"
-export const useUserStore = defineStore('user',{
-    state:()=>{
+import { defineStore } from "pinia"
+import { getLoginStatusApi, signOutApi } from "@/request/api/user"
+export const useUserStore = defineStore('user', {
+    state: () => {
         return {
-            isLogin:false,
-            userProfile:null,
-            isLoaded:false,
+            isLogin: false,
+            userProfile: null,
+            isLoaded: false,
         }
     },
     // getters:{
@@ -13,25 +13,22 @@ export const useUserStore = defineStore('user',{
     //         return state.isLogin
     //     }
     // },
-    actions:{
-        async setLoginStatus(){ 
-            const { data:profile } = await getLoginStatusApi()
-            if(profile.data.profile){
+    actions: {
+        async setLoginStatus() {
+            const { data: profile } = await getLoginStatusApi()
+            if (profile.data.profile) {
                 console.log("执行了setLOGIN")
                 this.isLogin = true
                 this.userProfile = profile.data.profile
-            }else{
+            } else {
                 console.log("执行了setLOGIN")
                 this.isLogin = false
                 this.userProfile = null
             }
         },
-        async signOut(){
-            const { data:res } = await signOutApi()
-            console.log("退出登录   ",res)
-            if(res.code === 200){
-                this.setLoginStatus()
-            }
+        async signOut() {
+            const { data: res } = await signOutApi()
+            console.log("退出登录", res)
         }
     }
     // const isLogin = ref(false)
