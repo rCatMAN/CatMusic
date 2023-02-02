@@ -91,10 +91,6 @@ const phoneNum = ref<string>()
 const password = ref<number>()
 const loginMode = ref(LoginMode.PhoneAndSMS)
 const switchLoginMode = () => {
-    // loginMode.value++
-    // if (loginMode.value > LoginMode.QrCode) {
-    //     loginMode.value = LoginMode.PhoneAndPassword
-    // }
     loginMode.value = loginMode.value === LoginMode.QrCode? LoginMode.PhoneAndSMS : LoginMode.QrCode
 }
 const login = () => {
