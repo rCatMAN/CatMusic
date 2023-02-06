@@ -16,4 +16,35 @@ const reload = ()=>{
 provide('reload',reload)
 </script>
 
-<style scoped></style>
+<style>
+.theme-button {
+    user-select: none;
+    transition-property: all;
+    transition-timing-function: ease-out;
+    transition-duration: 150ms;
+    border-radius: 10px;
+
+}
+
+.theme-button {
+    transition-property: all;
+    transition-timing-function: ease-out;
+    transition-duration: 150ms;
+    color: white;
+    box-shadow: none;
+    background-color: var(--primary-color);
+}
+
+.theme-button:hover {
+    transition-property: all;
+    transition-timing-function: ease-out;
+    transition-duration: 150ms;
+    color: white;
+    box-shadow: var(--primary-color) 0px 0px 15px 0px;
+    background-color: var(--primary-color);
+}
+
+.theme-button:active {
+    transform: scale(0.86);
+}
+</style>

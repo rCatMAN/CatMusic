@@ -8,11 +8,6 @@ export const useUserStore = defineStore('user', {
             isLoaded: false,
         }
     },
-    // getters:{
-    //     getIsLogin:(state)=>{
-    //         return state.isLogin
-    //     }
-    // },
     actions: {
         async setLoginStatus() {
             const { data: profile } = await getLoginStatusApi()
@@ -31,15 +26,4 @@ export const useUserStore = defineStore('user', {
             console.log("退出登录", res)
         }
     }
-    // const isLogin = ref(false)
-    // const userName = ref("")
-    // async function setLoginStatus(){
-    //     const { data:response } = await getLoginStatus()
-    //     if( response.profile){
-    //         isLogin.value = true
-    //         userName.value = response.profile.nickname
-    //     }else{
-    //         isLogin.value = false
-    //     }
-    // }
 })

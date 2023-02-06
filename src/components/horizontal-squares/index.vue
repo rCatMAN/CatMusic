@@ -1,31 +1,27 @@
 <template>
     <div class="flex items-center justify-around w-full h-full" style="min-width: 500px;">
         <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" v-for="(item, index) in songList"
-            :key="index" class=" relative rounded-2xl overflow-hidden cursor-pointer" style="width:18%">
-            <img class=" select-none" :src="item.picUrl" alt="" style="width:100%;">
-            <div class=" absolute top-0 w-full h-full overflow-hidden bg-gray-600 duration-300" style="" :style="{
-                transform: selectedIndex === index ? 'translateY(70%)' : 'translateY(100%)'
-            }">
-                <img :src="item.picUrl" class="w-full h-full" style="transform: translateY(-70%);filter: blur(15px);">
-                <div class=" absolute top-0 w-full h-full pt-2 text-white text-sm"
-                    style="padding-left: 5%;padding-right: 5%;">
-                    <p>{{ item.name }}</p>
-                </div>
+            :key="index" class=" relative  cursor-pointer" style="width:18%">
+            <img class="rounded-2xl overflow-hidden select-none" :src="item.picUrl" alt="" style="width:100%;">
+            <div class="mt-4" style="width:100%">
+                <p class=""></p>
             </div>
-
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { personalizedListApi } from "@/request/api/Recommended"
-import { onMounted, ref } from "vue";
-const songList = ref()
+import { recommendListDailyApi } from "@/request/api/Recommended"
+import { onMounted, ref,reactive} from "vue";
+var i:number
 const selectedIndex = ref()
+let songList = reactive([] as any[])
 onMounted(async () => {
-    const { data: songListRes } = await personalizedListApi()
-    console.log("songlist",songListRes)
-    songList.value = songListRes.result
+    const { data: dailyListRes } = await recommendListDailyApi()
+    for(i=0;i<5;i++){
+        songList.push(dailyListRes.recommend[i]) 
+    }
+    console.log("daily",dailyListRes)
 })
 </script>
 

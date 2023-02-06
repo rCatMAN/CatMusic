@@ -27,8 +27,8 @@
                     <div class="mt-4 bg-gray-300" style="width: 80%;height: 1px;">
 
                     </div>
-                    <div @click="signOut" class="mt-4 cursor-pointer">
-                        退出登录
+                    <div @click="signOut" class="theme-button mt-4 cursor-pointer">
+                        <span class="mx-8">退出登录</span> 
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ const isLogin = computed(()=>{
     console.log("更新islogin",store.isLogin)
     return store.isLogin
 })
-const userProfile = computed(()=> {
+const userProfile:any = computed(() => {
     console.log("userProfile更新",store.userProfile)
     return store.userProfile
 })
