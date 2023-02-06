@@ -5,7 +5,8 @@ const request = axios.create({
         "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin-Type": '*'
     },
-    baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
+    // baseURL: 'https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/',
+    baseURL: 'http://localhost:5173/',
     timeout: 80000,
     withCredentials: true,
     // headers: {
@@ -34,7 +35,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     response => {
         // 对响应数据做点什么
-        return response.data
+        return response
     },
     error => {
         // 对响应错误做点什么

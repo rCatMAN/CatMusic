@@ -22,5 +22,8 @@ import FooterMenu from "../../components/footer/index.vue"
     height: calc(100% - 9rem);
     right: 0px;
     top: 4rem;
+    padding-top: 40px;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 </style>
