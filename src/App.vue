@@ -17,6 +17,9 @@ provide('reload',reload)
 </script>
 
 <style>
+.title:hover{
+  color:var(--primary-color)
+}
 .theme-button {
     user-select: none;
     transition-property: all;
