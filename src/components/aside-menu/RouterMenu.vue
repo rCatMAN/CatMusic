@@ -18,6 +18,10 @@ const routerMenuList = [
         name: "探索音乐",
     },
     {
+        path: "/newsong",
+        name: "新潮"
+    },
+    {
         path: "/radios",
         name: "电台",
     },
@@ -36,7 +40,7 @@ const toPage = (path: string) => {
 
 <style scoped>
 .menu-Box {
-    height: 200px
+    height: 230px
 }
 
 .router-button-box {

@@ -19,7 +19,6 @@ import FooterMenu from "../../components/footer/index.vue"
 .main-Page {
     position: absolute;
     width: calc(100% - 13rem);
-    height: calc(100% - 9rem);
     right: 0px;
     top: 4rem;
     padding-top: 40px;

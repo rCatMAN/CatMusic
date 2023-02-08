@@ -1,6 +1,6 @@
 <template>
-    <div class="flex items-start justify-around w-full h-full" style="min-width: 500px;">
-        <div v-for="(item, index) in songList" :key="index" class="relative" style="width:18%">
+    <div class="flex items-start flex-wrap justify-around w-full h-full" style="min-width: 500px;">
+        <div v-for="(item, index) in songList.values" :key="index" class="relative mb-4" style="width:18%">
             <div>
                 <img @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class="mb-4 rounded-2xl overflow-hidden duration-500 ease-out select-none cursor-pointer"
@@ -18,26 +18,19 @@
             <div class="mb-3 text-sm font-bold leading-5 ">
                 <span class="duration-150 ease-out cursor-pointer title">{{ item.name }}</span>
             </div>
-            <div>
-                <span class="text-xs font-bold text-gray-500 cursor-default"> {{ item.creator.nickname }}</span>
-            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { recommendListDailyApi } from "@/request/api/Recommended"
+import { personalizedListApi } from "@/request/api/Recommended"
 import { onMounted, ref, reactive } from "vue";
-var i: number
 const selectedIndex = ref()
-const songList = reactive([] as any[])
+const songList: any = reactive([])
 onMounted(async () => {
-    const { data: dailyListRes } = await recommendListDailyApi()
-    for (i = 0; i < 5; i++) {
-        songList.push(dailyListRes.recommend[i])
-    }
-    console.log("dailyRES", dailyListRes)
-    console.log("daily", songList)
+    const { data: songListRes } = await personalizedListApi()
+    songList.values = songListRes.result
+    console.log('songList', songListRes)
 })
 </script>
 
