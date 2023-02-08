@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-start flex-wrap justify-around w-full h-full" style="min-width: 500px;">
-        <div v-for="(item, index) in songList.values" :key="index" class="relative mb-4" style="width:18%">
+        <div v-for="(item, index) in songList.result" :key="index" class="relative mb-4" style="width:18%">
             <div>
                 <img @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class="mb-4 rounded-2xl overflow-hidden duration-500 ease-out select-none cursor-pointer"
@@ -26,10 +26,12 @@
 import { personalizedListApi } from "@/request/api/Recommended"
 import { onMounted, ref, reactive } from "vue";
 const selectedIndex = ref()
-const songList: any = reactive([])
+const songList = reactive<any>({
+    result: null
+})
 onMounted(async () => {
     const { data: songListRes } = await personalizedListApi()
-    songList.values = songListRes.result
+    songList.result = songListRes.result
     console.log('songList', songListRes)
 })
 </script>

@@ -3,7 +3,7 @@
         <div class="flex items-start justify-start " style="min-width: 500px;">
             <div v-for=" (item, index) in singerList.values" :key="index" class=" mr-10 mb-8" style="width: 18%;">
                 <div @mouseenter="selectedIndex = item" @mouseleave="selectedIndex = 100"
-                    class="img-Shadow relative duration-200 ease-out rounded-full overflow-hidden cursor-pointer ">
+                    class="img-shadow relative duration-200 ease-out rounded-full overflow-hidden cursor-pointer ">
                     <img :src="item.img1v1Url" style="width: 100%;">
                     <div class="absolute w-12 h-12 rounded-full overflow-hidden duration-200 ease-out"
                         style="left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
@@ -25,7 +25,9 @@
 <script setup lang="ts">
 import { hotSingerApi } from '@/request/api/Recommended'
 import { onMounted, reactive, ref } from 'vue';
-const singerList: any = reactive({})
+const singerList = reactive<any>({
+    values: null,
+})
 const selectedIndex = ref(100)
 onMounted(async () => {
     const { data: singerRes } = await hotSingerApi()
@@ -35,7 +37,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.img-Shadow:hover {
+.img-shadow:hover {
     box-shadow: var(--primary-color) 0px 12px 15px -10px;
 }
 </style>

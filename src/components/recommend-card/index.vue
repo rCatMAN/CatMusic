@@ -22,11 +22,11 @@
             style="width: 48%;height: 200px;background-image:linear-gradient(0deg,#a18cd1 0%, #fbc2eb 100%)">
             <div class="absolute rounded-2xl overflow-hidden "
                 style="width: 166px;height: 166px;left: 20px;top: 50%;transform: translateY(-50%);">
-                <img style="width: 166px;height: 166px" :src="fmList.url" alt="">
+                <img style="width: 166px;height: 166px" :src="radioList.picUrl" alt="">
             </div>
             <div class=" absolute text-white " style="left: 200px;top: 20px;">
-                <p class="text-2xl font-bold">{{ fmList.values.name }}</p>
-                <p class="text-lg font-bold mt-4">{{ fmList.singer }}</p>
+                <p class="text-2xl font-bold">{{ radioList.name }}</p>
+                <p class="text-lg font-bold mt-4">{{ radioList.singer }}</p>
             </div>
             <div class="flex items-center absolute" style="left: 190px;bottom: 20px;">
                 <div
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="text-white font-bold absolute flex items-center" style="right: 8%;bottom: 20px;opacity: 0.3;">
-                <SvgIcon iconClass="radio" class="mr-1" />
+                <SvgIcon iconClass="radioList" class="mr-1" />
                 <span>私人FM</span>
             </div>
         </div>
@@ -53,14 +53,18 @@
 import { personalFmApi } from "@/request/api/Recommended"
 import { onMounted, ref, reactive } from "vue"
 const selectedIndex = ref(100)
-const fmList: any = reactive([] as any[])
+const radioList = reactive<any>({
+    name: null,
+    singer: null,
+    picUrl: null,
+})
 onMounted(async () => {
     const { data: fmListRes } = await personalFmApi()
     console.log("FMres", fmListRes.data)
-    fmList.values = fmListRes.data[0]
-    fmList.singer = fmListRes.data[0].artists[0].name
-    fmList.url = fmListRes.data[0].album.picUrl
-    console.log("FM", fmList)
+    radioList.name = fmListRes.data[0].name
+    radioList.singer = fmListRes.data[0].artists[0].name
+    radioList.picUrl = fmListRes.data[0].album.picUrl
+    console.log("FM", radioList)
 })
 </script>
 
