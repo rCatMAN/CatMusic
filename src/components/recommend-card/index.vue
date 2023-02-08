@@ -68,7 +68,8 @@ onMounted(async () => {
 .background-Animation {
     background: url('https://p2.music.126.net/QxJA2mr4hhb9DZyucIOIQw==/109951165422200291.jpg?param=1024y1024');
     background-position-y: 0%;
-    animation: backMove 350s linear infinite;
+    background-size: cover;
+    animation: backMove 300s linear infinite;
 }
 
 @keyframes backMove {

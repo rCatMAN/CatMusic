@@ -5,6 +5,7 @@ import MusicHall from "../pages/home/explore/music-hall/index.vue"
 import NewSong from "../pages/home/explore/new-song/index.vue"
 import Videos from "../pages/home/explore/videos/index.vue"
 import Radios from "../pages/home/explore/radio/index.vue"
+import SongList from "../pages/home/song-list/index.vue"
 const routes = [
     {
         path: "/login",
@@ -35,6 +36,11 @@ const routes = [
                 path: "radios",
                 name: "radios",
                 component: Radios
+            },
+            {
+                path: "songlist",
+                name: "songlist",
+                component: SongList
             },
         ]
     }
