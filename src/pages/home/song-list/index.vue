@@ -1,8 +1,11 @@
 <template>
     <div>
-        <div class="top-menu  relative flex items-start" style="width: 100%;height: 280px;">
-            <img :src="songListDetail.picUrl" alt="" class=""
-                style="height: 100%;width: 280px;margin-right: 5%; box-shadow: 0px 0px 30px -4px;">
+        <div class="top-menu  relative flex items-start" style="width: 100%;height: 330px;">
+            <div style="width: 25%;min-width: 200px;margin-right: 5%;">
+                <img :src="songListDetail.picUrl" alt="" class="rounded-2xl z-10 relative" style="">
+                <div class="shadow" :style="{ 'background-image': `url(${songListDetail.picUrl})` }">
+                </div>
+            </div>
             <div class=" h-full">
                 <p class="mt-4 text-3xl font-bold">{{ songListDetail.name }}</p>
                 <div class="mt-6 flex items-center">
@@ -11,11 +14,17 @@
                     </div>
                     <p class="text-sm font-bold text-gray-500">{{ songListDetail.creator }}</p>
                 </div>
-                <div class="mt-20 " style="">
-                    <span class="text-sm">{{ songListDetail.description }}</span>
+                <div v-if="songListDetail.description" class="mt-20 truncate" style="max-width: 700px;">
+                    <span class="text-sm text-gray-500">{{ songListDetail.description }}</span>
+                </div>
+                <div class=" theme-button mt-10 w-max cursor-pointer"
+                    style="padding-left: 20px;padding-right: 20px;padding-top: 5px;padding-bottom: 5px;">
+                    播放全部
                 </div>
             </div>
-
+        </div>
+        <div>
+            <SongList :id="id" />
         </div>
     </div>
 </template>
@@ -24,6 +33,7 @@
 import { onMounted, computed, ref, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { songListDetailApi } from '@/request/api/detail'
+import SongList from "./list.vue"
 const route = useRoute()
 const id: any = ref(route.query)
 const songListDetail: any = reactive({
@@ -33,7 +43,6 @@ const songListDetail: any = reactive({
     avatarUrl: "",
     description: "歌单介绍"
 })
-console.log("id", id.value)
 onMounted(async () => {
     const { data: songListDetailRes } = await songListDetailApi(id.value.id)
     songListDetail.name = songListDetailRes.playlist.name
@@ -41,10 +50,20 @@ onMounted(async () => {
     songListDetail.creator = songListDetailRes.playlist.creator.nickname
     songListDetail.avatarUrl = songListDetailRes.playlist.creator.avatarUrl
     songListDetail.description = songListDetailRes.playlist.description
-    console.log("songListdetail", songListDetailRes.playlist)
 })
 </script>
 
 <style scoped>
-
+.shadow {
+    position: absolute;
+    top: 13px;
+    left: 0px;
+    width: 25%;
+    min-width: 200px;
+    filter: blur(10px) opacity(.9);
+    transform: scale(.92, .96);
+    background-size: cover;
+    border-radius: .75em;
+    aspect-ratio: 1/1;
+}
 </style>

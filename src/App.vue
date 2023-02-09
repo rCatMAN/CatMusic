@@ -18,7 +18,7 @@ provide('reload', reload)
 
 <style>
 .title:hover {
-  color: var(--primary-color)
+  color: var(--primary-back-color)
 }
 
 .theme-button {
@@ -34,9 +34,9 @@ provide('reload', reload)
   transition-property: all;
   transition-timing-function: ease-out;
   transition-duration: 150ms;
-  color: white;
+  color: var(--primary-text-color);
   box-shadow: none;
-  background-color: var(--primary-color);
+  background-color: var(--primary-light-color);
 }
 
 .theme-button:hover {
@@ -44,8 +44,9 @@ provide('reload', reload)
   transition-timing-function: ease-out;
   transition-duration: 150ms;
   color: white;
-  box-shadow: var(--primary-color) 0px 0px 15px 0px;
-  background-color: var(--primary-color);
+  box-shadow: var(--primary-back-color) 0px 0px 15px 0px;
+  background-color: var(--primary-back-color);
+  transform: scale(1.1);
 }
 
 .theme-button:active {

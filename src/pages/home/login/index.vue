@@ -17,7 +17,7 @@
                     <div class="absolute font-extralight text-sm text-gray-500 ml-8">
                         <h1>If you don't have an account</h1>
                         <span>you can </span>
-                        <span class=" cursor-pointer" style="color: var(--primary-color);">Register here</span>
+                        <span class=" cursor-pointer" style="color: var(--primary-back-color);">Register here</span>
                     </div>
                 </div>
                 <div class="form flex flex-col items-center relative top-7 rounded-3xl"
@@ -31,7 +31,7 @@
                             <input v-model="phoneNum" class="select-text" type="text" id="phone">
                             <label for="phone" class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
                                 style="left: 10%;transform: translateY(-50%);"
-                                :style="{ top: phoneNum ? '-30%' : '50%', color: phoneNum ? 'var(--primary-color)' : '' }">Phone</label>
+                                :style="{ top: phoneNum ? '-30%' : '50%', color: phoneNum ? 'var(--primary-back-color)' : '' }">Phone</label>
                             <div v-show="loginMode === 1"
                                 class="send-code-button absolute flex items-center justify-center cursor-pointer">
                                 <span class="font-semibold text-xs">Send Code</span>
@@ -42,7 +42,7 @@
                             <label for="password"
                                 class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
                                 style="left: 10%;transform: translateY(-50%);"
-                                :style="{ top: password ? '-30%' : '50%', color: password ? 'var(--primary-color)' : '' }">PassWord</label>
+                                :style="{ top: password ? '-30%' : '50%', color: password ? 'var(--primary-back-color)' : '' }">PassWord</label>
                         </div>
                         <div @click="login" class="flex items-center justify-center cursor-pointer mt-16 login-button "
                             style="">

@@ -8,7 +8,7 @@
                         :class="selectedIndex === index ? 'box-Shadow' : ''" :src="item.picUrl" alt=""
                         style="width:100%;">
                 </div>
-                <div @mouseenter="selectedIndex = index"
+                <div @click="toSongListPage(item.id)" @mouseenter="selectedIndex = index"
                     class=" bg-red-500 w-12 h-12 rounded-full absolute duration-200 ease-out cursor-pointer"
                     style=" left: 50%;top: 30%;transform: translateX(-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
                     :style="{
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="mb-3 text-sm font-bold leading-5 ">
+            <div @click="toSongListPage(item.id)" class="mb-3 text-sm font-bold leading-5 ">
                 <span class="duration-150 ease-out cursor-pointer title">{{ item.name }}</span>
             </div>
             <div>
@@ -42,11 +42,8 @@ onMounted(async () => {
     for (i = 0; i < 5; i++) {
         songList.push(dailyListRes.recommend[i])
     }
-    console.log("dailyRES", dailyListRes)
-    console.log("daily", songList)
 })
-const toSongListPage = (id: any) => {
-    console.log("Id", id)
+const toSongListPage = (id: (string | number)) => {
     router.push({
         path: `/songlist`,
         query: { id: id }
@@ -56,6 +53,6 @@ const toSongListPage = (id: any) => {
 
 <style scoped>
 .box-Shadow {
-    box-shadow: var(--primary-color) 0px 12px 15px -10px;
+    box-shadow: var(--primary-back-color) 0px 12px 15px -10px;
 }
 </style>

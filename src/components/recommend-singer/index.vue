@@ -36,6 +36,6 @@ onMounted(async () => {
 
 <style scoped>
 .img-Shadow:hover {
-    box-shadow: var(--primary-color) 0px 12px 15px -10px;
+    box-shadow: var(--primary-back-color) 0px 12px 15px -10px;
 }
 </style>

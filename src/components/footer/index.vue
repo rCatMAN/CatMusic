@@ -1,6 +1,34 @@
 <template>
-    <div class="fixed bottom-0 right-0 h-20 z-10 bg-white footer">
+    <div class="footer fixed bottom-0 right-0 h-20 z-10 bg-white ">
+        <div class="flex items-center w-full h-full relative ">
+            <img src="https://p2.music.126.net/bDdwz0zd-BGYpel1QEU2RA==/109951165983886039.jpg" alt=""
+                style="height: 100%;" class="mr-4">
+            <div class="flex flex-col self-start mt-2">
+                <p class="mb-1 font-bold">歌曲名字</p>
+                <p class="text-xs font-bold text-gray-600">歌手名字</p>
+            </div>
+            <div class=" absolute flex items-center justify-between "
+                style="left: 50%;transform: translateX(-50%);width: 180px;">
+                <div class="icon-footer-box rounded-xl" style="padding: 4px;">
+                    <SvgIcon iconClass="lastsong" style="width: 35px;;" />
+                </div>
+                <div class="icon-footer-box rounded-xl" style="padding: 6px;">
+                    <SvgIcon iconClass="play" style="width: 40px;transform: translateX(2px)" />
+                </div>
+                <div class="icon-footer-box rounded-xl" style="padding: 4px;">
+                    <SvgIcon iconClass="nextsong" style="width: 35px;" />
+                </div>
 
+            </div>
+            <div class=" absolute flex items-center justify-between" style="right: 20%;width: 180px;">
+                <div class="flex items-center">
+                    <div class="icon-footer-box rounded-xl" style="padding: 4px;">
+                        <SvgIcon iconClass="volume" style="width: 20px;" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -11,6 +39,32 @@
 <style scoped>
 .footer {
     width: calc(100% - 13rem);
-    border-top: 2px solid var(--primary-color);
+    backdrop-filter: saturate(200%) blur(10px);
+    background-color: hsla(0, 0%, 100%, 0.86);
+}
+
+.icon {
+    transition: all 100ms ease-out;
+    cursor: pointer;
+
+}
+
+.icon:hover {
+    color: var(--primary-back-color);
+}
+
+.icon-footer-box {
+    cursor: pointer;
+    transition: all 200ms ease-out;
+}
+
+.icon-footer-box:hover {
+    transition: all 200ms ease-out;
+    color: var(--primary-back-color);
+    background-color: rgba(128, 128, 128, 0.265);
+}
+
+.icon-footer-box:active {
+    scale: 0.9;
 }
 </style>

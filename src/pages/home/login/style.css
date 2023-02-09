@@ -1,32 +1,33 @@
-.wave-animation{
-background-color: var(--primary-color);
-width: 100vw;
-height: 100vh;
-top: 50%;
-left: 50%;
-opacity: 0.3;
-transform: translate(-50%,-50%);
+.wave-animation {
+    background-color: var(--primary-back-color);
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    opacity: 0.3;
+    transform: translate(-50%, -50%);
 
-z-index: 1;
-overflow: hidden;
+    z-index: 1;
+    overflow: hidden;
 }
-.wave-animation::before{
+
+.wave-animation::before {
     content: '';
-    position:absolute;
-    top:0;
-    left:50%;
-    width:600vh;
-    height:600vh;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 600vh;
+    height: 600vh;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 40%;
-    transform: translate(-50%,-90%);
+    transform: translate(-50%, -90%);
     z-index: 1;
     animation: wave 80s linear infinite;
 }
 
-@keyframes wave{
+@keyframes wave {
     100% {
-        transform:translate(-50%,-90%) rotate(360deg);
+        transform: translate(-50%, -90%) rotate(360deg);
     }
 }
 
@@ -37,7 +38,7 @@ overflow: hidden;
 }
 
 .icon-color:hover {
-    color: var(--primary-color);
+    color: var(--primary-back-color);
 }
 
 .title-text {
@@ -53,7 +54,7 @@ overflow: hidden;
     padding-left: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-    outline-color: var(--primary-color);
+    outline-color: var(--primary-back-color);
     background-color: rgba(250, 235, 215, 0.185);
 }
 
@@ -63,13 +64,13 @@ overflow: hidden;
     top: -20%;
     right: -40%;
     transition: all .2s;
-    background-color: var(--primary-color);
-    box-shadow: 0 20px 30px -10px var(--primary-color);
+    background-color: var(--primary-back-color);
+    box-shadow: 0 20px 30px -10px var(--primary-back-color);
     border-radius: 14px;
 }
 
 .switch-login-mode:hover {
-    box-shadow: 0 3px 30px 0 var(--primary-color);
+    box-shadow: 0 3px 30px 0 var(--primary-back-color);
 }
 
 .switch-login-mode:active {
@@ -82,14 +83,14 @@ overflow: hidden;
     top: 15%;
     right: 10%;
     transition: all .2s;
-    background-color: var(--primary-color);
-    box-shadow: 0 20px 30px -10px var(--primary-color);
+    background-color: var(--primary-back-color);
+    box-shadow: 0 20px 30px -10px var(--primary-back-color);
     border-radius: 14px;
     transform: rotate3d(0, 1, 0, 0deg);
 }
 
 .send-code-button:hover {
-    box-shadow: 0 3px 30px 0 var(--primary-color);
+    box-shadow: 0 3px 30px 0 var(--primary-back-color);
 }
 
 .send-code-button:active {
@@ -101,13 +102,13 @@ overflow: hidden;
     height: 40px;
     transform: translateY(-50%);
     transition: all .2s;
-    background-color: var(--primary-color);
-    box-shadow: 0 20px 30px -10px var(--primary-color);
+    background-color: var(--primary-back-color);
+    box-shadow: 0 20px 30px -10px var(--primary-back-color);
     border-radius: 14px;
 }
 
 .login-button:hover {
-    box-shadow: 0 3px 30px 0 var(--primary-color);
+    box-shadow: 0 3px 30px 0 var(--primary-back-color);
 }
 
 .login-button:active {
@@ -152,7 +153,7 @@ overflow: hidden;
     transition-duration: .25s;
     box-shadow: none;
     color: white;
-    background-color: var(--primary-color);
+    background-color: var(--primary-back-color);
 }
 
 .icon-box:active {

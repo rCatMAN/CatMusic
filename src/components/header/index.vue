@@ -68,16 +68,20 @@ const signOut = async () => {
 
 <style scoped>
 .header {
-    border-bottom: 2px solid var(--primary-color);
+    z-index: 100;
+
+    backdrop-filter: saturate(200%) blur(10px);
+    background-color: hsla(0, 0%, 100%, 0.86);
+
 }
 
 .icon-Box {
     transition: all 125ms ease-out;
-    color: var(--primary-color);
+    color: var(--primary-back-color);
 }
 
 .icon-Box:hover {
     color: white;
-    background-color: var(--primary-color);
+    background-color: var(--primary-back-color);
 }
 </style>
