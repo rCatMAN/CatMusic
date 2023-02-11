@@ -31,7 +31,7 @@ const songList = reactive<any>({
     songs: null,
 })
 onMounted(async () => {
-    const { data: songListRes } = await songListApi(props.id.id)
+    const { data: songListRes } = await songListApi(props.id)
     songList.songs = songListRes.songs
     console.log('songListRes', songList)
 })

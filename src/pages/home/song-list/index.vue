@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="top-menu  relative flex items-start" style="width: 100%;height: 330px;">
+        <div class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 25%;min-width: 200px;margin-right: 5%;">
                 <img :src="songListDetail.picUrl" alt="" class="rounded-2xl z-10 relative" style="">
                 <div class="shadow" :style="{ 'background-image': `url(${songListDetail.picUrl})` }">
@@ -14,7 +14,10 @@
                     </div>
                     <p class="text-sm font-bold text-gray-500">{{ songListDetail.creator }}</p>
                 </div>
-                <div v-if="songListDetail.description" class="mt-20 truncate" style="max-width: 700px;">
+                <div class="mt-6">
+                    <span class="text-sm text-gray-500">最后更新于{{ songListDetail.updateTime }}</span>
+                </div>
+                <div v-if="songListDetail.description" class="mt-9 truncate" style="max-width: 700px;">
                     <span class="text-sm text-gray-500">{{ songListDetail.description }}</span>
                 </div>
                 <div class=" theme-button mt-10 w-max cursor-pointer"
@@ -30,26 +33,31 @@
 </template>
 
 <script setup lang='ts'>
-import { onMounted, computed, ref, reactive } from 'vue';
+import { onMounted, computed, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import { songListDetailApi } from '@/request/api/detail'
 import SongList from "./list.vue"
 const route = useRoute()
-const id: any = ref(route.query)
+const id = computed<any>(() => {
+    return route.query.id
+})
 const songListDetail: any = reactive({
     name: "歌单名字",
     picUrl: "",
     creator: "歌单创建者",
     avatarUrl: "",
-    description: "歌单介绍"
+    description: "歌单介绍",
+    updateTime: null,
 })
 onMounted(async () => {
-    const { data: songListDetailRes } = await songListDetailApi(id.value.id)
+    const { data: songListDetailRes } = await songListDetailApi(id.value)
+    console.log('songListDetailRes', songListDetailRes)
     songListDetail.name = songListDetailRes.playlist.name
     songListDetail.picUrl = songListDetailRes.playlist.coverImgUrl
     songListDetail.creator = songListDetailRes.playlist.creator.nickname
     songListDetail.avatarUrl = songListDetailRes.playlist.creator.avatarUrl
     songListDetail.description = songListDetailRes.playlist.description
+    songListDetail.updateTime = songListDetailRes.playlist.updateTime
 })
 </script>
 

@@ -30,7 +30,6 @@ const selectedIndex = ref(100)
 onMounted(async () => {
     const { data: singerRes } = await hotSingerApi()
     singerList.values = singerRes.artists
-    console.log('singerRes', singerList)
 })
 </script>
 

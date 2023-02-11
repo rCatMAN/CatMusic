@@ -1,8 +1,14 @@
 <template>
-    <div class="footer fixed bottom-0 right-0 h-20 z-10 bg-white ">
+    <div class="footer fixed bottom-0 right-0 h-20 z-50 bg-white ">
         <div class="flex items-center w-full h-full relative ">
+
             <img src="https://p2.music.126.net/bDdwz0zd-BGYpel1QEU2RA==/109951165983886039.jpg" alt=""
                 style="height: 100%;" class="mr-4">
+            <div @mouseenter="selectIndex = 1" @mouseleave="selectIndex = 100"
+                class="absolute bg-black duration-200 ease-out cursor-pointer" style="width: 80px;height: 80px;" :style="{
+                    opacity:selectIndex === 1? '0.3':'0'
+                }">
+            </div>
             <div class="flex flex-col self-start mt-2">
                 <p class="mb-1 font-bold">歌曲名字</p>
                 <p class="text-xs font-bold text-gray-600">歌手名字</p>
@@ -33,7 +39,8 @@
 </template>
 
 <script setup lang='ts'>
-
+import { ref } from 'vue';
+const selectIndex = ref<number>(100)
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
-    <div class="flex items-start justify-around w-full h-full" style="min-width: 500px;">
-        <div v-for="(item, index) in songList" :key="index" class="relative" style="width:18%">
+    <div class="flex items-start justify-around flex-wrap w-full h-full" style="min-width: 500px;">
+        <div v-for="(item, index) in songList" :key="index" class="relative mb-8" style="width:18%">
             <div @click="toSongListPage(item.id)">
                 <div>
                     <img @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
@@ -39,7 +39,7 @@ const selectedIndex = ref()
 const songList = reactive([] as any[])
 onMounted(async () => {
     const { data: dailyListRes } = await recommendListDailyApi()
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 10; i++) {
         songList.push(dailyListRes.recommend[i])
     }
 })
