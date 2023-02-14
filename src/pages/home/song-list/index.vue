@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
-            <div style="width: 25%;min-width: 200px;margin-right: 5%;">
+            <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <img :src="songListDetail.picUrl" alt="" class="rounded-2xl z-10 relative" style="">
                 <div class="shadow" :style="{ 'background-image': `url(${songListDetail.picUrl})` }">
                 </div>
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="mt-8">
             <SongList :id="id" />
         </div>
     </div>
@@ -66,7 +66,7 @@ onMounted(async () => {
     position: absolute;
     top: 13px;
     left: 0px;
-    width: 25%;
+    width: 24%;
     min-width: 200px;
     filter: blur(10px) opacity(.9);
     transform: scale(.92, .96);

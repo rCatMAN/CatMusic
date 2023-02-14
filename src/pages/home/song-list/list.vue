@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-for="(item, index) in songList.songs" :key="index"
+        <div v-for="(item, index) in songList.songs" :key="index" @click="playSong(item.id)"
             class="list-background flex items-center justify-start rounded-xl duration-200 ease-out cursor-pointer"
             style="padding: 8px;height: 80px;width: 100%;">
-            <img :src="item.al.picUrl" alt="" class="rounded-xl mr-4" style="width: 60px;">
+            <img :src="item.al.picUrl" alt="" loading="lazy" class="rounded-xl mr-4" style="width: 60px;">
             <div class="flex flex-col  justify-center" style="width: 48%;height: 100%;">
                 <p class=" font-bold mb-1">{{ item.name }}</p>
                 <div class="flex items-center">
@@ -26,6 +26,8 @@
 <script setup lang='ts'>
 import { songListApi } from '@/request/api/detail'
 import { onMounted, reactive } from 'vue';
+import { useHowlerStore } from '@/store/howler-store';
+const howlerStore = useHowlerStore()
 const props = defineProps(['id'])
 const songList = reactive<any>({
     songs: null,
@@ -35,6 +37,9 @@ onMounted(async () => {
     songList.songs = songListRes.songs
     console.log('songListRes', songList)
 })
+const playSong = (id: number) => {
+    howlerStore.nowPlayingId = id
+}
 </script>
 
 <style scoped>

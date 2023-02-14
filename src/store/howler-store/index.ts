@@ -8,34 +8,45 @@ export const useHowlerStore = defineStore('howler', {
             volume: 1,
             isPlaying: false,
             isLoaded: false,
+            nowPlayTime: 0,
+            durationTime: 0,
         }
     },
     actions: {
-        newHowl(url: any) {
+        newHowl(url: any, store: any) {
             if (this.howler) {
                 console.log('清除上一个howl')
                 this.howler.unload()
+                this.isPlaying = false
+                this.nowPlayTime = 0
             }
             console.log('在store里newHowl')
             this.howler = new Howl({
                 format: 'mp3',
                 src: url,
-                volume: this.volume,
+                volume: store.volume,
                 html5: true,
                 loop: false,
                 preload: true,
                 autoplay: false,
                 mute: false,
                 onend() {
-                    this.isPlaying = false
+                    store.isPlaying = false
+                    console.log('播放结束', store.isPlaying)
                 },
                 onload() {
-                    console.log('加载完成')
-                    this.isLoaded = true
+
+                    store.durationTime = this.duration()
+                    console.log('初始化durationTime', store.durationTime,)
+                    store.isLoaded = true
+                    console.log('加载完成', store.isLoaded)
                 },
             })
-            console.log('加载中')
+            console.log('加载中', store.isLoaded)
             this.isLoaded = false
         },
+        setNowPlayTime() {
+            this.nowPlayTime = this.howler.seek()
+        }
     }
 })

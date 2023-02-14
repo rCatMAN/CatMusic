@@ -7,7 +7,7 @@
         <div class="flex items-center justify-start flex-wrap w-full cursor-pointer">
             <div v-for="(item, index) in searchSongList.values" :key="index"
                 class="song-box flex items-center rounded-xl duration-300 ease-out"
-                style="width: 25%;height: 54px;padding: 8px;" @click="toPlayerPage(item.id)">
+                style="width: 25%;height: 54px;padding: 8px;" @click="playSong(item.id)">
                 <img :src="item.al.picUrl" alt="" class="w-9 h-9 rounded-lg">
                 <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
                     <div class="w-full truncate">
@@ -40,7 +40,7 @@ onMounted(async () => {
     const { data: searchSongRes } = await searchSongApi(props.keywords)
     searchSongList.values = searchSongRes.result.songs
 })
-const toPlayerPage = (id: number) => {
+const playSong = (id: number) => {
     howlerStore.nowPlayingId = id
 }
 </script>

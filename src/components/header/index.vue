@@ -5,6 +5,11 @@
                 style="left: 10%;" />
             <SvgIcon @click="router.forward()" iconClass="front" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 15%;" />
+            <div class="flex items-center absolute" style="left:45%">
+                <div @click="router.push({ path: '/musichall' })" class="top-menu-box">
+                    <span class=" text-lg font-bold">探索</span>
+                </div>
+            </div>
             <div @focusin="selectedIndex = 1" @focusout="selectedIndex = 0"
                 class=" absolute w-52 h-8 rounded-lg duration-200"
                 style="right:16%;background-color: rgba(209,209,214,0.28)">
@@ -93,6 +98,24 @@ const signOut = async () => {
     backdrop-filter: saturate(200%) blur(10px);
     background-color: hsla(0, 0%, 100%, 0.86);
 
+}
+
+.top-menu-box {
+    transition: all 200ms ease-out;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+.top-menu-box:hover {
+    cursor: pointer;
+    background-color: rgba(107, 114, 128, 0.2);
+}
+
+.top-menu-box:active {
+    scale: .9;
 }
 
 .search-input {

@@ -1,8 +1,10 @@
 <template>
     <div class="bg-black">
         <HeaderMenu />
-        <AsideMenu />
-        <FooterMenu />
+        <!-- <AsideMenu /> -->
+        <KeepAlive>
+            <FooterMenu />
+        </KeepAlive>
         <div class="main-Page bg-white">
             <router-view />
         </div>
@@ -18,7 +20,7 @@ import FooterMenu from "../../components/footer/index.vue"
 <style>
 .main-Page {
     position: absolute;
-    width: calc(100% - 13rem);
+    width: 100%;
     min-height: 85vh;
     right: 0px;
     padding-top: calc(4rem + 40px);
