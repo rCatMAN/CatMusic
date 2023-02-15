@@ -18,6 +18,10 @@ const routerMenuList = [
         name: "探索音乐",
     },
     {
+        path: "/newsong",
+        name: "新潮"
+    },
+    {
         path: "/radios",
         name: "电台",
     },
@@ -36,7 +40,7 @@ const toPage = (path: string) => {
 
 <style scoped>
 .menu-Box {
-    height: 200px
+    height: 230px
 }
 
 .router-button-box {
@@ -54,7 +58,7 @@ const toPage = (path: string) => {
     transition-duration: 150ms;
     color: white;
     box-shadow: none;
-    background-color: var(--primary-color);
+    background-color: var(--primary-back-color);
 }
 
 .router-button-box-down {
@@ -62,8 +66,8 @@ const toPage = (path: string) => {
     transition-timing-function: ease-out;
     transition-duration: 150ms;
     color: white;
-    box-shadow: var(--primary-color) 0px 0px 15px 0px;
-    background-color: var(--primary-color);
+    box-shadow: var(--primary-back-color) 0px 0px 15px 0px;
+    background-color: var(--primary-back-color);
 }
 
 .router-button-box:active {

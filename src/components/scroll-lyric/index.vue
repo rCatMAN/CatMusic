@@ -1,20 +1,15 @@
 <template>
-  <div style="height: 50vh" class="overflow-scroll" ref="containerRef">
+  <div style="height: 100%;width: 100%;" class="overflow-scroll select-none" ref="containerRef">
     <div v-for="(line, lineIndex) in data" class="h-10 flex">
       <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
         <!-- 歌词原字体元素 -->
         <div class="lyric-text">{{ text }}</div>
 
         <!-- 歌词播放填充字体元素 -->
-        <div
-          class="lyric-text fill-color"
-          :style="{
-            transition: `all ${
-              lineIndex === currentLineIndex ? duration / 1000 : 0.2
+        <div class="lyric-text fill-color" :style="{
+          transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
             }s ease-in-out`,
-          }"
-          :class="isActiveText(lineIndex, startTime) ? 'active' : ''"
-        >
+        }" :class="isActiveText(lineIndex, startTime) ? 'active' : ''">
           {{ text }}
         </div>
       </div>

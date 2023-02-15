@@ -1,9 +1,10 @@
 <template>
-    <div class=" w-max rounded-3xl overflow-hidden relative" style="border: solid 3px var(--primary-color);">
+    <div class=" w-max rounded-3xl overflow-hidden relative" style="border: solid 3px var(--primary-back-color);">
         <!-- <qrcodevue v-if="qrUrl" :value="qrUrl" :size="size" level="H" :margin="5" /> -->
         <img v-show="qrUrl" :src="qrUrl" alt="">
-        <div v-show="checkCode === 802 && 800"  class=" absolute top-0 left-0 w-full h-full flex items-center justify-center  bg-gray-500">
-            <div class=" absolute " style="color: var(--primary-color);">
+        <div v-show="checkCode === 802 && 800"
+            class=" absolute top-0 left-0 w-full h-full flex items-center justify-center  bg-gray-500">
+            <div class=" absolute " style="color: var(--primary-back-color);">
                 <span>{{ checkString }}</span>
             </div>
         </div>
@@ -35,12 +36,12 @@ onMounted(async () => {
                     localStorage.setItem('cookie', checkRes.cookie)
                     checkCode.value = 803
                     router.push({
-                        path:'/musichall'
+                        path: '/musichall'
                     })
                 } else if (checkRes.code === 800) {
                     checkString.value = "二维码已过期 请刷新页面"
                     clearInterval(intervalId)
-                }else if(checkRes.code === 802){
+                } else if (checkRes.code === 802) {
                     checkCode.value = 802
                     checkString.value = "已扫描 待确认"
                 }
@@ -49,7 +50,7 @@ onMounted(async () => {
     }
 })
 onUnmounted(() => {
-    if(intervalId){
+    if (intervalId) {
         clearInterval(intervalId)
     }
 })

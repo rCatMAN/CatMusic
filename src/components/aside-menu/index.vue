@@ -10,7 +10,8 @@ import RouterMenu from './RouterMenu.vue';
 
 <style scoped>
 .aside-box {
-  height: calc(100% - 4rem);
-  border-right: 2px solid var(--primary-color);
+  padding-top: 4rem;
+  height: 100%;
+  border-right: 2px solid var(--primary-back-color);
 }
 </style>
