@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="flex items-center w-full h-full relative ">
-            <img v-if="songDetail.value" :src="songDetail.value.al.picUrl" alt="" style="height: 100%;" class="mr-4">
+            <img v-if="songDetail.values" :src="songDetail.values.al.picUrl" alt="" style="height: 100%;" class="mr-4">
             <div @click="router.push({ path: '/player' })" @mouseenter="selectIndex = 1" @mouseleave="selectIndex = 100"
                 class="absolute bg-black duration-200 ease-out cursor-pointer" style="width: 80px;height: 80px;" :style="{
                     opacity: selectIndex === 1 ? '0.3' : '0'
@@ -26,9 +26,9 @@
                     transform: selectIndex === 1 ? 'translate(-50%,-45%)' : 'translate(-50%,-10%)'
                 }" />
             <div class="flex flex-col self-start mt-2">
-                <p v-if="songDetail.value" class="title mb-1 font-bold cursor-pointer">{{ songDetail.value.name }}</p>
+                <p v-if="songDetail.values" class="title mb-1 font-bold cursor-pointer">{{ songDetail.values.name }}</p>
                 <div class="flex items-center">
-                    <span v-if="songDetail.value" v-for="(item, index) in songDetail.value.ar" :key="index"
+                    <span v-if="songDetail.values" v-for="(item, index) in songDetail.values.ar" :key="index"
                         class="title text-xs font-bold text-gray-600 cursor-pointer">{{ item.name }}</span>
                 </div>
             </div>
@@ -60,11 +60,31 @@ import router from '@/router';
 import VolumeBar from '@/components/volume-bar/index.vue'
 const selectIndex = ref<number>(100)
 const isDraging = ref(false)
-const barPosition = ref<any>(null)
+type barPositionType = {
+    [key: string]: {
+        width: number
+    }
+}
+const barPosition = reactive<barPositionType>({
+    values: {
+        width: 0
+    }
+})
 const dragingX = ref(0)
-const bar = ref<any>(null)
-const songDetail = reactive<any>({
-    value: null,
+const bar = ref<any>()
+type songDetailType = {
+    values?: {
+        al: {
+            picUrl: string
+        }
+        name: string
+        ar: Array<{
+            name: string
+        }>
+    }
+}
+const songDetail = reactive<songDetailType>({
+    values: undefined,
 })
 const howlerStore = useHowlerStore()
 const { nowPlayingId, howler, nowPlayTime, durationTime, isLoaded, isPlaying } = storeToRefs(howlerStore)
@@ -74,7 +94,7 @@ const progressBarRatio = computed(() => {
             return nowPlayTime.value / durationTime.value
         }
         else {
-            return dragingX.value / barPosition.value.width
+            return dragingX.value / barPosition.values.width
         }
     } else {
         return 0
@@ -83,9 +103,10 @@ const progressBarRatio = computed(() => {
 let timeRecorder: any
 watch(nowPlayingId, async (newid, oldid) => {
     const { data: songDetailRes } = await songDetailApi(nowPlayingId.value)
-    songDetail.value = songDetailRes.songs[0]
+    songDetail.values = songDetailRes.songs[0]
     const { data: urlRes } = await songUrlApi(nowPlayingId.value)
     console.log('newid:', newid, 'oldid:', oldid)
+    console.log('url', urlRes)
     howlerStore.newHowl(urlRes.data[0].url, howlerStore)
 })
 watch(durationTime, () => {
@@ -123,13 +144,13 @@ const dragBar = (event: any) => {
 
     document.body.style['userSelect'] = 'none'
     dragingX.value = event.clientX
-    barPosition.value = bar.value.getBoundingClientRect()
+    barPosition.values = bar.value.getBoundingClientRect()
     isDraging.value = true
 }
 const mouseUpEvent = () => {
     if (isDraging.value) {
         document.body.style['userSelect'] = 'text'
-        howler.value.seek((dragingX.value / barPosition.value.width * durationTime.value))
+        howler.value.seek((dragingX.value / barPosition.values.width * durationTime.value))
         howlerStore.setNowPlayTime()
         document.body.removeEventListener('mousemove', dragBar)
         isDraging.value = false

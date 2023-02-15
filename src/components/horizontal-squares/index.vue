@@ -36,12 +36,21 @@ import { useRouter } from "vue-router";
 var i: number
 const router = useRouter()
 const selectedIndex = ref()
-const songList = reactive([] as any[])
+type resType = {
+    id: number
+    picUrl: string
+    name: string
+    creator: {
+        nickname: string
+    }
+}
+const songList = reactive<Array<resType>>([])
 onMounted(async () => {
     const { data: dailyListRes } = await recommendListDailyApi()
     for (i = 0; i < 10; i++) {
         songList.push(dailyListRes.recommend[i])
     }
+    console.log('songList', songList)
 })
 const toSongListPage = (id: (string | number)) => {
     router.push({

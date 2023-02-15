@@ -31,7 +31,16 @@ import { searchVideoApi } from '@/request/api/search'
 import { onMounted, reactive, ref } from 'vue';
 const selectedIndex = ref(100)
 const props = defineProps(['keywords'])
-const searchVideoList = reactive<any>({
+type searchVideoListType = {
+    values: Array<{
+        coverUrl: string
+        title: string
+        creator: Array<{
+            userName: string
+        }>
+    }>
+}
+const searchVideoList = reactive<searchVideoListType>({
     values: [],
 })
 onMounted(async () => {

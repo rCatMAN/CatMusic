@@ -31,8 +31,19 @@
 import { personalizedListApi } from "@/request/api/Recommended"
 import { onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-const selectedIndex = ref()
-const songList = reactive<any>({})
+type songListType = {
+    values?: Array<{
+        id: number
+        picUrl: string
+        playCount: number
+        name: string
+    }>
+
+}
+const selectedIndex = ref(100)
+const songList = reactive<songListType>({
+    values: undefined
+})
 const router = useRouter()
 onMounted(async () => {
     const { data: songListRes } = await personalizedListApi()

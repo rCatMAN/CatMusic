@@ -26,7 +26,13 @@ import { searchAlbumApi } from '@/request/api/search'
 import { onMounted, reactive, ref } from 'vue';
 const selectedIndex = ref(100)
 const props = defineProps(['keywords'])
-const searchAlbumList = reactive<any>({
+type searchAlbumListType = {
+    values: Array<{
+        picUrl: string
+        name: string
+    }>
+}
+const searchAlbumList = reactive<searchAlbumListType>({
     values: [],
 })
 onMounted(async () => {

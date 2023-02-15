@@ -28,7 +28,7 @@ import RecommendedPlaylist from '@/components/horizontal-squares/recommended-Pla
 import { useUserStore } from "@/store/user-store/index"
 import { computed } from "vue";
 const store = useUserStore()
-const isLogin = computed(() => {
+const isLogin = computed<boolean>(() => {
   return store.isLogin
 })
 </script>

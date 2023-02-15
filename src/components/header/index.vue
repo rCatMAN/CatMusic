@@ -59,12 +59,14 @@
 import { onMounted, computed, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import { useUserStore } from "@/store/user-store/index"
+import { storeToRefs } from 'pinia';
 const router = useRouter()
 const store = useUserStore()
+// const { userProfile } = storeToRefs(store)
 const keyWords = ref("")
 const enterIndex = ref(0)
 const selectedIndex = ref(0)
-const isLogin = computed(() => {
+const isLogin = computed<boolean>(() => {
     console.log("更新islogin", store.isLogin)
     return store.isLogin
 })

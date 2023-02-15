@@ -33,8 +33,20 @@ import { useHowlerStore } from '@/store/howler-store';
 const router = useRouter()
 const howlerStore = useHowlerStore()
 const props = defineProps(['keywords'])
-const searchSongList = reactive<any>({
-    values: null,
+type searchSongListType = {
+    values: Array<{
+        al: {
+            picUrl: string
+        }
+        name: string
+        id: number
+        ar: Array<{
+            name: string
+        }>
+    }>
+}
+const searchSongList = reactive<searchSongListType>({
+    values: [],
 })
 onMounted(async () => {
     const { data: searchSongRes } = await searchSongApi(props.keywords)

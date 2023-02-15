@@ -26,7 +26,13 @@ import { searchArtistApi } from '@/request/api/search'
 import { onMounted, reactive, ref } from 'vue';
 const props = defineProps(['keywords'])
 const selectedIndex = ref<number>(100)
-const searchArtistList = reactive<any>({
+type searchArtistListType = {
+    values: Array<{
+        img1v1Url: string
+        name: string
+    }>
+}
+const searchArtistList = reactive<searchArtistListType>({
     values: [],
 })
 onMounted(async () => {

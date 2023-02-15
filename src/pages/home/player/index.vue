@@ -60,8 +60,19 @@ import { onMounted, reactive } from 'vue';
 import { songDetailApi } from '@/request/api/detail'
 import ScrollLyric from '@/components/scroll-lyric/index.vue'
 const howlerStore = useHowlerStore()
-const songDetail = reactive<any>({
-    values: null
+type songDetailType = {
+    values?: {
+        al: {
+            picUrl: string
+        }
+        name: string
+        ar: Array<{
+            name: string
+        }>
+    }
+}
+const songDetail = reactive<songDetailType>({
+    values: undefined
 })
 onMounted(async () => {
     const { data: songDetailRes } = await songDetailApi(howlerStore.nowPlayingId)

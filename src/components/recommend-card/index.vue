@@ -18,14 +18,14 @@
                 <SvgIcon iconClass="play" class="text-white absolute" style="width: 22px;right: 20%;bottom: 17%;" />
             </div>
         </div>
-        <div class="relative daily-background rounded-2xl overflow-hidden"
+        <div v-if="fmList.id" class="relative daily-background rounded-2xl overflow-hidden"
             style="width: 48%;height: 200px;background-image:linear-gradient(0deg,#a18cd1 0%, #fbc2eb 100%)">
             <div class="absolute rounded-2xl overflow-hidden "
                 style="width: 166px;height: 166px;left: 20px;top: 50%;transform: translateY(-50%);">
                 <img style="width: 166px;height: 166px" :src="fmList.url" alt="">
             </div>
             <div class=" absolute text-white " style="left: 200px;top: 20px;">
-                <p class="text-2xl font-bold">{{ fmList.values.name }}</p>
+                <p class="text-2xl font-bold">{{ fmList.name }}</p>
                 <p class="text-lg font-bold mt-4">{{ fmList.singer }}</p>
             </div>
             <div class="flex items-center absolute" style="left: 190px;bottom: 20px;">
@@ -33,7 +33,7 @@
                     class="ml-2 mr-2 rounded-xl cursor-pointer duration-200 ease-out flex items-center justify-center icon-Box">
                     <SvgIcon iconClass="dontlike" class="text-white" style="width: 29px;" />
                 </div>
-                <div
+                <div @click="playFmSong()"
                     class="mr-1 rounded-xl cursor-pointer duration-200 ease-out flex items-center justify-center icon-Box">
                     <SvgIcon iconClass="play" class="text-white" style="width: 25px;" />
                 </div>
@@ -52,15 +52,30 @@
 <script setup lang='ts'>
 import { personalFmApi } from "@/request/api/Recommended"
 import { onMounted, ref, reactive } from "vue"
+import { useHowlerStore } from "@/store/howler-store";
+const howlerStore = useHowlerStore()
 const selectedIndex = ref(100)
-const fmList: any = reactive([] as any[])
+type fmListType = {
+    name?: string
+    singer?: string
+    url?: string
+    id: number
+}
+const fmList = reactive<fmListType>({
+    name: undefined,
+    singer: undefined,
+    url: undefined,
+    id: 1,
+})
+const playFmSong = () => {
+    howlerStore.nowPlayingId = fmList.id
+}
 onMounted(async () => {
     const { data: fmListRes } = await personalFmApi()
-    console.log("FMres", fmListRes.data)
-    fmList.values = fmListRes.data[0]
+    fmList.name = fmListRes.data[0].name
     fmList.singer = fmListRes.data[0].artists[0].name
     fmList.url = fmListRes.data[0].album.picUrl
-    console.log("FM", fmList)
+    fmList.id = fmListRes.data[0].bMusic.id
 })
 </script>
 

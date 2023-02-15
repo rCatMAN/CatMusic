@@ -29,8 +29,22 @@ import { onMounted, reactive } from 'vue';
 import { useHowlerStore } from '@/store/howler-store';
 const howlerStore = useHowlerStore()
 const props = defineProps(['id'])
-const songList = reactive<any>({
-    songs: null,
+type songListType = {
+    songs?: Array<{
+        id: number
+        al: {
+            picUrl: string
+            name: string
+        }
+        dt: string
+        name: string
+        ar: Array<{
+            name: string
+        }>
+    }>
+}
+const songList = reactive<songListType>({
+    songs: undefined,
 })
 onMounted(async () => {
     const { data: songListRes } = await songListApi(props.id)
