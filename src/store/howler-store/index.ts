@@ -28,7 +28,7 @@ export const useHowlerStore = defineStore('howler', {
                 html5: true,
                 loop: false,
                 preload: true,
-                autoplay: false,
+                autoplay: true,
                 mute: false,
                 onend() {
                     store.isPlaying = false
@@ -41,6 +41,9 @@ export const useHowlerStore = defineStore('howler', {
                     store.isLoaded = true
                     console.log('加载完成', store.isLoaded)
                 },
+                onplay() {
+                    store.isPlaying = true
+                }
             })
             console.log('加载中', store.isLoaded)
             this.isLoaded = false

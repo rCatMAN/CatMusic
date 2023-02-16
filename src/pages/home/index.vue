@@ -2,9 +2,9 @@
     <div class="bg-black">
         <HeaderMenu />
         <!-- <AsideMenu /> -->
-        <KeepAlive>
+        <keep-alive>
             <FooterMenu />
-        </KeepAlive>
+        </keep-alive>
         <div class="main-Page bg-white">
             <router-view />
         </div>

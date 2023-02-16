@@ -54,14 +54,14 @@ import { ref } from 'vue';
 import { useHowlerStore } from '@/store/howler-store'
 import { songUrlApi } from '@/request/api/url'
 import { songDetailApi } from '@/request/api/detail'
-import { watch, reactive, computed, onMounted } from 'vue';
+import { watch, reactive, computed, onActivated, onDeactivated } from 'vue';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import VolumeBar from '@/components/volume-bar/index.vue'
 const selectIndex = ref<number>(100)
 const isDraging = ref(false)
 type barPositionType = {
-    [key: string]: {
+    values: {
         width: number
     }
 }
@@ -90,11 +90,11 @@ const howlerStore = useHowlerStore()
 const { nowPlayingId, howler, nowPlayTime, durationTime, isLoaded, isPlaying } = storeToRefs(howlerStore)
 const progressBarRatio = computed(() => {
     if (isLoaded.value) {
-        if (!(isDraging.value)) {
-            return nowPlayTime.value / durationTime.value
+        if (isDraging.value) {
+            return dragingX.value / barPosition.values.width
         }
         else {
-            return dragingX.value / barPosition.values.width
+            return nowPlayTime.value / durationTime.value
         }
     } else {
         return 0
@@ -157,8 +157,12 @@ const mouseUpEvent = () => {
         dragingX.value = 0
     }
 }
-onMounted(() => {
+onActivated(() => {
+    console.log('act', songDetail)
     document.body.addEventListener('mouseup', mouseUpEvent)
+})
+onDeactivated(() => {
+    console.log('deactivated', songDetail)
 })
 </script>
 

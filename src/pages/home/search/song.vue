@@ -7,11 +7,15 @@
         <div class="flex items-center justify-start flex-wrap w-full cursor-pointer">
             <div v-for="(item, index) in searchSongList.values" :key="index"
                 class="song-box flex items-center rounded-xl duration-300 ease-out"
-                style="width: 25%;height: 54px;padding: 8px;" @click="playSong(item.id)">
+                style="width: 25%;height: 54px;padding: 8px;" :style="{
+                    backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
+                }" @click="playSong(item.id)">
                 <img :src="item.al.picUrl" alt="" class="w-9 h-9 rounded-lg">
                 <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
                     <div class="w-full truncate">
-                        <span class="font-bold text-sm mb-1 ">{{ item.name }}</span>
+                        <span class="font-bold text-sm mb-1 " :style="{
+                            color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                        }">{{ item.name }}</span>
                     </div>
                     <div class=" w-full truncate" style="margin-top: -5px;">
                         <span v-for="(itemm, indexx) in item.ar" :key="indexx" class="text-xs text-gray-500">{{
@@ -30,8 +34,10 @@ import { searchSongApi } from '@/request/api/search'
 import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHowlerStore } from '@/store/howler-store';
+import { storeToRefs } from 'pinia';
 const router = useRouter()
 const howlerStore = useHowlerStore()
+const { nowPlayingId } = storeToRefs(howlerStore)
 const props = defineProps(['keywords'])
 type searchSongListType = {
     values: Array<{
