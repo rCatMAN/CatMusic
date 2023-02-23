@@ -40,7 +40,7 @@ const barWidth = computed(() => {
             return dragingX.value - barPosition.value.left + 'px'
         }
     } else {
-        '0px'
+        '100%'
     }
 })
 const volume = computed(() => {

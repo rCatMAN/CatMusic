@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div v-if="songListDetail.values" class="top-menu  relative flex items-start "
-            style="width: 100%;height: 330px;">
+        <div v-if="songListDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <img :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative" style="">
                 <div class="shadow" :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
@@ -33,8 +32,14 @@
     </div>
 </template>
 
+<script lang="ts">
+export default defineComponent({
+    name: 'songlist'
+})
+</script>
+
 <script setup lang='ts'>
-import { onMounted, computed, reactive } from 'vue';
+import { onMounted, computed, reactive, onActivated, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import { songListDetailApi } from '@/request/api/detail'
 import SongList from "./list.vue"
@@ -59,10 +64,13 @@ const songListDetail = reactive<songListDetailType>({
     values: undefined
 })
 onMounted(async () => {
+    console.log('onMounted,songlist组件')
     const { data: songListDetailRes } = await songListDetailApi(id.value)
-    console.log('songListDetailRes', songListDetailRes)
     songListDetail.values = songListDetailRes.playlist
 })
+// onActivated(() => {
+//     console.log('activated,songlist组件')
+// })
 </script>
 
 <style scoped>

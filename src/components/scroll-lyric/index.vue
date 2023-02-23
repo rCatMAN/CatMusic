@@ -1,48 +1,101 @@
 <template>
-  <div style="height: 100%;width: 100%;" class="overflow-scroll select-none" ref="containerRef">
-    <div v-for="(line, lineIndex) in data" class="h-10 flex">
-      <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
-        <!-- 歌词原字体元素 -->
-        <div class="lyric-text">{{ text }}</div>
-
-        <!-- 歌词播放填充字体元素 -->
-        <div class="lyric-text fill-color" :style="{
-          transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
-            }s ease-in-out`,
-        }" :class="isActiveText(lineIndex, startTime) ? 'active' : ''">
-          {{ text }}
+  <div id="scroll" class=" absolute w-full h-full overflow-hidden select-none">
+    <div>
+      <div class="w-full" style="height: 50%;">
+      </div>
+      <div v-for="(line, lineIndex) in data" @click="clickToPage(lineIndex)"
+        class="line-background h-12  rounded-xl flex items-center justify-center cursor-pointer duration-500 ease-out"
+        style="">
+        <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
+          <!-- 歌词原字体元素 -->
+          <div class="lyric-text" :class="isActiveText(lineIndex, startTime) ? 'active' : ''" :style="{
+            transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
+              }s ease-out`,
+          }">{{ text }}</div>
+          <!-- 歌词播放填充字体元素 -->
+          <div class="lyric-text fill-color" :style="{
+            transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
+              }s ease-out`,
+          }" :class="isActiveText(lineIndex, startTime) ? 'active' : ''">
+            {{ text }}
+          </div>
         </div>
+      </div>
+      <div class="w-full" style="height: 50%;">
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import { yrc } from "./test.json";
-import { LyricData } from "./types";
-
-const containerRef = ref<HTMLDivElement>();
-let tempTimeRecorder: NodeJS.Timer | null = null;
+import IScroll from 'iscroll/build/iscroll'
+import { songLyricApi } from '@/request/api/detail'
+import { useHowlerStore } from '@/store/howler-store';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted, ref, reactive, watch, onActivated } from "vue";
+import { LyricData, lyricListType } from "./types";
+const howlerStore = useHowlerStore()
+const { nowPlayingId } = storeToRefs(howlerStore)
+const data = ref<LyricData>()
+const myScroll = ref()
+const lyricList = reactive<lyricListType>({
+  lrc: {
+    lyric: ''
+  },
+  yrc: {
+    lyric: '',
+    handleLyric: [],
+    currentLyric: ''
+  },
+})
 // 当前播放时间
-const currentTime = ref(10000);
+const currentTime = computed(() => {
+  return (howlerStore.nowPlayTime * 1000) + 350
+});
+// onMounted(async () => {
+//   const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
+//   if (lyricRes.yrc.lyric) {
+//     lyricList.yrc.lyric = lyricRes.yrc.lyric
+//     lyricList.yrc.handleLyric = lyricList.yrc.lyric.split('}')
+//     lyricList.yrc.currentLyric = lyricList.yrc.handleLyric[lyricList.yrc.handleLyric.length - 1]
+//     data.value = praseData(lyricList.yrc.currentLyric);
+//     setTimeout(() => {
+//       myScroll.value = new IScroll('#scroll', {
+//         mouseWheel: true,
+//         scrollbars: false,
+//         scrollX: true,
+//         bounce: true,
+//         mouseWheelSpeed: 3,
+//         snap: '.line-background',
+//       });
+//       console.log('初始化myscroll', myScroll.value)
+//     }, 100);
+//   }
 
-// 测试用：临时启动一个计时器模拟歌曲播放时间
-const tempTimeRecord = () => {
-  tempTimeRecorder = setInterval(() => {
-    currentTime.value += 100;
+// })
+watch(nowPlayingId, async () => {
+  const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
+  lyricList.yrc.lyric = lyricRes.yrc.lyric
+  lyricList.yrc.handleLyric = lyricList.yrc.lyric.split('}')
+  lyricList.yrc.currentLyric = lyricList.yrc.handleLyric[lyricList.yrc.handleLyric.length - 1]
+  data.value = praseData(lyricList.yrc.currentLyric);
+  setTimeout(() => {
+    myScroll.value = new IScroll('#scroll', {
+      mouseWheel: true,
+      scrollbars: false,
+      scrollX: true,
+      bounce: true,
+      mouseWheelSpeed: 3,
+      snap: '.line-background',
+    });
+    console.log('刷新myscroll', myScroll.value)
   }, 100);
-};
-
-onMounted(() => {
-  // 启动计时器
-  tempTimeRecord();
-});
-
-onUnmounted(() => {
-  // 清除计时器
-  clearInterval(tempTimeRecorder as NodeJS.Timer);
-});
+})
+const clickToPage = (lineIndex: number) => {
+  if (!myScroll.value.moved) {
+    myScroll.value.goToPage(0, lineIndex - 6, 3000)
+  }
+}
 
 // 解析歌词数据
 const praseData = (data: string) => {
@@ -81,11 +134,9 @@ const praseData = (data: string) => {
   return lines as LyricData;
 };
 
-const data = praseData(yrc.lyric);
-
 // 计算当前播放的行数
 const currentLineIndex = computed(() =>
-  data.findIndex((line, index) => {
+  data.value?.findIndex((line, index) => {
     if (line && line.startTime && line.duration) {
       const { startTime, duration } = line;
       const endTime = startTime + duration;
@@ -98,6 +149,16 @@ const currentLineIndex = computed(() =>
   })
 );
 
+watch(currentLineIndex, () => {
+  if (!(lyricList.yrc.currentLyric === '')) {
+    if (currentLineIndex.value && currentLineIndex.value > 0) {
+      if (myScroll.value && !myScroll.value.moved) {
+        myScroll.value.goToPage(0, currentLineIndex.value - 6, 2000)
+      }
+    }
+  }
+
+})
 // 判断歌词是否需要触发激活效果
 const isActiveText = (lineIndex: number, startTime?: number) => {
   if (startTime && lineIndex === currentLineIndex.value) {
@@ -108,16 +169,22 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
   }
   return false;
 };
+
 </script>
 
 <style scoped>
 .lyric-text {
   position: relative;
-  font-size: 20px;
-  color: rgb(230, 230, 230);
+  font-size: 22px;
+  color: rgba(230, 230, 230, 0.728);
   background-clip: text;
   letter-spacing: 6px;
   transform: translateY(0);
+}
+
+.lyric-text.active {
+
+  transform: translateY(-3px);
 }
 
 .lyric-text.fill-color {
@@ -125,7 +192,7 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
   top: 0;
   left: 0;
   color: transparent;
-  background: linear-gradient(to right, gray, rgb(230, 230, 230));
+  background: linear-gradient(0deg, #7028e4 0%, #e5b2ca 100%);
   -webkit-background-clip: text;
   width: 0%;
   overflow: hidden;
@@ -133,7 +200,12 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
 
 .lyric-text.fill-color.active {
   width: 100%;
-  font-weight: bold;
+  z-index: 10;
   transform: translateY(-3px);
+}
+
+.line-background:hover {
+
+  background-color: rgba(128, 128, 128, 0.11);
 }
 </style>
