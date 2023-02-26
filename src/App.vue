@@ -1,14 +1,13 @@
 <template>
   <div class="bg-white">
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
+    <router-view v-if="isRouterAlive" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { nextTick, provide, ref, onMounted } from 'vue';
 import { useUserStore } from './store/user-store';
+
 const userStore = useUserStore()
 const isRouterAlive = ref(true)
 onMounted(() => {
@@ -16,9 +15,13 @@ onMounted(() => {
 })
 const reload = () => {
   isRouterAlive.value = false
-  nextTick(() => {
+  setTimeout(() => {
     isRouterAlive.value = true
-  })
+  }, 1);
+  // nextTick(() => {
+  //   isRouterAlive.value = true
+  // })
+
 }
 provide('reload', reload)
 </script>

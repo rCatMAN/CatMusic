@@ -5,11 +5,16 @@
             style="padding: 8px;height: 80px;width: 100%;" :style="{
                 backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
             }">
-            <img :src="item.al.picUrl" alt="" class="rounded-xl mr-4" style="width: 60px;">
+            <el-image :src="item.al.picUrl" class="rounded-xl mr-4" style="width: 60px;" fit="cover" loading="lazy" lazy />
             <div class="flex flex-col  justify-center" style="width: 48%;height: 100%;">
-                <p class=" font-bold mb-1" :style="{
-                    color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
-                }">{{ item.name }}</p>
+                <div class="flex items-center">
+                    <p class=" font-bold mb-1" :style="{
+                        color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                    }">{{ item.name }}</p>
+                    <div v-if="item.fee === 1" class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center">
+                        <span class=" font-bold" style="font-size: xx-small;">VIP</span>
+                    </div>
+                </div>
                 <div class="flex items-center">
                     <p v-for="(itemm, index) in item.ar" :key="index" class=" text-xs font-bold text-gray-600">{{
                         itemm.name
@@ -50,6 +55,7 @@ type songListType = {
         ar: Array<{
             name: string
         }>
+        fee: number
     }>
 }
 const songList = reactive<songListType>({
@@ -57,6 +63,7 @@ const songList = reactive<songListType>({
 })
 onMounted(async () => {
     const { data: songListRes } = await songListApi(props.id)
+    console.log('songListRes: ', songListRes);
     songList.songs = songListRes.songs
 })
 const playSong = (id: number) => {
@@ -72,5 +79,9 @@ const playSong = (id: number) => {
 
 .list-background:active {
     scale: .95;
+}
+
+.vip-icon {
+    background-color: #a5a5a53f;
 }
 </style>

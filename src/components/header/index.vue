@@ -61,10 +61,11 @@ export default defineComponent({
 </script>
 
 <script setup lang='ts'>
-import { onMounted, computed, ref, defineComponent } from 'vue';
+import { onMounted, computed, ref, defineComponent,inject } from 'vue';
 import { useRouter } from 'vue-router'
 import { useUserStore } from "@/store/user-store/index"
 import { storeToRefs } from 'pinia';
+const reload = inject<Function>('reload',()=>{})
 const router = useRouter()
 const store = useUserStore()
 const { isLogin, userProfile } = storeToRefs(store)
@@ -79,6 +80,7 @@ const toSearchPage = (k: string) => {
                 keywords: k
             }
         })
+        reload()
     }
 }
 

@@ -15,14 +15,15 @@
         </div>
         <div class="flex items-center w-full h-full relative ">
             <img v-if="songDetail.values" :src="songDetail.values.al.picUrl" alt="" style="height: 100%;" class="mr-4">
-            <div v-if="songDetail.values" @click="showPlayer()" @mouseenter="selectIndex = 1"
+            <div v-if="!(nowPlayingId === 1)" @click="showPlayer()" @mouseenter="selectIndex = 1"
                 @mouseleave="selectIndex = 100" class="absolute bg-black duration-200 ease-out cursor-pointer"
                 style="width: 80px;height: 80px;" :style="{
                     opacity: selectIndex === 1 ? '0.3' : '0'
                 }">
             </div>
-            <SvgIcon v-if="songDetail.values" @click="showPlayer()" @mouseenter="selectIndex = 1" iconClass="doubleuparrow"
-                class=" absolute text-white duration-200 ease-out cursor-pointer" style="left:40px;top: 40px;" :style="{
+            <SvgIcon v-if="!(nowPlayingId === 1)" @click="showPlayer()" @mouseenter="selectIndex = 1"
+                iconClass="doubleuparrow" class=" absolute text-white duration-200 ease-out cursor-pointer"
+                style="left:40px;top: 40px;" :style="{
                     opacity: selectIndex === 1 ? '0.8' : '0',
                     transform: selectIndex === 1 ? 'translate(-50%,-45%)' : 'translate(-50%,-10%)'
                 }" />

@@ -2,7 +2,8 @@
     <div>
         <div v-if="songListDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
-                <img :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative" style="">
+                <el-image :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative" style=""
+                    fit="cover" loading="lazy" lazy />
                 <div class="shadow" :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
                 </div>
             </div>
