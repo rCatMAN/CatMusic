@@ -16,3 +16,23 @@ export const songListApi = (id: any) =>
     request.get<Response>(
         `/music/playlist/track/all?id=${id}`
     )
+export const artistDetailApi = (id: any) =>
+    request.get<Response>(
+        `/music/artist/detail?id=${id}`
+    )
+export const artistHotSongAPi = (id: any) =>
+    request.get<Response>(
+        `/music/artist/top/song?id=${id}`
+    )
+export const artistAlbumAPi = (id: any, offset: number) =>
+    request.get<Response>(
+        `/music/artist/album?id=${id}&limit=10&offset=${offset}`
+    )
+export const artistMvAPi = (id: any) =>
+    request.get<Response>(
+        `/music/artist/mv?id=${id}`
+    )
+export const similarArtistApi = (id: any) =>
+    request.get<Response>(
+        `/music/simi/artist?id=${id}`
+    )

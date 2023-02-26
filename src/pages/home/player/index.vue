@@ -74,10 +74,8 @@ import ProgressBar from './ProgressBar.vue';
 import { useHowlerStore } from '@/store/howler-store';
 import { storeToRefs } from 'pinia';
 import { reactive, watch, defineComponent } from 'vue';
-import { useRouter, } from 'vue-router';
 import { songDetailApi } from '@/request/api/detail'
 import ScrollLyric from '@/components/scroll-lyric/index.vue'
-const router = useRouter()
 const howlerStore = useHowlerStore()
 const { howler, isPlaying, isLoaded, nowPlayingId } = storeToRefs(howlerStore)
 const hiddenPlayerPage = () => {

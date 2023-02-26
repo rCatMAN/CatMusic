@@ -23,7 +23,6 @@ import HeaderMenu from "../../components/header/index.vue"
 import FooterMenu from "../../components/footer/index.vue"
 import { useHowlerStore } from "@/store/howler-store"
 import { storeToRefs } from "pinia"
-import { ref } from "vue"
 const howlerStore = useHowlerStore()
 const { isShowPlayerPage } = storeToRefs(howlerStore)
 </script>

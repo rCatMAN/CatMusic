@@ -8,13 +8,15 @@
             <div v-for="(item, index) in searchArtistList.values" :key="index" class="mr-8 mb-8 " style="width: 27%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class=" relative cursor-pointer w-full">
-                    <img :src="item.img1v1Url" alt="" class=" relative rounded-full z-10">
+                    <img @click="toArtistPage(item.id)" :src="item.img1v1Url" alt=""
+                        class=" relative rounded-full z-10 cursor-pointer">
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.img1v1Url})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>
                 </div>
                 <div class="mt-4 flex items-center justify-center">
-                    <span class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
+                    <span @click="toArtistPage(item.id)"
+                        class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
                 </div>
             </div>
         </div>
@@ -23,6 +25,7 @@
 
 <script setup lang='ts'>
 import { searchArtistApi } from '@/request/api/search'
+import router from '@/router';
 import { onMounted, reactive, ref } from 'vue';
 const props = defineProps(['keywords'])
 const selectedIndex = ref<number>(100)
@@ -30,6 +33,7 @@ type searchArtistListType = {
     values: Array<{
         img1v1Url: string
         name: string
+        id: number
     }>
 }
 const searchArtistList = reactive<searchArtistListType>({
@@ -43,6 +47,14 @@ onMounted(async () => {
         }
     }
 })
+const toArtistPage = (id: number) => {
+    router.push({
+        path: '/artist',
+        query: {
+            id: id
+        }
+    })
+}
 </script>
 
 <style scoped>

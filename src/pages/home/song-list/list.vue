@@ -5,7 +5,7 @@
             style="padding: 8px;height: 80px;width: 100%;" :style="{
                 backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
             }">
-            <img :src="item.al.picUrl" alt="" class="rounded-xl mr-4" style="width: 60px;">
+            <el-image :src="item.al.picUrl" class="rounded-xl mr-4" style="width: 60px;" fit="cover" loading="lazy" lazy />
             <div class="flex flex-col  justify-center" style="width: 48%;height: 100%;">
                 <p class=" font-bold mb-1" :style="{
                     color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''

@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 import Login from "../pages/home/login/index.vue"
-// import Player from "../pages/home/player/index.vue"
 import Home from "../pages/home/index.vue"
 import MusicHall from "../pages/home/explore/music-hall/index.vue"
 import NewSong from "../pages/home/explore/new-song/index.vue"
@@ -8,21 +7,13 @@ import Videos from "../pages/home/explore/videos/index.vue"
 import Radios from "../pages/home/explore/radio/index.vue"
 import SongList from "../pages/home/song-list/index.vue"
 import Search from "../pages/home/search/index.vue"
-const Player = () => import('../pages/home/player/index.vue')
+const Artist = () => import('../pages/home/artist/index.vue')
 const routes = [
     {
         path: "/login",
         name: "Login",
         component: Login,
     },
-    // {
-    //     path: "/player",
-    //     name: "player",
-    //     component: Player,
-    //     meta: {
-    //         keepAlive: true
-    //     }
-    // },
     {
         path: "/",
         name: "Home",
@@ -67,6 +58,11 @@ const routes = [
                 meta: {
                     keepAlive: false
                 }
+            },
+            {
+                path: "artist",
+                name: "artist",
+                component: Artist,
             },
             {
                 path: "search",

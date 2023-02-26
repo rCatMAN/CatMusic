@@ -6,8 +6,7 @@
         </div>
         <div class="flex items-start ">
             <div v-for="(item, index) in searchVideoList.values" :key="index" class="mr-7" style="width: 25%;">
-                <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
-                    class=" relative cursor-pointer">
+                <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                     <img :src="item.coverUrl" alt="" class="w-full rounded-xl  relative z-10">
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.coverUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
@@ -19,7 +18,6 @@
                         <span v-for="(itemm, indexx) in item.creator" :key="indexx"
                             class="title cursor-pointer mt-1 text-xs text-gray-500">{{ itemm.userName }}</span>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -32,7 +30,7 @@ import { onMounted, reactive, ref } from 'vue';
 const selectedIndex = ref(100)
 const props = defineProps(['keywords'])
 type searchVideoListType = {
-    values: Array<{
+    values?: Array<{
         coverUrl: string
         title: string
         creator: Array<{
@@ -41,13 +39,13 @@ type searchVideoListType = {
     }>
 }
 const searchVideoList = reactive<searchVideoListType>({
-    values: [],
+    values: undefined,
 })
 onMounted(async () => {
     const { data: searchVideoRes } = await searchVideoApi(props.keywords)
     for (var i = 0; i < 5; i++) {
         if (searchVideoRes.result.videos[i]) {
-            searchVideoList.values.push(searchVideoRes.result.videos[i])
+            searchVideoList.values?.push(searchVideoRes.result.videos[i])
         }
     }
 })

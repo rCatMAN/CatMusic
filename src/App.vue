@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <router-view v-slot="{ Component }">
+    <router-view v-if="isRouterAlive" v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
   </div>
@@ -15,6 +15,7 @@ onMounted(() => {
   userStore.setLoginStatus()
 })
 const reload = () => {
+  console.log('执行了reload')
   isRouterAlive.value = false
   nextTick(() => {
     isRouterAlive.value = true
