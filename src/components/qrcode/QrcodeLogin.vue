@@ -1,6 +1,5 @@
 <template>
     <div class=" w-max rounded-3xl overflow-hidden relative" style="border: solid 3px var(--primary-back-color);">
-        <!-- <qrcodevue v-if="qrUrl" :value="qrUrl" :size="size" level="H" :margin="5" /> -->
         <img v-show="qrUrl" :src="qrUrl" alt="">
         <div v-show="checkCode === 802 && 800"
             class=" absolute top-0 left-0 w-full h-full flex items-center justify-center  bg-gray-500">
@@ -13,7 +12,6 @@
 </template>
 
 <script setup lang='ts'>
-import qrcodevue from 'qrcode.vue'
 import { useRouter } from 'vue-router';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { qrcodeKeyApi, qrcodeCreateApi, qrcodeCheckApi } from '@/request/api/user';

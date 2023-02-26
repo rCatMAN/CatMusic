@@ -5,8 +5,7 @@
         <div class=" w-full h-full select-none relative z-10">
             <SvgIcon @click="router.back()" iconClass="back" class="icon-color text-black absolute cursor-pointer"
                 style="left: 5%;top:5%;" />
-            <div class="flex items-center justify-between z-10"
-                style="height: 100%;margin-right: 17%;margin-left: 17%;">
+            <div class="flex items-center justify-between z-10" style="height: 100%;margin-right: 17%;margin-left: 17%;">
                 <div class=" relative ">
                     <div class="background" style="width: 430px;height: 200px;">
                     </div>
@@ -20,8 +19,7 @@
                         <span class=" cursor-pointer" style="color: var(--primary-back-color);">Register here</span>
                     </div>
                 </div>
-                <div class="form flex flex-col items-center relative top-7 rounded-3xl"
-                    style="width: 400px;height: 480px;">
+                <div class="form flex flex-col items-center relative top-7 rounded-3xl" style="width: 400px;height: 480px;">
                     <div @click="switchLoginMode"
                         class="switch-login-mode absolute flex items-center justify-center cursor-pointer">
                         <span class="font-semibold text-xs">Switch LoginMode</span>
@@ -39,8 +37,7 @@
                         </div>
                         <div class=" mt-8 relative">
                             <input v-model="password" class="select-text" type="password" id="password">
-                            <label for="password"
-                                class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
+                            <label for="password" class="absolute text-gray-500 font-bold text-sm cursor-text duration-150"
                                 style="left: 10%;transform: translateY(-50%);"
                                 :style="{ top: password ? '-30%' : '50%', color: password ? 'var(--primary-back-color)' : '' }">PassWord</label>
                         </div>
@@ -72,14 +69,13 @@
                             <span>请使用网易云手机app扫描二维码登录</span>
                         </div>
                         <div class="mt-8">
-                            <Qrcode v-if="loginMode === 2" />
+                            <Qrcode src="" v-if="loginMode === 2" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup lang='ts'>
@@ -111,6 +107,4 @@ const login = () => {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
