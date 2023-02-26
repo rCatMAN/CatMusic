@@ -5,8 +5,7 @@
                 <div>
                     <img @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                         class="mb-4 rounded-2xl overflow-hidden duration-500 ease-out select-none cursor-pointer"
-                        :class="selectedIndex === index ? 'box-Shadow' : ''" :src="item.picUrl" alt=""
-                        style="width:100%;">
+                        :class="selectedIndex === index ? 'box-Shadow' : ''" :src="item.picUrl" alt="" style="width:100%;">
                 </div>
                 <div @click="toSongListPage(item.id)" @mouseenter="selectedIndex = index"
                     class=" bg-red-500 w-12 h-12 rounded-full absolute duration-200 ease-out cursor-pointer"
@@ -48,7 +47,9 @@ const songList = reactive<Array<resType>>([])
 onMounted(async () => {
     const { data: dailyListRes } = await recommendListDailyApi()
     for (i = 0; i < 10; i++) {
-        songList.push(dailyListRes.recommend[i])
+        if (dailyListRes.recommend[i]) {
+            songList.push(dailyListRes.recommend[i])
+        }
     }
     console.log('songList', songList)
 })

@@ -3,6 +3,7 @@ import { Howl } from 'howler'
 export const useHowlerStore = defineStore('howler', {
     state: () => {
         return {
+            isShowPlayerPage: false,
             nowPlayingId: 1,
             howler: null as any,
             volume: 1,
@@ -15,12 +16,10 @@ export const useHowlerStore = defineStore('howler', {
     actions: {
         newHowl(url: any, store: any) {
             if (this.howler) {
-                console.log('清除上一个howl')
                 this.howler.unload()
                 this.isPlaying = false
                 this.nowPlayTime = 0
             }
-            console.log('在store里newHowl')
             this.howler = new Howl({
                 format: 'mp3',
                 src: url,
@@ -28,7 +27,7 @@ export const useHowlerStore = defineStore('howler', {
                 html5: true,
                 loop: false,
                 preload: true,
-                autoplay: false,
+                autoplay: true,
                 mute: false,
                 onend() {
                     store.isPlaying = false
@@ -41,6 +40,9 @@ export const useHowlerStore = defineStore('howler', {
                     store.isLoaded = true
                     console.log('加载完成', store.isLoaded)
                 },
+                onplay() {
+                    store.isPlaying = true
+                }
             })
             console.log('加载中', store.isLoaded)
             this.isLoaded = false

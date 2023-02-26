@@ -17,6 +17,8 @@ import qrcodevue from 'qrcode.vue'
 import { useRouter } from 'vue-router';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { qrcodeKeyApi, qrcodeCreateApi, qrcodeCheckApi } from '@/request/api/user';
+import { useUserStore } from '@/store/user-store';
+const userStore = useUserStore()
 const router = useRouter()
 const size = ref(150)
 const qrUrl = ref()
@@ -35,6 +37,7 @@ onMounted(async () => {
                     clearInterval(intervalId)
                     localStorage.setItem('cookie', checkRes.cookie)
                     checkCode.value = 803
+                    userStore.setLoginStatus()
                     router.push({
                         path: '/musichall'
                     })
@@ -56,6 +59,4 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -9,18 +9,19 @@
             }">
 
             </div>
-            <div @mouseenter="selectIndex = 2" @mouseleave="selectIndex = 100" ref="bar"
-                @mousedown="addMouseMoveListener()" class="absolute w-full h-3 -top-2 cursor-pointer z-10">
+            <div @mouseenter="selectIndex = 2" @mouseleave="selectIndex = 100" ref="bar" @mousedown="addMouseMoveListener()"
+                class="absolute w-full h-3 -top-2 cursor-pointer z-10">
             </div>
         </div>
         <div class="flex items-center w-full h-full relative ">
             <img v-if="songDetail.values" :src="songDetail.values.al.picUrl" alt="" style="height: 100%;" class="mr-4">
-            <div @click="router.push({ path: '/player' })" @mouseenter="selectIndex = 1" @mouseleave="selectIndex = 100"
-                class="absolute bg-black duration-200 ease-out cursor-pointer" style="width: 80px;height: 80px;" :style="{
+            <div v-if="songDetail.values" @click="showPlayer()" @mouseenter="selectIndex = 1"
+                @mouseleave="selectIndex = 100" class="absolute bg-black duration-200 ease-out cursor-pointer"
+                style="width: 80px;height: 80px;" :style="{
                     opacity: selectIndex === 1 ? '0.3' : '0'
                 }">
             </div>
-            <SvgIcon @click="router.push({ path: '/player' })" @mouseenter="selectIndex = 1" iconClass="doubleuparrow"
+            <SvgIcon v-if="songDetail.values" @click="showPlayer()" @mouseenter="selectIndex = 1" iconClass="doubleuparrow"
                 class=" absolute text-white duration-200 ease-out cursor-pointer" style="left:40px;top: 40px;" :style="{
                     opacity: selectIndex === 1 ? '0.8' : '0',
                     transform: selectIndex === 1 ? 'translate(-50%,-45%)' : 'translate(-50%,-10%)'
@@ -37,14 +38,19 @@
                 <div class="icon-footer-box rounded-xl" style="padding: 4px;">
                     <SvgIcon iconClass="lastsong" style="width: 35px;;" />
                 </div>
-                <div @click="changePlayStatus()" class="icon-footer-box rounded-xl" style="padding: 6px;">
+                <div v-show="isLoaded" @click="changePlayStatus()" class="icon-footer-box absolute rounded-xl"
+                    style="padding: 6px;left: 50%; transform: translateX(-50%);">
                     <SvgIcon :iconClass="isPlaying ? 'pause' : 'play'" style="width: 40px;transform: translateX(2px)" />
+                </div>
+                <div v-show="!isLoaded" class="icon-footer-box rounded-xl absolute"
+                    style="padding: 6px;left: 50%; transform: translateX(-50%);">
+                    <SvgIcon iconClass="loading" class="loading-animation" style="width: 40px;transform: translateX(0px)" />
                 </div>
                 <div class="icon-footer-box rounded-xl" style="padding: 4px;">
                     <SvgIcon iconClass="nextsong" style="width: 35px;" />
                 </div>
             </div>
-            <VolumeBar style="right: 10%;" />
+            <VolumeBar class="absolute" style="right: 10%;" />
         </div>
     </div>
 </template>
@@ -52,16 +58,21 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
 import { useHowlerStore } from '@/store/howler-store'
+import { usekeepAliveStore } from '@/store/keepAlive-store';
 import { songUrlApi } from '@/request/api/url'
 import { songDetailApi } from '@/request/api/detail'
-import { watch, reactive, computed, onMounted } from 'vue';
+import { watch, reactive, computed, onActivated, onDeactivated, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 import VolumeBar from '@/components/volume-bar/index.vue'
+const keepAliveStore = usekeepAliveStore()
 const selectIndex = ref<number>(100)
 const isDraging = ref(false)
+const showPlayer = () => {
+    howlerStore.isShowPlayerPage = true
+}
 type barPositionType = {
-    [key: string]: {
+    values: {
         width: number
     }
 }
@@ -73,7 +84,7 @@ const barPosition = reactive<barPositionType>({
 const dragingX = ref(0)
 const bar = ref<any>()
 type songDetailType = {
-    values?: {
+    values: {
         al: {
             picUrl: string
         }
@@ -84,17 +95,23 @@ type songDetailType = {
     }
 }
 const songDetail = reactive<songDetailType>({
-    values: undefined,
+    values: {
+        al: {
+            picUrl: ''
+        },
+        name: '',
+        ar: [{ name: '' }]
+    },
 })
 const howlerStore = useHowlerStore()
-const { nowPlayingId, howler, nowPlayTime, durationTime, isLoaded, isPlaying } = storeToRefs(howlerStore)
+const { nowPlayingId, howler, nowPlayTime, durationTime, isLoaded, isPlaying, } = storeToRefs(howlerStore)
 const progressBarRatio = computed(() => {
     if (isLoaded.value) {
-        if (!(isDraging.value)) {
-            return nowPlayTime.value / durationTime.value
+        if (isDraging.value) {
+            return dragingX.value / barPosition.values.width
         }
         else {
-            return dragingX.value / barPosition.values.width
+            return nowPlayTime.value / durationTime.value
         }
     } else {
         return 0
@@ -160,6 +177,14 @@ const mouseUpEvent = () => {
 onMounted(() => {
     document.body.addEventListener('mouseup', mouseUpEvent)
 })
+onActivated(() => {
+    songDetail.values.name = keepAliveStore.name
+    songDetail.values.ar = keepAliveStore.artist
+    songDetail.values.al.picUrl = keepAliveStore.picUrl
+})
+onDeactivated(() => {
+    keepAliveStore.addState(songDetail.values.name, songDetail.values.ar, songDetail.values.al.picUrl)
+})
 </script>
 
 <style scoped>
@@ -193,5 +218,15 @@ onMounted(() => {
 
 .icon-footer-box:active {
     scale: 0.9;
+}
+
+.loading-animation {
+    animation: loading-animation 1.5s linear infinite;
+}
+
+@keyframes loading-animation {
+    100% {
+        transform: rotate(180deg)
+    }
 }
 </style>

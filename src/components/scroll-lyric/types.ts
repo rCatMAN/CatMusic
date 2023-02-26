@@ -9,3 +9,13 @@ export type LetterData = {
   duration: number;
   text: string;
 };
+export type lyricListType = {
+  lrc: {
+    lyric: string
+  }
+  yrc: {
+    lyric: string
+    currentLyric: string
+    handleLyric: string[]
+  }
+}

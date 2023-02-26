@@ -1,5 +1,5 @@
 <template>
-    <div class=" fixed top-0 w-full h-16 bg-white z-10 header">
+    <div class=" fixed top-0 w-full h-16 bg-white  header">
         <div class="relative w-full h-full flex items-center">
             <SvgIcon @click="router.back()" iconClass="back" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 10%;" />
@@ -23,7 +23,7 @@
                         }">
                 </div>
             </div>
-            <div @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0" v-if="isLogin"
+            <div @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0" v-if="isLogin && userProfile"
                 class="absolute z-10 flex items-center duration-300 ease-out" style="right: 11%;" :style="{
                     scale: enterIndex ? '2.5' : '1',
                     transform: enterIndex ? 'translate(-15%, 40%)' : ''
@@ -32,11 +32,11 @@
                     <img :src="userProfile.avatarUrl" alt="">
                 </div>
             </div>
-            <div v-if="isLogin" v-show="enterIndex" @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0"
+            <div v-if="isLogin && userProfile" v-show="enterIndex" @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0"
                 class="absolute duration-300 ease-out rounded-2xl bg-white"
                 style="width: 300px;padding: 14px;right: 11%;top: 68px;transform: translateX(41%);box-shadow: 0 10px 20px -10px #6b7280;"
                 :style="{
-                
+
                 }">
                 <div class="flex flex-col items-center justify-center mt-8 cursor-default">
                     <span>{{ userProfile.nickname }}</span>
@@ -54,26 +54,23 @@
         </div>
     </div>
 </template>
+<script lang="ts">
+export default defineComponent({
+    name: 'headerMenu'
+})
+</script>
 
 <script setup lang='ts'>
-import { onMounted, computed, ref } from 'vue';
+import { onMounted, computed, ref, defineComponent } from 'vue';
 import { useRouter } from 'vue-router'
 import { useUserStore } from "@/store/user-store/index"
 import { storeToRefs } from 'pinia';
 const router = useRouter()
 const store = useUserStore()
-// const { userProfile } = storeToRefs(store)
+const { isLogin, userProfile } = storeToRefs(store)
 const keyWords = ref("")
 const enterIndex = ref(0)
 const selectedIndex = ref(0)
-const isLogin = computed<boolean>(() => {
-    console.log("更新islogin", store.isLogin)
-    return store.isLogin
-})
-const userProfile = computed<any>(() => {
-    console.log("userProfile更新", store.userProfile)
-    return store.userProfile
-})
 const toSearchPage = (k: string) => {
     if (!(k === "")) {
         router.push({
@@ -84,9 +81,9 @@ const toSearchPage = (k: string) => {
         })
     }
 }
-onMounted(() => {
-    store.setLoginStatus()
-})
+
+
+
 const signOut = async () => {
     await store.signOut()
     store.setLoginStatus()
@@ -95,8 +92,7 @@ const signOut = async () => {
 
 <style scoped>
 .header {
-    z-index: 100;
-
+    z-index: 49;
     backdrop-filter: saturate(200%) blur(10px);
     background-color: hsla(0, 0%, 100%, 0.86);
 

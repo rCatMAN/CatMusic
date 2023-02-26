@@ -1,10 +1,17 @@
 import { defineStore } from "pinia"
 import { getLoginStatusApi, signOutApi } from "@/request/api/user"
+type userProfileType = {
+    nickname?: string,
+    avatarUrl?: string
+}
 export const useUserStore = defineStore('user', {
     state: () => {
         return {
             isLogin: false,
-            userProfile: null,
+            userProfile: {
+                nickname: undefined,
+                avatarUrl: undefined
+            } as userProfileType,
             isLoaded: false,
         }
     },
@@ -18,7 +25,7 @@ export const useUserStore = defineStore('user', {
             } else {
                 console.log("执行了setLOGIN")
                 this.isLogin = false
-                this.userProfile = null
+                this.userProfile = {}
             }
         },
         async signOut() {

@@ -1,5 +1,9 @@
 import request from "../request"
 import { Response } from '../type'
+export const songLyricApi = (id: number | string) =>
+    request.get<Response>(
+        `/music/lyric/new?id=${id}`,
+    )
 export const songDetailApi = (id: number | string) =>
     request.get<Response>(
         `/music/song/detail?ids=${id}`,
