@@ -52,27 +52,6 @@ const lyricList = reactive<lyricListType>({
 const currentTime = computed(() => {
   return (howlerStore.nowPlayTime * 1000) + 350
 });
-// onMounted(async () => {
-//   const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
-//   if (lyricRes.yrc.lyric) {
-//     lyricList.yrc.lyric = lyricRes.yrc.lyric
-//     lyricList.yrc.handleLyric = lyricList.yrc.lyric.split('}')
-//     lyricList.yrc.currentLyric = lyricList.yrc.handleLyric[lyricList.yrc.handleLyric.length - 1]
-//     data.value = praseData(lyricList.yrc.currentLyric);
-//     setTimeout(() => {
-//       myScroll.value = new IScroll('#scroll', {
-//         mouseWheel: true,
-//         scrollbars: false,
-//         scrollX: true,
-//         bounce: true,
-//         mouseWheelSpeed: 3,
-//         snap: '.line-background',
-//       });
-//       console.log('初始化myscroll', myScroll.value)
-//     }, 100);
-//   }
-
-// })
 watch(nowPlayingId, async () => {
   const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
   lyricList.yrc.lyric = lyricRes.yrc.lyric

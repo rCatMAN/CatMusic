@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full">
+    <div v-if="searchVideoList.values" class="w-full">
         <div class="flex items-center justify-between mb-8">
             <span class="text-2xl font-bold">视频</span>
             <span class="title text-sm font-bold text-gray-500 duration-200 ease-out cursor-pointer">查看全部</span>
@@ -7,7 +7,7 @@
         <div class="flex items-start ">
             <div v-for="(item, index) in searchVideoList.values" :key="index" class="mr-7" style="width: 25%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
-                    <img :src="item.coverUrl" alt="" class="w-full rounded-xl  relative z-10">
+                    <el-image :src="item.coverUrl" alt="" class="w-full rounded-xl  relative z-10" lazy />
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.coverUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>
@@ -39,7 +39,7 @@ type searchVideoListType = {
     }>
 }
 const searchVideoList = reactive<searchVideoListType>({
-    values: undefined,
+    values: [],
 })
 onMounted(async () => {
     const { data: searchVideoRes } = await searchVideoApi(props.keywords)

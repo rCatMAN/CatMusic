@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full">
+    <div v-if="similarArtistList.values" class="w-full">
         <span class="text-2xl font-bold">相似艺人</span>
     </div>
-    <div class="mt-8 w-full flex items-start justify-between flex-wrap">
+    <div v-if="similarArtistList.values && isLogin" class="mt-8 w-full flex items-start justify-between flex-wrap">
         <div v-for="(item, index) in similarArtistList.values" :key="index" class="mb-8" style="width: 15%;">
             <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                 <el-image @click="toArtistPage(item.id)" :src="item.picUrl" alt="" class="rounded-full relative z-10"
@@ -16,17 +16,24 @@
             </div>
         </div>
     </div>
+    <div v-if="!isLogin" class="mt-8 flex items-center justify-center">
+        <span class="text-2xl font-bold">登录后为您推荐相似艺人</span>
+    </div>
 </template>
 
 <script setup lang='ts'>
 import { onMounted, reactive, computed, ref, inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { similarArtistApi } from '@/request/api/detail'
+import { useUserStore } from '@/store/user-store'
+import { storeToRefs } from 'pinia';
+const userStore = useUserStore()
+const { isLogin } = storeToRefs(userStore)
 const route = useRoute()
 const router = useRouter()
 const selectedIndex = ref(100)
-const reload: Function = inject('reload')
-console.log(reload)
+
+const reload = inject<Function>('reload', () => { })
 const id = computed(() => {
     return route.query.id
 })
@@ -41,11 +48,12 @@ const similarArtistList = reactive<similarArtistType>({
     values: []
 })
 onMounted(async () => {
-    const { data: similarArtistRes } = await similarArtistApi(id.value)
-    for (let i = 0; i < 12; i++) {
-        similarArtistList.values?.push(similarArtistRes.artists[i])
+    if (isLogin.value) {
+        const { data: similarArtistRes } = await similarArtistApi(id.value)
+        for (let i = 0; i < 12; i++) {
+            similarArtistList.values?.push(similarArtistRes.artists[i])
+        }
     }
-
 })
 const toArtistPage = (id: number) => {
     router.push({
