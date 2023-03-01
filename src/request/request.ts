@@ -6,7 +6,8 @@ const request = axios.create({
         "Access-Control-Allow-Origin-Type": '*'
     },
     // baseURL: 'http://127.0.0.1:5173/',
-    baseURL: 'catmusic-5gyf5fr834ec8917-1314215170.ap-shanghai.app.tcloudbase.com',
+    // baseURL: 'catmusic-5gyf5fr834ec8917-1314215170.ap-shanghai.app.tcloudbase.com',
+    baseURL: 'catmusic-5gyf5fr834ec8917-1314215170.tcloudbaseapp.com',
     timeout: 80000,
     withCredentials: true,
     // headers: {
