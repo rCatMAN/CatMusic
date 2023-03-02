@@ -4,7 +4,8 @@
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <el-image :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative"
                     style="max-width: 330px;" fit="cover" loading="lazy" lazy />
-                <div class="shadow" :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
+                <div class="shadow" style="max-width: 330px;"
+                    :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
                 </div>
             </div>
             <div class=" h-full">
