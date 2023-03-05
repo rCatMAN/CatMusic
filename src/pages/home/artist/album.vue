@@ -6,13 +6,15 @@
         <div v-for="(item, index) in artistAlbumList.values" class="mb-8" :key="index" style="width: 17%;">
             <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                 class=" relative w-full cursor-pointer">
-                <el-image :src="item.picUrl" alt="" class="relative rounded-lg z-10" lazy />
+                <el-image @click="router.push({ path: '/album', query: { id: item.id } })" :src="item.picUrl" alt=""
+                    class="relative rounded-lg z-10" lazy />
                 <div class="shadow duration-300 ease-out"
                     :style="{ 'background-image': `url(${item.picUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>
             </div>
             <div class="mt-4 flex items-center justify-center">
-                <span class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
+                <span @click="router.push({ path: '/album', query: { id: item.id } })"
+                    class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
             </div>
         </div>
     </div>
@@ -23,9 +25,10 @@
 
 <script setup lang='ts'>
 import { onMounted, reactive, computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { artistAlbumAPi } from '@/request/api/detail'
 const route = useRoute()
+const router = useRouter()
 const selectedIndex = ref(100)
 const offset = ref(0)
 const id = computed(() => {
@@ -35,6 +38,7 @@ type artistAlbumListType = {
     values?: Array<{
         name: string
         picUrl: string
+        id: number
     }>
 }
 const artistAlbumList = reactive<artistAlbumListType>({

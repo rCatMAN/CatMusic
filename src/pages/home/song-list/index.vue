@@ -66,13 +66,9 @@ const songListDetail = reactive<songListDetailType>({
     values: undefined
 })
 onMounted(async () => {
-    console.log('onMounted,songlist组件')
     const { data: songListDetailRes } = await songListDetailApi(id.value)
     songListDetail.values = songListDetailRes.playlist
 })
-// onActivated(() => {
-//     console.log('activated,songlist组件')
-// })
 </script>
 
 <style scoped>
