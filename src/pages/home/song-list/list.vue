@@ -63,7 +63,6 @@ const songList = reactive<songListType>({
 })
 onMounted(async () => {
     const { data: songListRes } = await songListApi(props.id)
-    console.log('songListRes: ', songListRes);
     songList.songs = songListRes.songs
 })
 const playSong = (id: number) => {

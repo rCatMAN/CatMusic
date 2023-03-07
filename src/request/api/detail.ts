@@ -20,6 +20,10 @@ export const artistDetailApi = (id: any) =>
     request.get<Response>(
         `/music/artist/detail?id=${id}`
     )
+export const albumDetailApi = (id: any) =>
+    request.get<Response>(
+        `/music/album?id=${id}`
+    )
 export const artistHotSongAPi = (id: any) =>
     request.get<Response>(
         `/music/artist/top/song?id=${id}`

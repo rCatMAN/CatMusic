@@ -8,6 +8,7 @@ import Radios from "../pages/home/explore/radio/index.vue"
 import SongList from "../pages/home/song-list/index.vue"
 import Search from "../pages/home/search/index.vue"
 const Artist = () => import('../pages/home/artist/index.vue')
+const Album = () => import('../pages/home/album/index.vue')
 const routes = [
     {
         path: "/login",
@@ -55,6 +56,14 @@ const routes = [
                 path: "songlist",
                 name: "songlist",
                 component: SongList,
+                meta: {
+                    keepAlive: false
+                }
+            },
+            {
+                path: "album",
+                name: "album",
+                component: Album,
                 meta: {
                     keepAlive: false
                 }

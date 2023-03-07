@@ -2,9 +2,10 @@
     <div>
         <div v-if="songListDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
-                <el-image :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative" style=""
-                    fit="cover" loading="lazy" lazy />
-                <div class="shadow" :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
+                <el-image :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative"
+                    style="max-width: 330px;" fit="cover" loading="lazy" lazy />
+                <div class="shadow" style="max-width: 330px;"
+                    :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
                 </div>
             </div>
             <div class=" h-full">
@@ -65,13 +66,9 @@ const songListDetail = reactive<songListDetailType>({
     values: undefined
 })
 onMounted(async () => {
-    console.log('onMounted,songlist组件')
     const { data: songListDetailRes } = await songListDetailApi(id.value)
     songListDetail.values = songListDetailRes.playlist
 })
-// onActivated(() => {
-//     console.log('activated,songlist组件')
-// })
 </script>
 
 <style scoped>

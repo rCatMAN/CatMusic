@@ -26,7 +26,7 @@
                                     class="text-xs text-gray-300">{{ item.name }}</span>
                             </div>
                         </div>
-                        <div class="flex items-center" style="width: 220px;">
+                        <div class="flex items-center ml-10" style="width: 220px;">
                             <VolumeBar class="text-white" />
                             <div class="player-icon-box flex items-center justify-center  rounded-md duration-200 ease-out"
                                 style="margin-left: 120px;">
@@ -104,12 +104,6 @@ const changePlayStatus = () => {
         howler.value.play()
     }
 }
-// onMounted(async () => {
-//     console.log('Player onActivated')
-//     const { data: songDetailRes } = await songDetailApi(nowPlayingId.value)
-//     songDetail.values = songDetailRes.songs[0]
-//     console.log('songDetailRes', songDetail.values)
-// })
 watch(nowPlayingId, async () => {
     const { data: songDetailRes } = await songDetailApi(nowPlayingId.value)
     songDetail.values = songDetailRes.songs[0]

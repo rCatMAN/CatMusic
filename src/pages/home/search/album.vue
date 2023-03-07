@@ -8,13 +8,15 @@
             <div v-for="(item, index) in searchAlbumList.values" class="mb-8 mr-8" :key="index" style="width: 27%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class=" relative w-full cursor-pointer">
-                    <img :src="item.picUrl" alt="" class="relative rounded-lg z-10">
+                    <el-image @click="router.push({ path: '/album', query: { id: item.id } })" :src="item.picUrl" alt=""
+                        class="relative rounded-lg z-10" lazy />
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.picUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>
                 </div>
                 <div class="mt-4 flex items-center justify-center">
-                    <span class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
+                    <span @click="router.push({ path: '/album', query: { id: item.id } })"
+                        class="title text-sm font-bold duration-200 ease-out cursor-pointer">{{ item.name }}</span>
                 </div>
             </div>
         </div>
@@ -24,12 +26,15 @@
 <script setup lang='ts'>
 import { searchAlbumApi } from '@/request/api/search'
 import { onMounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const selectedIndex = ref(100)
 const props = defineProps(['keywords'])
 type searchAlbumListType = {
     values: Array<{
         picUrl: string
         name: string
+        id: number
     }>
 }
 const searchAlbumList = reactive<searchAlbumListType>({
