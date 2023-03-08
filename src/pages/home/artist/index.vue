@@ -1,7 +1,7 @@
 <template>
     <div v-if="artistDetail.value.artist" class="w-3/5 h-80 flex items-center justify-start relative">
         <div class="artist-cover relative">
-            <el-image :src="artistDetail.value.artist.cover" class="mr-8 rounded-full z-10 relative"
+            <el-image :src="artistDetail.value.artist.cover + '?param=1080y1080'" class="mr-8 rounded-full z-10 relative"
                 style="width: 300px;height: 300px;" fit="cover" />
             <div class="shadow" :style="{ 'background-image': `url(${artistDetail.value.artist.cover})` }">
             </div>

@@ -1,19 +1,13 @@
 <template>
     <div>
         <div v-if="singerList.values" class="flex items-start justify-start " style="min-width: 500px;">
-            <div v-for=" (item, index) in singerList.values" :key="index" class=" mr-10 mb-8" style="width: 18%;">
-                <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
-                    class="img-Shadow relative duration-200 ease-out rounded-full overflow-hidden cursor-pointer ">
-                    <el-image @click="router.push({ path: '/artist', query: { id: item.id } })" :src="item.img1v1Url"
-                        fit="cover" lazy />
-                    <div class="absolute w-12 h-12 rounded-full overflow-hidden duration-200 ease-out"
-                        style="left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
-                        :style="{
-                            opacity: selectedIndex === index ? '1' : '0',
-                        }">
-                        <SvgIcon iconClass="play" class="text-white absolute"
-                            style="width: 23px;left: 50%;top: 50%;transform: translate(-40%,-50%);" />
-                    </div>
+            <div v-for=" (item, index) in singerList.values" :key="index" class="relative mr-10 mb-8" style="width: 18%;">
+                <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
+                    @click="router.push({ path: '/artist', query: { id: item.id } })"
+                    class="relative z-20 rounded-full cursor-pointer" :src="item.img1v1Url + '?param=500y500'" fit="cover"
+                    lazy />
+                <div class="shadow w-full duration-200 ease-out" style="max-width: 330px;"
+                    :style="{ 'background-image': `url(${item.img1v1Url + '?param=500y500'})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>
                 <div class=" mt-4 flex items-center justify-center font-bold duration-200 ease-out">
                     <span @click="router.push({ path: '/artist', query: { id: item.id } })" class="title cursor-pointer">{{
@@ -43,11 +37,19 @@ const selectedIndex = ref(100)
 onMounted(async () => {
     const { data: singerRes } = await hotSingerApi()
     singerList.values = singerRes.artists
+    console.log('singerList.values: ', singerList.values);
 })
 </script>
 
 <style scoped>
-.img-Shadow:hover {
-    box-shadow: var(--primary-back-color) 0px 12px 15px -10px;
+.shadow {
+    position: absolute;
+    top: 5%;
+    left: 0px;
+    filter: blur(10px) opacity(.9);
+    transform: scale(.92, .96);
+    background-size: cover;
+    border-radius: 999px;
+    aspect-ratio: 1/1;
 }
 </style>

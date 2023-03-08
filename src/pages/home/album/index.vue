@@ -39,7 +39,7 @@
         </div>
         <div v-if="albumDetail.songs && albumDetail.values" class="mt-16">
             <SongList :songs="albumDetail.songs" />
-            <div class="song-list-footer mt-10 text-xs text-gray-500">
+            <div v-if="date" class="song-list-footer mt-10 text-xs text-gray-500">
                 <p>发行于 {{ date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate()
                     + '日' }}</p>
                 <p class="mt-1">© {{ albumDetail.values.company }}</p>
@@ -65,7 +65,7 @@ import { albumDetailApi } from '@/request/api/detail'
 import SongList from "./list.vue"
 import MoreAblum from "./more-album.vue"
 const isDescriptionShow = ref(false)
-const date = ref()
+const date = ref<Date>()
 const route = useRoute()
 const id = computed<any>(() => {
     return route.query.id
@@ -88,6 +88,7 @@ type albumDetailType = {
     }
     songs?: Array<{
         name: string
+        alia: string
         id: number
         fee: number
         dt: number

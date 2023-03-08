@@ -8,10 +8,18 @@
             <div v-for="(item, index) in searchAlbumList.values" class="mb-8 mr-8" :key="index" style="width: 27%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class=" relative w-full cursor-pointer">
-                    <el-image @click="router.push({ path: '/album', query: { id: item.id } })" :src="item.picUrl" alt=""
-                        class="relative rounded-lg z-10" lazy />
+                    <el-image @click="router.push({ path: '/album', query: { id: item.id } })"
+                        :src="item.picUrl + '?param=500y500'" alt="" class="relative rounded-lg z-10" lazy />
+                    <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
+                        style="height: 25%;aspect-ratio:1/1; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
+                        :style="{
+                            opacity: selectedIndex === index ? '1' : '0',
+                        }">
+                        <SvgIcon iconClass="play" class="text-white absolute"
+                            style="width: 40%;left: 50%;top: 50%;transform: translate(-40%,-50%);" />
+                    </div>
                     <div class="shadow duration-300 ease-out"
-                        :style="{ 'background-image': `url(${item.picUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
+                        :style="{ 'background-image': `url(${item.picUrl + '?param=500y500'})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>
                 </div>
                 <div class="mt-4 flex items-center justify-center">

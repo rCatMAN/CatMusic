@@ -10,7 +10,7 @@
                 style="width: 25%;height: 54px;padding: 8px;" :style="{
                     backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
                 }" @click="playSong(item.id)">
-                <img :src="item.al.picUrl" alt="" class="w-9 h-9 rounded-lg">
+                <el-image :src="item.al.picUrl + '?param=100y100'" fit="cover" class="w-12 rounded-lg" lazy />
                 <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
                     <div class="w-full flex items-center truncate ">
                         <span class="font-bold text-sm mb-1 " :style="{

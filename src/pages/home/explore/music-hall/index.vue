@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import ScrollLyric from "@/components/scroll-lyric/index.vue";
 import HorizontalSquares from "@/components/horizontal-squares/index.vue"
 import RecommendCard from "@/components/recommend-card/index.vue"
 import RecommendSinger from "@/components/recommend-singer/index.vue"
@@ -33,6 +32,4 @@ const isLogin = computed<boolean>(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
