@@ -88,7 +88,7 @@ type albumDetailType = {
     }
     songs?: Array<{
         name: string
-        alia: string
+        alia: string[]
         id: number
         fee: number
         dt: number
