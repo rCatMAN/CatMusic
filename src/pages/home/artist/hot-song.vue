@@ -9,7 +9,7 @@
             style="height: 54px;padding: 8px;" :style="{
                 backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
             }">
-            <el-image :src="item.al.picUrl" class="w-11 rounded-lg" lazy />
+            <el-image :src="item.al.picUrl + '?param=100y100'" class="w-11 rounded-lg" lazy />
             <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
                 <div class="w-full flex items-center truncate">
                     <span class="font-bold text-sm mb-1 " :style="{

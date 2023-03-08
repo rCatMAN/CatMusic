@@ -3,9 +3,12 @@
         <div v-for="(item, index) in songList" :key="index" class="relative mb-8" style="width:18%">
             <div @click="toSongListPage(item.id)">
                 <div>
-                    <img @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
+                    <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                         class="mb-4 rounded-2xl overflow-hidden duration-500 ease-out select-none cursor-pointer"
-                        :class="selectedIndex === index ? 'box-Shadow' : ''" :src="item.picUrl" alt="" style="width:100%;">
+                        :src="item.picUrl + '?param=1080y1080'" fit="cover" style="width:100%;" lazy />
+                </div>
+                <div class="shadow duration-300 ease-out"
+                    :style="{ 'background-image': `url(${item.picUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>
                 <div @click="toSongListPage(item.id)" @mouseenter="selectedIndex = index"
                     class=" bg-red-500 w-12 h-12 rounded-full absolute duration-200 ease-out cursor-pointer"
@@ -62,7 +65,17 @@ const toSongListPage = (id: (string | number)) => {
 </script>
 
 <style scoped>
-.box-Shadow {
-    box-shadow: var(--primary-back-color) 0px 12px 15px -10px;
+.shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90%;
+    height: 90%;
+    filter: blur(10px) opacity(.9);
+    transform: scale(.9) translateY(15%);
+    background-size: cover;
+    border-radius: 1000px;
+    aspect-ratio: 1/1;
+    z-index: 0;
 }
 </style>

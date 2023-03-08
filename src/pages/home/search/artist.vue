@@ -8,10 +8,10 @@
             <div v-for="(item, index) in searchArtistList.values" :key="index" class="mr-8 mb-8 " style="width: 27%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class=" relative cursor-pointer w-full">
-                    <img @click="toArtistPage(item.id)" :src="item.img1v1Url" alt=""
-                        class=" relative rounded-full z-10 cursor-pointer">
+                    <el-image @click="toArtistPage(item.id)" :src="item.img1v1Url + '?param=500y500'" fit="cover"
+                        class=" relative rounded-full z-10 cursor-pointer" lazy />
                     <div class="shadow duration-300 ease-out"
-                        :style="{ 'background-image': `url(${item.img1v1Url})`, opacity: selectedIndex === index ? '1' : '0' }">
+                        :style="{ 'background-image': `url(${item.img1v1Url + '?param=500y500'})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>
                 </div>
                 <div class="mt-4 flex items-center justify-center">

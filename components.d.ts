@@ -14,6 +14,8 @@ declare module '@vue/runtime-core' {
     Footer: typeof import('./src/components/footer/index.vue')['default']
     Header: typeof import('./src/components/header/index.vue')['default']
     HorizontalSquares: typeof import('./src/components/horizontal-squares/index.vue')['default']
+    Player: typeof import('./src/components/player/index.vue')['default']
+    ProgressBar: typeof import('./src/components/player/ProgressBar.vue')['default']
     Qrcode: typeof import('./src/components/qrcode/index.vue')['default']
     QrcodeLogin: typeof import('./src/components/qrcode/QrcodeLogin.vue')['default']
     RecommendCard: typeof import('./src/components/recommend-card/index.vue')['default']

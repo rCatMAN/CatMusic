@@ -5,7 +5,8 @@
     <div class="mt-8 w-full flex items-start justify-between flex-wrap">
         <div v-for="(item, index) in artistMvList.values" :key="index" class="mb-8" style="width: 17.5%;">
             <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
-                <el-image :src="item.imgurl16v9" alt="" class="w-full rounded-xl  relative z-10" lazy />
+                <el-image :src="item.imgurl16v9" fit="cover" class="w-full rounded-xl  relative z-10"
+                    style="aspect-ratio:16/9;" lazy />
                 <div class="shadow duration-300 ease-out"
                     :style="{ 'background-image': `url(${item.imgurl16v9})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>

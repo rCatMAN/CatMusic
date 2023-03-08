@@ -2,10 +2,10 @@
     <div>
         <div v-if="songListDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
-                <el-image :src="songListDetail.values.coverImgUrl" alt="" class="rounded-2xl z-10 relative"
-                    style="max-width: 330px;" fit="cover" loading="lazy" lazy />
+                <el-image :src="songListDetail.values.coverImgUrl + '?param=1080y1080'" alt=""
+                    class="rounded-2xl z-10 relative" style="max-width: 330px;" fit="cover" loading="lazy" lazy />
                 <div class="shadow" style="max-width: 330px;"
-                    :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl})` }">
+                    :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl + '?parma=1080y1080'})` }">
                 </div>
             </div>
             <div class=" h-full">
@@ -17,10 +17,21 @@
                     <p class="text-sm font-bold text-gray-500">{{ songListDetail.values.creator.nickname }}</p>
                 </div>
                 <div class="mt-6">
-                    <span class="text-sm text-gray-500">最后更新于{{ songListDetail.values.updateTime }}</span>
+                    <span class="text-sm text-gray-500">最后更新于 {{ publishDate?.getFullYear() + ' 年 ' +
+                        publishDate?.getMonth()
+                        + ' 月 ' + publishDate?.getDate() + ' 日 ' }}</span>
                 </div>
                 <div v-if="songListDetail.values.description" class="mt-9 truncate" style="max-width: 700px;">
-                    <span class="text-sm text-gray-500">{{ songListDetail.values.description }}</span>
+                    <span @click="isDescriptionShow = true" class="text-sm text-gray-500 cursor-pointer">{{
+                        songListDetail.values.description }}</span>
+                </div>
+                <div class=" absolute bg-gray-200 rounded-2xl duration-300 ease-out"
+                    style="top: 180px;width: 60%;padding: 20px;"
+                    :style="{ opacity: isDescriptionShow ? '1' : '0', zIndex: isDescriptionShow ? 20 : -1, transform: isDescriptionShow ? 'translateY(0px)' : 'translateY(10px)' }">
+                    <SvgIcon @click="isDescriptionShow = false" iconClass="close"
+                        class=" absolute top-2 right-4 text-gray-500 z-30 cursor-pointer"
+                        style="width: 15px;height: 15px;" />
+                    <span>{{ songListDetail.values.description }}</span>
                 </div>
                 <div class=" theme-button mt-10 w-max cursor-pointer"
                     style="padding-left: 20px;padding-right: 20px;padding-top: 5px;padding-bottom: 5px;">
@@ -28,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-8">
+        <div class="mt-8 mb-32">
             <SongList :id="id" />
         </div>
     </div>
@@ -41,7 +52,7 @@ export default defineComponent({
 </script>
 
 <script setup lang='ts'>
-import { onMounted, computed, reactive, onActivated, defineComponent } from 'vue';
+import { onMounted, computed, reactive, ref, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import { songListDetailApi } from '@/request/api/detail'
 import SongList from "./list.vue"
@@ -49,6 +60,8 @@ const route = useRoute()
 const id = computed<any>(() => {
     return route.query.id
 })
+const isDescriptionShow = ref(false)
+const publishDate = ref<Date>()
 type songListDetailType = {
     values?: {
         coverImgUrl: string
@@ -58,7 +71,7 @@ type songListDetailType = {
             avatarUrl: string
             nickname: string
         }
-        updateTime: string
+        updateTime: Date
         description: string
     }
 }
@@ -68,6 +81,9 @@ const songListDetail = reactive<songListDetailType>({
 onMounted(async () => {
     const { data: songListDetailRes } = await songListDetailApi(id.value)
     songListDetail.values = songListDetailRes.playlist
+    if (songListDetail.values) {
+        publishDate.value = new Date(songListDetail.values?.updateTime)
+    }
 })
 </script>
 

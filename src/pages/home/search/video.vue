@@ -7,7 +7,16 @@
         <div class="flex items-start ">
             <div v-for="(item, index) in searchVideoList.values" :key="index" class="mr-7" style="width: 25%;">
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
-                    <el-image :src="item.coverUrl" alt="" class="w-full rounded-xl  relative z-10" lazy />
+                    <el-image :src="item.coverUrl" fit="cover" style="aspect-ratio:16/9;"
+                        class="w-full rounded-xl  relative z-10" lazy />
+                    <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
+                        style="height: 30%;aspect-ratio:1/1; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
+                        :style="{
+                            opacity: selectedIndex === index ? '1' : '0',
+                        }">
+                        <SvgIcon iconClass="play" class="text-white absolute"
+                            style="width: 40%;left: 50%;top: 50%;transform: translate(-40%,-50%);" />
+                    </div>
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.coverUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>

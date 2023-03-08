@@ -12,6 +12,9 @@
                 <p class=" font-bold" :style="{
                     color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
                 }">{{ item.name }}</p>
+                <p v-for="(aliaName, aliaIndex) in item.alia" :key="aliaIndex" class=" ml-3 text-xs  text-gray-500" :style="{
+                    color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                }">{{ aliaName }}</p>
                 <div v-if="item.fee === 1" class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center">
                     <span class=" font-bold" style="font-size: xx-small;">VIP</span>
                 </div>
@@ -38,6 +41,7 @@ const dt = reactive<Array<{
 const props = defineProps<{
     songs?: Array<{
         name: string
+        alia: string[]
         id: number
         fee: number
         dt: number

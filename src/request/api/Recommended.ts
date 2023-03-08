@@ -21,5 +21,5 @@ export const personalFmApi = () =>
     )
 export const hotSingerApi = () =>
     request.get<Response>(
-        '/music/top/artists?limit=5'
+        '/music/top/artists?limit=6'
     )
