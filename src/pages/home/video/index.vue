@@ -11,10 +11,20 @@
                 </div>
             </div>
         </div>
-        <div class="mv-detail-box relative flex items-center mt-4 text-sm text-gray-500">
-            <span>{{ playTime }}</span>
-            <span class="text-xs ml-1" style="transform: translateY(0.5px);">Views · </span>
-            <span class="ml-1 text-xs" style="transform: translateY(0.5px);">{{ publishTime?.toLocaleDateString() }}</span>
+        <div class="mt-4 flex items-center">
+            <el-image :src="videoDetail.values?.creator.avatarUrl" class="w-6 rounded-full cursor-pointer" />
+            <span class="title ml-3 text-xs text-gray-500 cursor-pointer">{{ videoDetail.values?.creator.nickname }}</span>
+        </div>
+        <div class="mv-detail-box relative  mt-4 text-sm text-gray-500">
+            <div class="flex items-center">
+                <span>{{ playTime }}</span>
+                <span class="text-xs ml-1" style="transform: translateY(0.5px);">Views · </span>
+                <span class="ml-1 text-xs" style="transform: translateY(0.5px);">{{ publishTime?.toLocaleDateString()
+                }}</span>
+            </div>
+            <div class="mt-4 w-2/3 truncate ">
+                <span>{{ videoDetail.values?.description }}</span>
+            </div>
         </div>
         <div class="mb-64 mt-24">
             <SimiMv />
@@ -38,10 +48,11 @@ type videoDetailType = {
         title: string
         playTime: number
         publishTime: number
-        creator: Array<{
+        description: string
+        creator: {
             nickname: string
             avatarUrl: string
-        }>
+        }
     }
 }
 const videoDetail = reactive<videoDetailType>({

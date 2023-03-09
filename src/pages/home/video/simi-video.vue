@@ -4,8 +4,8 @@
     </div>
     <div v-if="simiVideo.values" class="mt-8 w-full flex items-start justify-between flex-wrap">
         <div v-for="(item, index) in simiVideo.values" :key="index" class="mb-8" style="width: 17.5%;">
-            <div @click="router.push({ path: '/video', query: { vid: item.vid } }); reload()"
-                @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
+            <div @click="toVideoPage(item.vid, item.type); reload()" @mouseenter="selectedIndex = index"
+                @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                 <el-image :src="item.coverUrl + '?param=800y450'" fit="cover" class="w-full rounded-xl  relative z-10"
                     style="aspect-ratio:16/9;" lazy />
                 <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
@@ -46,6 +46,7 @@ type simiVideoType = {
         title: string
         coverUrl: string
         vid: string
+        type: number
         creator: Array<{
             userName: string
             userId: number
@@ -60,6 +61,20 @@ onMounted(async () => {
     console.log('simiVideoRes: ', simiVideoRes);
     simiVideo.values = simiVideoRes.data
 })
+const toVideoPage = (vid: string, type: number) => {
+    if (type) {
+        router.push({
+            path: '/video',
+            query: { vid: vid }
+        })
+    } else {
+        router.push({
+            path: '/mv',
+            query: { id: vid }
+        })
+    }
+
+}
 </script>
 
 <style scoped>
