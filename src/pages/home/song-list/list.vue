@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="(item, index) in songList.songs" :key="index" @click="playSong(item.id)"
-            class="list-background flex items-center justify-start rounded-xl duration-200 ease-out cursor-pointer"
+            class="list-background mb-1 flex items-center justify-start rounded-xl duration-200 ease-out cursor-pointer"
             style="padding: 8px;height: 80px;width: 100%;" :style="{
                 backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
             }">
@@ -21,7 +21,9 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <div v-for="(itemm, indexx) in item.ar" :key="indexx" class=" text-xs font-bold text-gray-600">
+                    <div v-for="(itemm, indexx) in item.ar" :key="indexx" class=" text-xs font-bold text-gray-600" :style="{
+                        color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                    }">
                         <span class="title">{{ itemm.name }}</span>
                         <span v-if="item.ar.length !== 1 && indexx !== item.ar.length - 1">&nbsp;/&nbsp;</span>
                     </div>

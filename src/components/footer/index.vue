@@ -64,7 +64,6 @@ import { songUrlApi } from '@/request/api/url'
 import { songDetailApi } from '@/request/api/detail'
 import { watch, reactive, computed, onActivated, onDeactivated, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import router from '@/router';
 import VolumeBar from '@/components/volume-bar/index.vue'
 const keepAliveStore = usekeepAliveStore()
 const selectIndex = ref<number>(100)

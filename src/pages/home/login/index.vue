@@ -1,7 +1,5 @@
 <template>
     <div class="" style="width: 100vw;height: 100vh;">
-        <div class="wave-animation absolute ">
-        </div>
         <div class=" w-full h-full select-none relative z-10">
             <SvgIcon @click="router.back()" iconClass="back" class="icon-color text-black absolute cursor-pointer"
                 style="left: 5%;top:5%;" />

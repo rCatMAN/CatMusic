@@ -3,6 +3,7 @@ import { Howl } from 'howler'
 export const useHowlerStore = defineStore('howler', {
     state: () => {
         return {
+            isVideoPlaying: false,
             isShowPlayerPage: false,
             nowPlayingId: 1,
             howler: null as any,

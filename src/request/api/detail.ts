@@ -40,3 +40,19 @@ export const similarArtistApi = (id: any) =>
     request.get<Response>(
         `/music/simi/artist?id=${id}`
     )
+export const mvDetailApi = (id: any) =>
+    request.get<Response>(
+        `/music/mv/detail?mvid=${id}`
+    )
+export const simiMvApi = (id: any) =>
+    request.get<Response>(
+        `/music/simi/mv?mvid=${id}`
+    )
+export const videoDeatilApi = (vid: any) =>
+    request.get<Response>(
+        `/music/video/detail?id=${vid}`
+    )
+export const simiVideoApi = (vid: any) =>
+    request.get<Response>(
+        `/music/related/allvideo?id=${vid}`
+    )
