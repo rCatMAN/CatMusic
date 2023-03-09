@@ -26,6 +26,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     ScrollLyric: typeof import('./src/components/scroll-lyric/index.vue')['default']
     SvgIcon: typeof import('./src/components/svg-icon/index.vue')['default']
+    VideoPlayer: typeof import('./src/components/video-player/index.vue')['default']
     VolumeBar: typeof import('./src/components/volume-bar/index.vue')['default']
   }
 }

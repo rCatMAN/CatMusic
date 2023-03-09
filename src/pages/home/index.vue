@@ -4,7 +4,7 @@
             <HeaderMenu />
         </keep-alive>
         <keep-alive>
-            <FooterMenu />
+            <FooterMenu v-show="!isVideoPlaying" />
         </keep-alive>
         <div class="main-Page bg-white">
             <router-view />
@@ -22,7 +22,7 @@ import { useHowlerStore } from "@/store/howler-store"
 import { storeToRefs } from "pinia"
 import { watch } from "vue"
 const howlerStore = useHowlerStore()
-const { isShowPlayerPage } = storeToRefs(howlerStore)
+const { isShowPlayerPage, isVideoPlaying } = storeToRefs(howlerStore)
 watch(isShowPlayerPage, () => {
     if (isShowPlayerPage.value) {
         const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
@@ -43,7 +43,7 @@ watch(isShowPlayerPage, () => {
     min-height: 85vh;
     right: 0px;
     padding-top: calc(4rem + 40px);
-    padding-left: 4%;
-    padding-right: 4%;
+    padding-left: 7%;
+    padding-right: 7%;
 }
 </style>

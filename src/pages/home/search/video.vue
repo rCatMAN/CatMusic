@@ -6,7 +6,8 @@
         </div>
         <div class="flex items-start ">
             <div v-for="(item, index) in searchVideoList.values" :key="index" class="mr-7" style="width: 25%;">
-                <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
+                <div @click="toVideoPage(item.vid, item.type)" @mouseenter="selectedIndex = index"
+                    @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                     <el-image :src="item.coverUrl" fit="cover" style="aspect-ratio:16/9;"
                         class="w-full rounded-xl  relative z-10" lazy />
                     <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
@@ -36,10 +37,14 @@
 <script setup lang='ts'>
 import { searchVideoApi } from '@/request/api/search'
 import { onMounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const selectedIndex = ref(100)
 const props = defineProps(['keywords'])
 type searchVideoListType = {
     values?: Array<{
+        vid: string
+        type: number
         coverUrl: string
         title: string
         creator: Array<{
@@ -52,12 +57,26 @@ const searchVideoList = reactive<searchVideoListType>({
 })
 onMounted(async () => {
     const { data: searchVideoRes } = await searchVideoApi(props.keywords)
+    console.log('searchVideoRes: ', searchVideoRes);
     for (var i = 0; i < 5; i++) {
         if (searchVideoRes.result.videos[i]) {
             searchVideoList.values?.push(searchVideoRes.result.videos[i])
         }
     }
 })
+const toVideoPage = (vid: string, type: number) => {
+    if (type) {
+        router.push({
+            path: '/video',
+            query: { vid: vid }
+        })
+    } else {
+        router.push({
+            path: '/mv',
+            query: { id: vid }
+        })
+    }
+}
 </script>
 
 <style scoped>

@@ -3,12 +3,13 @@ import Login from "../pages/home/login/index.vue"
 import Home from "../pages/home/index.vue"
 import MusicHall from "../pages/home/explore/music-hall/index.vue"
 import NewSong from "../pages/home/explore/new-song/index.vue"
-import Videos from "../pages/home/explore/videos/index.vue"
 import Radios from "../pages/home/explore/radio/index.vue"
 import SongList from "../pages/home/song-list/index.vue"
 import Search from "../pages/home/search/index.vue"
 const Artist = () => import('../pages/home/artist/index.vue')
 const Album = () => import('../pages/home/album/index.vue')
+const Videos = () => import('../pages/home/video/index.vue')
+const Mvs = () => import('../pages/home/mv/index.vue')
 const routes = [
     {
         path: "/login",
@@ -38,12 +39,20 @@ const routes = [
                 component: NewSong
             },
             {
-                path: "videos",
-                name: "videos",
+                path: "video",
+                name: "video",
                 meta: {
                     keepAlive: false
                 },
                 component: Videos
+            },
+            {
+                path: "mv",
+                name: "mv",
+                meta: {
+                    keepAlive: false
+                },
+                component: Mvs
             },
             {
                 path: "radios",
