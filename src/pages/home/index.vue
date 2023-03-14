@@ -6,7 +6,10 @@
         <keep-alive>
             <FooterMenu v-show="!isVideoPlaying" />
         </keep-alive>
-        <div class="main-Page bg-white">
+        <div class="main-Page bg-white overflow-hidden">
+            <div class="w-full mb-20">
+                <Banner />
+            </div>
             <router-view />
         </div>
         <player class="fixed top-0 duration-500 ease-out z-50"
@@ -18,6 +21,7 @@
 import player from "../../components/player/index.vue"
 import HeaderMenu from "../../components/header/index.vue"
 import FooterMenu from "../../components/footer/index.vue"
+import Banner from "@/components/banner/index.vue"
 import { useHowlerStore } from "@/store/howler-store"
 import { storeToRefs } from "pinia"
 import { watch } from "vue"

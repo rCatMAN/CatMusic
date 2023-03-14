@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AsideMenu: typeof import('./src/components/aside-menu/index.vue')['default']
+    Banner: typeof import('./src/components/banner/index.vue')['default']
     ElImage: typeof import('element-plus/es')['ElImage']
     Footer: typeof import('./src/components/footer/index.vue')['default']
     Header: typeof import('./src/components/header/index.vue')['default']
