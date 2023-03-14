@@ -1,5 +1,10 @@
 import request from "../request"
 import { Response } from '../type'
+export const bannerApi = () =>
+    request.get<Response>(
+        '/music/banner?type=0',
+    )
+
 export const personalizedListApi = () =>
     request.get<Response>(
         '/music/personalized?limit=15',
