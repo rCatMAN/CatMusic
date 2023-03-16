@@ -10,6 +10,7 @@ const Artist = () => import('../pages/home/artist/index.vue')
 const Album = () => import('../pages/home/album/index.vue')
 const Videos = () => import('../pages/home/video/index.vue')
 const Mvs = () => import('../pages/home/mv/index.vue')
+const welcome = () => import('../pages/home/welecome/index.vue')
 const routes = [
     {
         path: "/login",
@@ -17,10 +18,15 @@ const routes = [
         component: Login,
     },
     {
+        path: "/welcome",
+        name: "welcome",
+        component: welcome,
+    },
+    {
         path: "/",
         name: "Home",
         component: Home,
-        redirect: '/musichall',
+        redirect: '/welcome',
         children: [
             {
                 path: "musichall",

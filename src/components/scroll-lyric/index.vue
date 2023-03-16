@@ -1,5 +1,5 @@
 <template>
-  <div id="scroll" class=" absolute w-full h-full overflow-hidden select-none">
+  <div id="scroll" class="absolute w-full h-full overflow-hidden select-none">
     <div>
       <div class="w-full" style="height: 50%;">
       </div>
