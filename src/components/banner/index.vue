@@ -87,8 +87,8 @@ const last = () => {
 }
 
 .item {
-    width: 200px;
-    height: 100px;
+    width: 25%;
+    height: 35%;
     background-position: 50%, 50%;
     display: inline-block;
     transition: 0.5s;
@@ -129,13 +129,13 @@ const last = () => {
 }
 
 .item:nth-child(4) {
-    left: calc(55% + 220px);
+    left: 80%;
 
 
 }
 
 .item:nth-child(5) {
-    left: calc(50% + 440px);
+    left: 90%;
 
 
 }
