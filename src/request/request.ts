@@ -6,7 +6,7 @@ const request = axios.create({
         "Access-Control-Allow-Origin-Type": '*'
     },
     // baseURL: 'http://localhost:5173/',
-    baseURL: '',
+    baseURL: import.meta.env.DEV ? 'http://127.0.0.1:5173/' : '',
     // baseURL: '120.79.233.10:80',
     // baseURL: 'catmusic-5gyf5fr834ec8917-1314215170.tcloudbaseapp.com',
     timeout: 80000,
