@@ -16,6 +16,5 @@ export type lyricListType = {
   yrc: {
     lyric: string
     currentLyric: string
-    handleLyric: string[]
   }
 }

@@ -32,7 +32,7 @@ import IScroll from 'iscroll/build/iscroll'
 import { songLyricApi } from '@/request/api/detail'
 import { useHowlerStore } from '@/store/howler-store';
 import { storeToRefs } from 'pinia';
-import { computed, onMounted, ref, reactive, watch, onActivated } from "vue";
+import { computed, ref, reactive, watch } from "vue";
 import { LyricData, lyricListType } from "./types";
 const howlerStore = useHowlerStore()
 const { nowPlayingId } = storeToRefs(howlerStore)
@@ -44,19 +44,28 @@ const lyricList = reactive<lyricListType>({
   },
   yrc: {
     lyric: '',
-    handleLyric: [],
     currentLyric: ''
   },
 })
 // 当前播放时间
+
 const currentTime = computed(() => {
   return (howlerStore.nowPlayTime * 1000) + 350
 });
+const pretreatmentLyric = (initialLyric: string) => {
+  const arr = initialLyric.split('\n')
+  let result = ''
+  arr.forEach((currentValue, index, array) => {
+    if (currentValue.charAt(0) === '[') {
+      result += currentValue
+    }
+  })
+  return result
+}
 watch(nowPlayingId, async () => {
   const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
   lyricList.yrc.lyric = lyricRes.yrc.lyric
-  lyricList.yrc.handleLyric = lyricList.yrc.lyric.split('}')
-  lyricList.yrc.currentLyric = lyricList.yrc.handleLyric[lyricList.yrc.handleLyric.length - 1]
+  lyricList.yrc.currentLyric = pretreatmentLyric(lyricList.yrc.lyric)
   data.value = praseData(lyricList.yrc.currentLyric);
   setTimeout(() => {
     myScroll.value = new IScroll('#scroll', {
@@ -78,6 +87,7 @@ const clickToPage = (lineIndex: number) => {
 
 // 解析歌词数据
 const praseData = (data: string) => {
+  console.log('prassData', data)
   // 将歌词字符串分割为一行行
   const lines = data.split("[").map((line) => {
     // 从行中的数据取出行的时间数据 lineTime 和歌词数据 duration

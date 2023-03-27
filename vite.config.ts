@@ -28,13 +28,13 @@ export default defineConfig({
     },
   },
   server: {
-    proxy: {
-      "/music": {
-        target: "https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/music/, ""),
-      }
-    }
+    // proxy: {
+    //   "/music": {
+    //     target: "https://service-miegmo5o-1314215170.gz.apigw.tencentcs.com/release/",
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/music/, ""),
+    //   }
+    // }
   }
 })
 

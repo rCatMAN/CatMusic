@@ -10,6 +10,7 @@ export const useHowlerStore = defineStore('howler', {
             volume: 1,
             isPlaying: false,
             isLoaded: false,
+            isOneSongLoop: false,
             nowPlayTime: 0,
             durationTime: 0,
         }
@@ -26,7 +27,7 @@ export const useHowlerStore = defineStore('howler', {
                 src: url,
                 volume: store.volume,
                 html5: true,
-                loop: false,
+                loop: store.isOneSongLoop,
                 preload: true,
                 autoplay: true,
                 mute: false,

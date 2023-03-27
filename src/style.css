@@ -4,8 +4,7 @@
 
 :root {
   --primary-back-color: #d57eeb;
-  --primary-text-color: #cc2ef4;
+  --primary-text-color: rgb(204, 46, 244);
   --primary-light-color: #deb0ea75;
   background-color: #818181;
-
 }
