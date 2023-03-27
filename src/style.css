@@ -3,8 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --primary-back-color: #d57eeb;
-  --primary-text-color: rgb(204, 46, 244);
-  --primary-light-color: #deb0ea75;
+  --primary-back-color: #ffbb00;
+  --primary-text-color: #fad000;
+  --primary-light-color: #e7e1c875;
   background-color: #818181;
+}
+
+.container-bg {
+  background: linear-gradient(rgb(248, 248, 248), white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
 }

@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
 import { Howl } from 'howler'
+
 export const useHowlerStore = defineStore('howler', {
-    state: () => {
-        return {
+    state: () => ({
             isVideoPlaying: false,
             isShowPlayerPage: false,
             nowPlayingId: 1,
@@ -13,8 +13,7 @@ export const useHowlerStore = defineStore('howler', {
             isOneSongLoop: false,
             nowPlayTime: 0,
             durationTime: 0,
-        }
-    },
+        }),
     actions: {
         newHowl(url: any, store: any) {
             if (this.howler) {

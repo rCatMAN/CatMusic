@@ -25,8 +25,8 @@
                 <div class="w-full mt-2">
                     <span class="title cursor-pointer font-bold">{{ item.title }}</span>
                     <div>
-                        <span v-for="(itemm, indexx) in item.creator" :key="indexx"
-                            class="title cursor-pointer mt-1 text-xs text-gray-500">{{ itemm.userName }}</span>
+                        <span v-for="(item2, index2) in item.creator" :key="index2"
+                            class="title cursor-pointer mt-1 text-xs text-gray-500">{{ item2.userName }}</span>
                     </div>
                 </div>
             </div>
