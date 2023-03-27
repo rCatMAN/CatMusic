@@ -7,7 +7,6 @@
             <FooterMenu v-show="!isVideoPlaying" />
         </keep-alive>
         <div class="main-Page bg-white overflow-hidden">
-
             <router-view />
         </div>
         <player class="fixed top-0 duration-500 ease-out z-50"

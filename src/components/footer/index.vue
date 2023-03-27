@@ -36,20 +36,25 @@
             </div>
             <div class=" absolute flex items-center justify-between "
                 style="left: 50%;transform: translateX(-50%);width: 180px;">
-                <div class="icon-footer-box rounded-xl" style="padding: 4px;">
+                <div class="icon-footer-box " style="padding: 4px;">
                     <SvgIcon iconClass="lastsong" style="width: 35px;;" />
                 </div>
-                <div v-show="isLoaded" @click="changePlayStatus()" class="icon-footer-box absolute rounded-xl"
+                <div v-show="isLoaded" @click="changePlayStatus()" class="icon-footer-box absolute "
                     style="padding: 6px;left: 50%; transform: translateX(-50%);">
                     <SvgIcon :iconClass="isPlaying ? 'pause' : 'play'" style="width: 40px;transform: translateX(2px)" />
                 </div>
-                <div v-show="!isLoaded" class="icon-footer-box rounded-xl absolute"
+                <div v-show="!isLoaded" class="icon-footer-box  absolute"
                     style="padding: 6px;left: 50%; transform: translateX(-50%);">
                     <SvgIcon iconClass="loading" class="loading-animation" style="width: 40px;transform: translateX(0px)" />
                 </div>
-                <div class="icon-footer-box rounded-xl" style="padding: 4px;">
+                <div class="icon-footer-box " style="padding: 4px;">
                     <SvgIcon iconClass="nextsong" style="width: 35px;" />
                 </div>
+            </div>
+            <div @click="switchLoopMode()" class="options-icon icon-footer-box flex items-start absolute"
+                style="right:20%;">
+                <SvgIcon :iconClass="howlerStore.isOneSongLoop ? 'onesong' : 'listloop'" class=""
+                    style="width: 30px;padding:0px 5px;" />
             </div>
             <VolumeBar class="absolute" style="right: 10%;" />
         </div>
@@ -185,6 +190,13 @@ onActivated(() => {
 onDeactivated(() => {
     keepAliveStore.addState(songDetail.values.name, songDetail.values.ar, songDetail.values.al.picUrl)
 })
+const switchLoopMode = () => {
+    howlerStore.isOneSongLoop = !howlerStore.isOneSongLoop
+    console.log('是否单曲循环：', howlerStore.isOneSongLoop)
+    if (howlerStore.howler)
+        howlerStore.howler.loop(howlerStore.isOneSongLoop)
+}
+switchLoopMode
 </script>
 
 <style scoped>
@@ -206,6 +218,7 @@ onDeactivated(() => {
 }
 
 .icon-footer-box {
+    border-radius: 12px;
     cursor: pointer;
     transition: all 200ms ease-out;
 }

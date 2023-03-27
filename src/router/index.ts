@@ -11,6 +11,7 @@ const Album = () => import('../pages/home/album/index.vue')
 const Videos = () => import('../pages/home/video/index.vue')
 const Mvs = () => import('../pages/home/mv/index.vue')
 const welcome = () => import('../pages/home/welecome/index.vue')
+const MusicSpace = () => import('../pages/home/user-space/index.vue')
 const routes = [
     {
         path: "/login",
@@ -26,7 +27,7 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
-        redirect: '/welcome',
+        redirect: '/musichall',
         children: [
             {
                 path: "musichall",
@@ -96,6 +97,11 @@ const routes = [
                     keepAlive: true
                 },
                 component: Search
+            },
+            {
+                path: "musicspace",
+                name: "musicspace",
+                component: MusicSpace
             },
         ]
     }

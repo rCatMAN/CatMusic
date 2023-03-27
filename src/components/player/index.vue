@@ -127,9 +127,9 @@ watch(nowPlayingId, async () => {
 }
 
 .player-background {
-    filter: blur(15px) brightness(0.4);
+    filter: blur(25px) brightness(0.5);
     transform: scale(1.1);
-    background-size: cover;
+    object-fit: cover;
 
 }
 
