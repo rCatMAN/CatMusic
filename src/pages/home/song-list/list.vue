@@ -21,11 +21,11 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <div v-for="(itemm, indexx) in item.ar" :key="indexx" class=" text-xs font-bold text-gray-600" :style="{
+                    <div v-for="(item2, index2) in item.ar" :key="index2" class=" text-xs font-bold text-gray-600" :style="{
                         color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
                     }">
-                        <span class="title">{{ itemm.name }}</span>
-                        <span v-if="item.ar.length !== 1 && indexx !== item.ar.length - 1">&nbsp;/&nbsp;</span>
+                        <span class="title">{{ item2.name }}</span>
+                        <span v-if="item.ar.length !== 1 && index2 !== item.ar.length - 1">&nbsp;/&nbsp;</span>
                     </div>
                 </div>
             </div>

@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <div class=" w-full truncate" style="margin-top: -5px;">
-                        <span v-for="(itemm, indexx) in item.ar" :key="indexx" class="text-xs text-gray-500">{{
-                            itemm.name
+                        <span v-for="(item2, index2) in item.ar" :key="index2" class="text-xs text-gray-500">{{
+                            item2.name
                         }}</span>
                     </div>
 

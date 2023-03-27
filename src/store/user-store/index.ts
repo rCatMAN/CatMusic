@@ -1,20 +1,19 @@
 import { defineStore } from "pinia"
 import { getLoginStatusApi, signOutApi } from "@/request/api/user"
+
 type userProfileType = {
     nickname?: string,
     avatarUrl?: string
 }
 export const useUserStore = defineStore('user', {
-    state: () => {
-        return {
+    state: () => ({
             isLogin: false,
             userProfile: {
                 nickname: undefined,
                 avatarUrl: undefined
             } as userProfileType,
             isLoaded: false,
-        }
-    },
+        }),
     actions: {
         async setLoginStatus() {
             const { data: profile } = await getLoginStatusApi()
