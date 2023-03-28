@@ -44,7 +44,6 @@ const bannerDetail = reactive<bannerDetailType>({
 let timer: NodeJS.Timer
 const progress = ref(0)
 watch(progress, () => {
-    console.log('progress', progress.value)
     if (progress.value >= 1) {
         next()
         progress.value = 0

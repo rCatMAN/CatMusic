@@ -45,5 +45,6 @@ watch(isShowPlayerPage, () => {
     padding-top: calc(4rem + 40px);
     padding-left: 7%;
     padding-right: 7%;
+    font-family: "得意黑 斜体";
 }
 </style>
