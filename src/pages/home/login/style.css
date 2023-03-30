@@ -1,6 +1,6 @@
 .background {
     z-index: 5;
-    background-image: linear-gradient(0deg, #a18cd1 0%, #fbc2eb 100%);
+    background-image: linear-gradient(0deg, #ffbb00 0%, #fad000 100%);
     filter: blur(70px);
 }
 
@@ -30,7 +30,7 @@
     height: 50px;
     top: -20%;
     right: -40%;
-    transition: all .2s;
+    transition: all 0.2s;
     background-color: var(--primary-back-color);
     box-shadow: 0 20px 30px -10px var(--primary-back-color);
     border-radius: 14px;
@@ -49,7 +49,7 @@
     height: 33px;
     top: 15%;
     right: 10%;
-    transition: all .2s;
+    transition: all 0.2s;
     background-color: var(--primary-back-color);
     box-shadow: 0 20px 30px -10px var(--primary-back-color);
     border-radius: 14px;
@@ -68,14 +68,14 @@
     width: 300px;
     height: 40px;
     transform: translateY(-50%);
-    transition: all .2s;
+    transition: all 0.2s;
     background-color: var(--primary-back-color);
-    box-shadow: 0 20px 30px -10px var(--primary-back-color);
+    box-shadow: 0 5px 5px -2px var(--primary-back-color);
     border-radius: 14px;
 }
 
 .login-button:hover {
-    box-shadow: 0 3px 30px 0 var(--primary-back-color);
+    box-shadow: 0 3px 10px 0 var(--primary-back-color);
 }
 
 .login-button:active {
@@ -88,7 +88,7 @@
     top: 50%;
     height: 1px;
     width: 100%;
-    background-color: hsla(220, 9%, 46%, .5);
+    background-color: hsla(220, 9%, 46%, 0.5);
     z-index: 5;
 }
 
@@ -102,7 +102,7 @@
 .icon-box {
     transition-property: all;
     transition-timing-function: ease-out;
-    transition-duration: .15s;
+    transition-duration: 0.15s;
     cursor: pointer;
     position: relative;
     display: flex;
@@ -117,7 +117,7 @@
 .icon-box:hover {
     transition-property: all;
     transition-timing-function: ease-in-out;
-    transition-duration: .15s;
+    transition-duration: 0.15s;
     box-shadow: none;
     color: white;
     background-color: var(--primary-back-color);

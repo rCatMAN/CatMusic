@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --primary-back-color: #d57eeb;
-  --primary-text-color: rgb(204, 46, 244);
-  --primary-light-color: #deb0ea75;
+  --primary-back-color: #ffbb00;
+  --primary-text-color: #fad000;
+  --primary-light-color: #e7e1c875;
   background-color: #818181;
 }
 
-/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
-@font-face {
-  font-family: "得意黑 斜体";
-  font-weight: 400;
-  src: url("./font/deyi/Smiley_Sans_Oblique_斜体.woff2") format("woff2");
-  font-display: swap;
+.container-bg {
+  background: linear-gradient(rgb(248, 248, 248), white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
 }
