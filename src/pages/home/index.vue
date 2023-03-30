@@ -9,10 +9,8 @@
     <div class="main-page bg-white overflow-hidden">
       <router-view />
     </div>
-    <player
-      class="fixed top-0 duration-500 ease-out z-50"
-      :style="{ top: isShowPlayerPage === true ? '0vw' : '100vw' }"
-    />
+    <player class="fixed top-0 duration-500 ease-out z-50"
+      :style="{ top: isShowPlayerPage === true ? '0vw' : '100vw' }" />
   </div>
 </template>
 
@@ -44,7 +42,5 @@ watch(isShowPlayerPage, () => {
   right: 0px;
   padding-top: calc(4rem + 40px);
   width: 100vw;
-  display: flex;
-  justify-content: center;
 }
 </style>

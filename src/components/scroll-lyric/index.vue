@@ -181,7 +181,8 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
   top: 0;
   left: 0;
   color: transparent;
-  background: linear-gradient(0deg, #7028e4 0%, #e5b2ca 100%);
+  /* background: linear-gradient(0deg, #7028e4 0%, #e5b2ca 100%); */
+  background-color: var(--primary-text-color);
   -webkit-background-clip: text;
   width: 0%;
   overflow: hidden;
@@ -194,7 +195,6 @@ const isActiveText = (lineIndex: number, startTime?: number) => {
 }
 
 .line-background:hover {
-
   background-color: rgba(128, 128, 128, 0.11);
 }
 </style>

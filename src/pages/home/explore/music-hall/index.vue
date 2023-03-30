@@ -7,13 +7,16 @@
     </div>
 
     <div v-if="!isLogin" class="mt-4 w-full h-20 flex items-center justify-center">
-      <p class="text-xl font-mono mt-6 text-gray-600 font-serif">
+      <p class="text-xl mt-6 text-gray-600 ">
         登录后即可为您定制推荐歌单
       </p>
     </div>
-    <p v-if="isLogin" class="mb-8 text-3xl font-bold">Welcome back 今日为你推荐</p>
-    <div v-if="isLogin" class="mb-20">
-      <HorizontalSquares />
+    <div v-if="isLogin" class=" container-bg py-20">
+      <div class="max-w-6xl w-full">
+        <p v-if="isLogin" class="mb-8 text-3xl font-bold">Welcome back 今日为你推荐</p>
+        <HorizontalSquares />
+      </div>
+
     </div>
     <div class="container-bg py-20">
       <div class="max-w-6xl w-full">
