@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="max-w-6xl container">
         <div v-if="songListDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <el-image :src="songListDetail.values.coverImgUrl + '?param=1080y1080'" alt=""
-                    class="rounded-2xl z-10 relative" style="max-width: 330px;" fit="cover" loading="lazy" lazy />
+                    class="rounded-2xl z-10 relative w-full" style="max-width: 330px;aspect-ratio: 1/1;" fit="cover"
+                    loading="lazy" />
                 <div class="shadow" style="max-width: 330px;"
                     :style="{ 'background-image': `url(${songListDetail.values.coverImgUrl + '?parma=1080y1080'})` }">
                 </div>

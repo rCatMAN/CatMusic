@@ -6,7 +6,7 @@
                 backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
             }">
             <el-image :src="item.al.picUrl + '?param=100y100'" class="rounded-xl mr-4" style="width: 60px;" fit="cover"
-                loading="lazy" lazy />
+                loading="lazy" />
             <div class="flex flex-col  justify-center" style="width: 48%;height: 100%;">
                 <div class="flex items-center">
                     <p class=" font-bold mb-1" :style="{
@@ -21,9 +21,10 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <div v-for="(item2, index2) in item.ar" :key="index2" class=" text-xs font-bold text-gray-600" :style="{
-                        color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
-                    }">
+                    <div v-for="(item2, index2) in item.ar" :key="index2" class=" text-xs font-bold text-gray-600 truncate"
+                        :style="{
+                            color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                        }">
                         <span class="title">{{ item2.name }}</span>
                         <span v-if="item.ar.length !== 1 && index2 !== item.ar.length - 1">&nbsp;/&nbsp;</span>
                     </div>

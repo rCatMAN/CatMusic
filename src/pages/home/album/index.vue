@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div v-if="albumDetail.values" class="top-menu  relative flex items-start " style="width: 100%;height: 330px;">
+    <div class="max-w-6xl">
+        <div v-if="albumDetail.values" class="top-menu relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <el-image :src="albumDetail.values.picUrl" alt="" class="rounded-2xl z-10 relative"
                     style="max-width: 330px;" fit="cover" loading="lazy" lazy />

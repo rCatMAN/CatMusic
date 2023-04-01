@@ -15,7 +15,6 @@
         <p v-if="isLogin" class="mb-8 text-3xl font-bold">Welcome back 今日为你推荐</p>
         <HorizontalSquares />
       </div>
-
     </div>
     <div class="container-bg py-20">
       <div class="max-w-6xl w-full">

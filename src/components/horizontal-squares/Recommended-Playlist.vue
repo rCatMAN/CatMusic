@@ -1,10 +1,10 @@
 <template>
-    <div class="flex items-start flex-wrap justify-around w-full h-full" style="min-width: 500px;">
+    <div class="flex items-start flex-wrap justify-between w-full h-full" style="min-width: 500px;">
         <div v-for="(item, index) in songList.values" :key="index" class="relative mb-4" style="width:18%">
             <div @click="toSongListPage(item.id)" class="relative">
                 <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class="mb-1 rounded-2xl overflow-hidden duration-500 ease-out select-none cursor-pointer z-30"
-                    :src="item.picUrl + '?param=1080y1080'" alt="" style="width:100%;" lazy />
+                    :src="item.picUrl + '?param=1080y1080'" alt="" style="width:100%;" loading="lazy" />
                 <div @mouseenter="selectedIndex = index"
                     class="absolute rounded-full overflow-hidden duration-200 ease-out z-30 cursor-pointer"
                     style="width: 25%;height: 25%; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"

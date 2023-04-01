@@ -1,12 +1,12 @@
 <template>
-    <div v-if="artistDetail.value.artist" class="w-3/5 h-80 flex items-center justify-start relative">
-        <div class="artist-cover relative">
-            <el-image :src="artistDetail.value.artist.cover + '?param=1080y1080'" class="mr-8 rounded-full z-10 relative"
-                style="width: 300px;height: 300px;" fit="cover" />
+    <div v-if="artistDetail.value.artist" class="w-full h-80 max-w-6xl flex items-center justify-start relative">
+        <div class=" relative" style="width: 28% ;">
+            <el-image :src="artistDetail.value.artist.cover + '?param=1080y1080'"
+                class=" rounded-full z-10 relative aspect-square" fit="cover" />
             <div class="shadow" :style="{ 'background-image': `url(${artistDetail.value.artist.cover})` }">
             </div>
         </div>
-        <div class="w-full h-full mt-14">
+        <div class=" h-full mt-14 ml-8 relative" style="width:72%">
             <div>
                 <span class="text-5xl font-bold">{{ artistDetail.value.artist.name }}</span>
             </div>
@@ -17,29 +17,30 @@
                 <span>{{ artistDetail.value.artist.musicSize }} 首歌 · {{ artistDetail.value.artist.albumSize }} 张专辑 · {{
                     artistDetail.value.artist.mvSize }} 个 MV</span>
             </div>
-            <div class="w-full mt-8 text-gray-600 text-sm truncate">
-                <span @click="isDescriptionShow = true" class="cursor-pointer">{{ artistDetail.value.artist.briefDesc
+            <div class="h-full mt-8 text-gray-600 text-sm truncate">
+                <span @click="isDescriptionShow = true" class="cursor-pointer ">{{
+                    artistDetail.value.artist.briefDesc
                 }}</span>
             </div>
             <div class=" absolute bg-gray-200 rounded-2xl duration-300 ease-out"
                 style="top: 180px;width: 100%;padding: 20px;"
-                :style="{ opacity: isDescriptionShow ? '1' : '0', zIndex: isDescriptionShow ? 20 : -1, transform: isDescriptionShow ? 'translateY(0px)' : 'translateY(10px)' }">
+                :style="{ opacity: isDescriptionShow ? '1' : '0', zIndex: isDescriptionShow ? 20 : -1, transform: isDescriptionShow ? 'translateY(-20px)' : 'translateY(10px)' }">
                 <SvgIcon @click="isDescriptionShow = false" iconClass="close"
                     class=" absolute top-2 right-4 text-gray-500 z-30 cursor-pointer" style="width: 15px;height: 15px;" />
-                <span>{{ artistDetail.value.artist.briefDesc }}</span>
+                <span class="">{{ artistDetail.value.artist.briefDesc }}</span>
             </div>
         </div>
     </div>
-    <div class="w-full mt-8">
+    <div class=" mt-8 max-w-6xl">
         <HotSong />
     </div>
-    <div class="w-full mt-8 ">
+    <div class=" mt-8 max-w-6xl ">
         <Album />
     </div>
-    <div class="w-full mt-8 ">
+    <div class="mt-8 max-w-6xl ">
         <Mv />
     </div>
-    <div class="w-full mt-8 mb-36">
+    <div class="mt-8 mb-36 max-w-6xl">
         <SimilarArtist />
     </div>
 </template>
@@ -89,24 +90,11 @@ onMounted(async () => {
     z-index: 9;
     top: 20px;
     left: 0px;
-    width: 300px;
+    width: 100%;
     filter: blur(10px) opacity(.9);
     transform: scale(.92);
     background-size: cover;
     border-radius: 9999px;
     aspect-ratio: 1/1;
-}
-
-.artist-cover {
-    left: 0;
-    top: 0;
-    animation: first-animation 0.2s ease-out;
-}
-
-@keyframes first-animation {
-    0% {
-        opacity: 0;
-        top: 20px;
-    }
 }
 </style>

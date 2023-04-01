@@ -1,13 +1,16 @@
 <template>
-    <div class=" fixed top-0 w-full h-16 bg-white  header">
+    <div class=" fixed top-0 w-full h-16 bg-white header">
         <div class="relative w-full h-full flex items-center">
             <SvgIcon @click="router.back()" iconClass="back" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 10%;" />
             <SvgIcon @click="router.forward()" iconClass="front" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 15%;" />
-            <div class="flex items-center absolute" style="left:45%">
+            <div class="flex items-center absolute" style="left:50%;transform: translateX(-50%);">
                 <div @click="router.push({ path: '/musichall' })" class="top-menu-box">
                     <span class=" text-lg font-bold">探索</span>
+                </div>
+                <div @click="router.push({ path: '/musicspace' })" class="top-menu-box ml-5">
+                    <span class=" text-lg font-bold">音乐空间</span>
                 </div>
             </div>
             <div @focusin="selectedIndex = 1" @focusout="selectedIndex = 0"
@@ -23,8 +26,9 @@
                         }">
                 </div>
             </div>
-            <div @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0" v-if="isLogin && userProfile"
-                class="absolute z-10 flex items-center duration-300 ease-out" style="right: 11%;" :style="{
+            <div @click="router.push({ path: '/musicspace' })" @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0"
+                v-if="isLogin && userProfile" class="absolute z-10 flex items-center duration-300 ease-out"
+                style="right: 11%;" :style="{
                     scale: enterIndex ? '2.5' : '1',
                     transform: enterIndex ? 'translate(-15%, 40%)' : ''
                 }">
@@ -61,11 +65,11 @@ export default defineComponent({
 </script>
 
 <script setup lang='ts'>
-import { onMounted, computed, ref, defineComponent,inject } from 'vue';
+import { onMounted, computed, ref, defineComponent, inject } from 'vue';
 import { useRouter } from 'vue-router'
 import { useUserStore } from "@/store/user-store/index"
 import { storeToRefs } from 'pinia';
-const reload = inject<Function>('reload',()=>{})
+const reload = inject<Function>('reload', () => { })
 const router = useRouter()
 const store = useUserStore()
 const { isLogin, userProfile } = storeToRefs(store)
@@ -83,9 +87,6 @@ const toSearchPage = (k: string) => {
         reload()
     }
 }
-
-
-
 const signOut = async () => {
     await store.signOut()
     store.setLoginStatus()

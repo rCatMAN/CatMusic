@@ -3,24 +3,22 @@ import { getLoginStatusApi, signOutApi } from "@/request/api/user"
 
 type userProfileType = {
     nickname?: string,
-    avatarUrl?: string
+    avatarUrl?: string,
+    userId?: number,
 }
 export const useUserStore = defineStore('user', {
     state: () => ({
-            isLogin: false,
-            userProfile: {
-                nickname: undefined,
-                avatarUrl: undefined
-            } as userProfileType,
-            isLoaded: false,
-        }),
+        isLogin: false,
+        userProfile: {} as userProfileType,
+        isLoaded: false,
+    }),
     actions: {
         async setLoginStatus() {
             const { data: profile } = await getLoginStatusApi()
             if (profile.data.profile) {
-                console.log("执行了setLOGIN")
                 this.isLogin = true
                 this.userProfile = profile.data.profile
+                console.log("执行了setLOGIN", this.userProfile)
             } else {
                 console.log("执行了setLOGIN")
                 this.isLogin = false

@@ -42,5 +42,8 @@ watch(isShowPlayerPage, () => {
   right: 0px;
   padding-top: calc(4rem + 40px);
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

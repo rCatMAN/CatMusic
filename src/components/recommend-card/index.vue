@@ -22,7 +22,8 @@
             style="width: 48%;height: 200px;background-image:linear-gradient(0deg,#a18cd1 0%, #fbc2eb 100%)">
             <div class="absolute rounded-2xl overflow-hidden "
                 style="width: 166px;height: 166px;left: 20px;top: 50%;transform: translateY(-50%);">
-                <el-image style="width: 166px;height: 166px" :src="fmList.url + '?param=500y500'" fit="cover" lazy />
+                <el-image style="width: 166px;height: 166px" :src="fmList.url + '?param=500y500'" fit="cover"
+                    loading="lazy" />
             </div>
             <div class=" absolute text-white " style="left: 200px;top: 20px;">
                 <p class="text-2xl font-bold">{{ fmList.name }}</p>
@@ -84,7 +85,7 @@ onMounted(async () => {
     background: url('https://p2.music.126.net/QxJA2mr4hhb9DZyucIOIQw==/109951165422200291.jpg?param=1024y1024');
     background-position-y: 0%;
     background-size: cover;
-    animation: backMove 300s linear infinite;
+    animation: backMove 200s linear infinite;
 }
 
 @keyframes backMove {

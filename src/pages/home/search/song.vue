@@ -10,7 +10,7 @@
                 style="width: 25%;height: 54px;padding: 8px;" :style="{
                     backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
                 }" @click="playSong(item.id)">
-                <el-image :src="item.al.picUrl + '?param=100y100'" fit="cover" class="w-12 rounded-lg" lazy />
+                <el-image :src="item.al.picUrl + '?param=100y100'" fit="cover" class="w-12 rounded-lg" loading="lazy" />
                 <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
                     <div class="w-full flex items-center truncate ">
                         <span class="font-bold text-sm mb-1 " :style="{
@@ -26,11 +26,10 @@
                         </div>
                     </div>
                     <div class=" w-full truncate" style="margin-top: -5px;">
-                        <span v-for="(item2, index2) in item.ar" :key="index2" class="text-xs text-gray-500">{{
-                            item2.name
-                        }}</span>
+                        <span v-for="(item2, index2) in item.ar" :key="index2" class="text-xs text-gray-500" :style="{
+                            color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                        }">{{ item2.name }}</span>
                     </div>
-
                 </div>
             </div>
         </div>

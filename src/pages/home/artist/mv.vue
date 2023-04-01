@@ -7,7 +7,7 @@
             <div @click="router.push({ path: '/mv', query: { id: item.id } })" @mouseenter="selectedIndex = index"
                 @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                 <el-image :src="item.imgurl16v9 + '?param=800y450'" fit="cover" class="w-full rounded-xl  relative z-10"
-                    style="aspect-ratio:16/9;" lazy />
+                    style="aspect-ratio:16/9;" loading="lazy" />
                 <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
                     style="aspect-ratio:1/1;height: 30%; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.1);backdrop-filter: blur(7px);border: 1px solid hsla(0,0%,100%,.08);"
                     :style="{

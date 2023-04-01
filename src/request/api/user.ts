@@ -29,8 +29,18 @@ export const getLoginStatusApi = () =>
     request.get<Response>(
         `/music/login/status?timerstamp=${Date.parse(new Date().toString())}`,
     )
-    
-export const signOutApi = ()=>
+
+export const signOutApi = () =>
     request.get<Response>(
         `/music/logout?timerstamp=${Date.parse(new Date().toString())}`,
+    )
+
+export const getUserSongList = (uid: number) =>
+    request.get<Response>(
+        `/music/user/playlist?uid=${uid}`
+    )
+
+export const getUserLikeSongs = (uid: number) =>
+    request.get<Response>(
+        `/music/likelist?uid=${uid}`
     )

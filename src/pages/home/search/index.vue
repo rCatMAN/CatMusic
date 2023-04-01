@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex justify-between mb-8">
+    <div class="w-full max-w-6xl flex justify-between mb-8">
         <div class="" style="width:45%">
             <Artist :keywords="keywords" />
         </div>
@@ -7,10 +7,10 @@
             <Album :keywords="keywords" />
         </div>
     </div>
-    <div class="mb-8" style="width: 100%;">
+    <div class="mb-8 max-w-6xl" style="width: 100%;">
         <Song :keywords="keywords" />
     </div>
-    <div class="mb-36">
+    <div class="mb-36 max-w-6xl">
         <Video :keywords="keywords" />
     </div>
 </template>
@@ -28,6 +28,4 @@ const keywords = computed<any>(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

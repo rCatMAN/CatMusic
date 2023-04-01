@@ -8,6 +8,12 @@ export const songDetailApi = (id: number | string) =>
     request.get<Response>(
         `/music/song/detail?ids=${id}`,
     )
+
+export const songsDetailApi = (ids: string) =>
+    request.get<Response>(
+        `/music/song/detail?ids=${ids}`,
+    )
+
 export const songListDetailApi = (id: any) =>
     request.get<Response>(
         `/music/playlist/detail?id=${id}`,
