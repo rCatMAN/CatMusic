@@ -24,22 +24,22 @@
             <div class=" h-full  flex flex-wrap justify-between content-between" style="width: 60%;padding-left: 2%;">
                 <div @click="playSong(songDetail.id)" v-for="(songDetail, songsIndex) in userLikeSongs.songs"
                     :key="songsIndex" class="like-song-box " :style="{
-                        backgroundColor: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-light-color)' : ''
-                    }">
+                            backgroundColor: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-light-color)' : ''
+                        }">
                     <ElImage :src="songDetail.al.picUrl + '?param=100y100'" fit="cover" loading="lazy"
                         class="h-full aspect-square rounded-lg min-w-max" />
                     <div class="ml-3 truncate" :style="{
-                        color: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-text-color)' : ''
-                    }">
+                            color: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-text-color)' : ''
+                        }">
                         <div class="flex items-center">
                             <p class="text-sm font-bold tracking-wide truncate">{{ songDetail.name }}</p>
                             <div v-if="songDetail.fee === 1"
                                 class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center" :style="{
-                                    backgroundColor: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-light-color)' : ''
-                                }">
+                                        backgroundColor: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-light-color)' : ''
+                                    }">
                                 <span class=" font-bold" style="font-size: xx-small;" :style="{
-                                    color: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-text-color)' : ''
-                                }">VIP</span>
+                                        color: songDetail.id === howlerStore.nowPlayingId ? 'var(--primary-text-color)' : ''
+                                    }">VIP</span>
                             </div>
                         </div>
                         <span v-for="(artistValue, artistIndex) in songDetail.ar" :key="artistIndex"
@@ -52,15 +52,15 @@
             <div @click="router.push({ path: `/musicspace/songlist` })"
                 class="hover:bg-gray-100 h-full flex items-center justify-center rounded-lg duration-300 ease-out cursor-pointer active:scale-90"
                 style="padding:0px 13px;" :style="{
-                    backgroundColor: route.path === '/musicspace/songlist' ? 'rgb(243,244,246)' : ''
-                }">
+                        backgroundColor: route.path === '/musicspace/songlist' ? 'rgb(243,244,246)' : ''
+                    }">
                 <p>全部歌单</p>
             </div>
             <div v-for="(routerMenu, routerIndex) in routerMenuButtonText" :key="routerIndex"
                 class="hover:bg-gray-100 h-full flex items-center justify-center rounded-lg duration-300 ease-out cursor-pointer active:scale-90"
                 style="padding:0px 13px;" :style="{
-                    backgroundColor: routerMenu.route === route.path ? 'rgb(243,244,246)' : ''
-                }">
+                        backgroundColor: routerMenu.route === route.path ? 'rgb(243,244,246)' : ''
+                    }">
                 <p>{{ routerMenu.title }}</p>
             </div>
         </div>
@@ -73,8 +73,8 @@
 
 <script setup lang='ts'>
 import { reactive, onMounted } from 'vue'
-import { getUserLikeSongs } from "@/request/api/user"
-import { songsDetailApi } from "@/request/api/detail"
+import { songListApi } from "@/request/api/detail"
+import { getUserSongList, getUserLikeSongs } from '@/request/api/user'
 import { useUserStore } from '@/store/user-store';
 import { useHowlerStore } from '@/store/howler-store';
 import { useRouter, useRoute } from 'vue-router';
@@ -119,22 +119,13 @@ const userLikeSongs = reactive<userLikeSongsType>({
     IdList: [],
     songs: [],
 })
-let idsStr = ""
 onMounted(async () => {
     if (userStore.userProfile.userId) {
-        const { data: userLikeSongsRes } = await getUserLikeSongs(userStore.userProfile.userId)
-        userLikeSongs.allIdList = userLikeSongsRes.ids
-        for (let i = 0; i < 12; i++) {
-            userLikeSongs.IdList.push(userLikeSongsRes.ids[i])
-            if (i < 11) {
-                idsStr = idsStr + userLikeSongsRes.ids[i] + ","
-            } else {
-                idsStr = idsStr + userLikeSongsRes.ids[i]
-            }
-        }
-        const { data: songsDetailRes } = await songsDetailApi(idsStr)
-        userLikeSongs.songs = songsDetailRes.songs
-
+        const { data: userSongListRes } = await getUserSongList(userStore.userProfile.userId)
+        const { data: userLikeSongsRes } = await songListApi(userSongListRes.playlist[0].id, 12)
+        const { data: userLikeSongsIdList } = await getUserLikeSongs(userStore.userProfile.userId)
+        userLikeSongs.allIdList = userLikeSongsIdList.ids
+        userLikeSongs.songs = userLikeSongsRes.songs
     }
 })
 const playSong = (id: number) => {

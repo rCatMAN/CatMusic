@@ -9,9 +9,9 @@
         <div v-for="{ text, duration, startTime } in line.lineData" class="relative">
           <!-- 歌词原字体元素 -->
           <div class="lyric-text" :class="isActiveText(lineIndex, startTime) ? 'active' : ''" :style="{
-            transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
-              }s ease-out`,
-          }">{{ text }}</div>
+              transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
+                }s ease-out`,
+            }">{{ text }}</div>
           <!-- 歌词播放填充字体元素 -->
           <div class="lyric-text fill-color" :style="{
             transition: `all ${lineIndex === currentLineIndex ? duration / 1000 : 0.2
@@ -65,7 +65,9 @@ const pretreatmentLyric = (initialLyric: string) => {
 watch(nowPlayingId, async () => {
   const { data: lyricRes } = await songLyricApi(nowPlayingId.value)
   lyricList.yrc.lyric = lyricRes.yrc.lyric
+  lyricList.lrc.lyric = lyricRes.lrc.lyric
   lyricList.yrc.currentLyric = pretreatmentLyric(lyricList.yrc.lyric)
+
   data.value = praseData(lyricList.yrc.currentLyric);
   setTimeout(() => {
     myScroll.value = new IScroll('#scroll', {
@@ -87,7 +89,6 @@ const clickToPage = (lineIndex: number) => {
 
 // 解析歌词数据
 const praseData = (data: string) => {
-  console.log('prassData', data)
   // 将歌词字符串分割为一行行
   const lines = data.split("[").map((line) => {
     // 从行中的数据取出行的时间数据 lineTime 和歌词数据 duration

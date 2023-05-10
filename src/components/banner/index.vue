@@ -10,7 +10,7 @@
           <div class="content">
             <div class="name"></div>
             <div class="des"></div>
-            <button class="">See More</button>
+            <button @click.prevent="seeMore(item.targetId, item.targetType, item.url)" class="">See More</button>
           </div>
         </div>
       </div>
@@ -28,10 +28,15 @@
 
 <script setup lang="ts">
 import { bannerApi } from "@/request/api/Recommended";
+import { useRouter } from "vue-router";
 import { onMounted, reactive, onUnmounted, ref, watch } from "vue";
+const router = useRouter()
 type bannerDetailType = {
   values?: Array<{
     imageUrl: string;
+    targetType: number
+    targetId: number
+    url: string
   }>;
 };
 const bannerDetail = reactive<bannerDetailType>({
@@ -64,6 +69,34 @@ onMounted(async () => {
     startTimerRecord();
   }
 });
+const seeMore = (id: number, type: number, url: string | null) => {
+  switch (type) {
+    case 10:
+      router.push({
+        path: `/album`,
+        query: { id: id }
+      })
+      break;
+    case 100:
+      router.push({
+        path: `/artist`,
+        query: { id: id }
+      })
+      break;
+    case 1000:
+      router.push({
+        path: `/songlist`,
+        query: { id: id }
+      })
+      break;
+    case 3000:
+      if (url)
+        window.open(url, "_blank")
+      break;
+    default:
+      break;
+  }
+}
 onUnmounted(() => {
   clearTimerRecord();
 });

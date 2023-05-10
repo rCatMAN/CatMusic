@@ -13,8 +13,8 @@
                         class="absolute rounded-full overflow-hidden duration-200 ease-out z-30 cursor-pointer"
                         style="width: 20%;aspect-ratio: 1/1; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
                         :style="{
-                            opacity: selectedIndex === index ? '1' : '0',
-                        }">
+                                opacity: selectedIndex === index ? '1' : '0',
+                            }">
                         <SvgIcon iconClass="play" class="text-white absolute"
                             style="width: 40%;left: 50%;top: 50%;transform: translate(-40%,-50%);" />
                     </div>
@@ -61,7 +61,6 @@ onMounted(async () => {
             songList.push(dailyListRes.recommend[i])
         }
     }
-    console.log('songList', songList)
 })
 const toSongListPage = (id: (string | number)) => {
     router.push({
@@ -76,7 +75,6 @@ const last = () => {
 const next = () => {
     let list = document.querySelectorAll(".recommend-squares-item")
     document.getElementById("recommend-squares-slide")?.append(list[0]);
-    console.log(list)
 }
 </script>
 

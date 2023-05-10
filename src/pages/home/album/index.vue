@@ -3,7 +3,7 @@
         <div v-if="albumDetail.values" class="top-menu relative flex items-start " style="width: 100%;height: 330px;">
             <div style="width: 24%;min-width: 200px;margin-right: 5%;">
                 <el-image :src="albumDetail.values.picUrl" alt="" class="rounded-2xl z-10 relative"
-                    style="max-width: 330px;" fit="cover" loading="lazy" lazy />
+                    style="max-width: 330px;" fit="cover" loading="lazy" />
                 <div class="shadow" style="max-width: 330px;"
                     :style="{ 'background-image': `url(${albumDetail.values.picUrl})` }">
                 </div>
@@ -13,7 +13,7 @@
                 <div class="mt-6 flex items-center">
                     <span class="text-base font-bold">{{ albumDetail.values.type }} by</span>
                     <el-image class="rounded-full overflow-hidden ml-2 mr-2" style="width: 30px;height: 30px;"
-                        :src="albumDetail.values.artist.img1v1Url" alt="" lazy />
+                        :src="albumDetail.values.artist.img1v1Url" alt="" loading="lazy" />
                     <p class="text-sm font-bold text-gray-500">{{ albumDetail.values.artist.name }}</p>
                 </div>
                 <div class="mt-2">

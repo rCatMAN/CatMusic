@@ -57,6 +57,7 @@ import { onMounted, computed, reactive, ref, defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import { songListDetailApi } from '@/request/api/detail'
 import SongList from "./list.vue"
+// const SongList =()=> import("./list.vue")
 const route = useRoute()
 const id = computed<any>(() => {
     return route.query.id

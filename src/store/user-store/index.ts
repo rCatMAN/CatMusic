@@ -1,5 +1,8 @@
 import { defineStore } from "pinia"
 import { getLoginStatusApi, signOutApi } from "@/request/api/user"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
 
 type userProfileType = {
     nickname?: string,
@@ -27,6 +30,7 @@ export const useUserStore = defineStore('user', {
         },
         async signOut() {
             const { data: res } = await signOutApi()
+            router.push({ path: '/musichall' })
             console.log("退出登录", res)
         }
     }

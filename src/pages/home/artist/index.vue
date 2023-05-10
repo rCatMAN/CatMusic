@@ -17,14 +17,14 @@
                 <span>{{ artistDetail.value.artist.musicSize }} 首歌 · {{ artistDetail.value.artist.albumSize }} 张专辑 · {{
                     artistDetail.value.artist.mvSize }} 个 MV</span>
             </div>
-            <div class="h-full mt-8 text-gray-600 text-sm truncate">
+            <div class="mt-8 text-gray-600 text-sm truncate">
                 <span @click="isDescriptionShow = true" class="cursor-pointer ">{{
                     artistDetail.value.artist.briefDesc
                 }}</span>
             </div>
             <div class=" absolute bg-gray-200 rounded-2xl duration-300 ease-out"
                 style="top: 180px;width: 100%;padding: 20px;"
-                :style="{ opacity: isDescriptionShow ? '1' : '0', zIndex: isDescriptionShow ? 20 : -1, transform: isDescriptionShow ? 'translateY(-20px)' : 'translateY(10px)' }">
+                :style="{ opacity: isDescriptionShow ? '1' : '0', zIndex: isDescriptionShow ? 20 : -50, transform: isDescriptionShow ? 'translateY(-20px)' : 'translateY(10px)' }">
                 <SvgIcon @click="isDescriptionShow = false" iconClass="close"
                     class=" absolute top-2 right-4 text-gray-500 z-30 cursor-pointer" style="width: 15px;height: 15px;" />
                 <span class="">{{ artistDetail.value.artist.briefDesc }}</span>

@@ -8,20 +8,27 @@ export const songDetailApi = (id: number | string) =>
     request.get<Response>(
         `/music/song/detail?ids=${id}`,
     )
-
 export const songsDetailApi = (ids: string) =>
     request.get<Response>(
         `/music/song/detail?ids=${ids}`,
     )
-
 export const songListDetailApi = (id: any) =>
     request.get<Response>(
         `/music/playlist/detail?id=${id}`,
     )
-export const songListApi = (id: any) =>
-    request.get<Response>(
-        `/music/playlist/track/all?id=${id}`
-    )
+export const songListApi = (id: any, limit?: number) => {
+    if (limit) {
+        return request.get<Response>(
+            `/music/playlist/track/all?id=${id}&limit=${limit}`
+        )
+    } else {
+        return request.get<Response>(
+            `/music/playlist/track/all?id=${id}`
+        )
+    }
+}
+
+
 export const artistDetailApi = (id: any) =>
     request.get<Response>(
         `/music/artist/detail?id=${id}`

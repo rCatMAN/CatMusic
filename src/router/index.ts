@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router"
-import Login from "../pages/home/login/index.vue"
-import Home from "../pages/home/index.vue"
-import MusicHall from "../pages/home/explore/music-hall/index.vue"
-import NewSong from "../pages/home/explore/new-song/index.vue"
-import Radios from "../pages/home/explore/Radio/index.vue"
-import SongList from "../pages/home/song-list/index.vue"
-import Search from "../pages/home/search/index.vue"
+const Login = () => import("../pages/home/login/index.vue")
+const Home = () => import("../pages/home/index.vue")
+const MusicHall = () => import("../pages/home/explore/music-hall/index.vue")
+const NewSong = () => import("../pages/home/explore/new-song/index.vue")
+const Radios = () => import("../pages/home/explore/Radio/index.vue")
+const SongList = () => import("../pages/home/song-list/index.vue")
+const Search = () => import("../pages/home/search/index.vue")
 const Artist = () => import('../pages/home/artist/index.vue')
 const Album = () => import('../pages/home/album/index.vue')
 const Videos = () => import('../pages/home/video/index.vue')

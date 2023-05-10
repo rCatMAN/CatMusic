@@ -7,27 +7,27 @@
     <div @click="playSong(item.id)" v-for="(item, index) in artistHotSong.values" :key="index"
       class="song-box w-1/4 flex items-center rounded-xl duration-300 ease-out cursor-pointer"
       style="height: 54px; padding: 8px" :style="{
-        backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : '',
-      }">
+          backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : '',
+        }">
       <el-image :src="item.al.picUrl + '?param=100y100'" class="w-11 rounded-lg" loading="lazy" />
       <div class="ml-3 flex flex-col items-start justify-center w-full truncate">
-        <div class="w-full flex items-center truncate">
+        <div class="w-full flex items-start truncate">
           <span class="font-bold text-sm mb-1" :style="{
-            color: item.id === nowPlayingId ? 'var(--primary-text-color)' : '',
-          }">{{ item.name }}</span>
-          <div v-if="item.fee === 1" class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center" :style="{
-            backgroundColor:
-              item.id === nowPlayingId ? 'var(--primary-light-color)' : '',
-          }">
-            <span class="font-bold" style="font-size: xx-small" :style="{
               color: item.id === nowPlayingId ? 'var(--primary-text-color)' : '',
-            }">VIP</span>
+            }">{{ item.name }}</span>
+          <div v-if="item.fee === 1" class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center" :style="{
+              backgroundColor:
+                item.id === nowPlayingId ? 'var(--primary-light-color)' : '',
+            }">
+            <span class="font-bold" style="font-size: xx-small" :style="{
+                color: item.id === nowPlayingId ? 'var(--primary-text-color)' : '',
+              }">VIP</span>
           </div>
         </div>
         <div class="w-full truncate" style="margin-top: -5px">
           <span v-for="(item2, index2) in item.ar" :key="index2" class="text-xs text-gray-500" :style="{
-            color: item.id === nowPlayingId ? 'var(--primary-text-color)' : '',
-          }">{{ item2.name }}</span>
+              color: item.id === nowPlayingId ? 'var(--primary-text-color)' : '',
+            }">{{ item2.name }}</span>
         </div>
       </div>
     </div>
