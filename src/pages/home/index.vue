@@ -11,11 +11,11 @@
       <div class="container-bg py-10 mb-28 ">
         <div class="flex items-center max-w-6xl text-xs">
           <img src="@/icons/png/备案图标.png" class="mr-1 w-4">
-          <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030702005396" target="_blank"
+          <a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030702005396" target="_blank"
             class="mr-2">粤公网安备
             44030702005396号</a>
           |
-          <a href="https://beian.miit.gov.cn/" target="_blank" class="ml-2">粤ICP备2023041798-1</a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" class="ml-2">粤ICP备2023041798号-1</a>
         </div>
       </div>
     </div>
