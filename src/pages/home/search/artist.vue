@@ -9,7 +9,7 @@
                 <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     class=" relative cursor-pointer w-full">
                     <el-image @click="toArtistPage(item.id)" :src="item.img1v1Url + '?param=500y500'" fit="cover"
-                        class=" relative rounded-full z-10 cursor-pointer" lazy />
+                        class=" relative rounded-full z-10 cursor-pointer" loading="lazy" />
                     <div class="shadow duration-300 ease-out"
                         :style="{ 'background-image': `url(${item.img1v1Url + '?param=500y500'})`, opacity: selectedIndex === index ? '1' : '0' }">
                     </div>

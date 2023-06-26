@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div @contextmenu.prevent="" class="bg-white">
     <router-view v-if="isRouterAlive" />
   </div>
 </template>
@@ -7,9 +7,9 @@
 <script setup lang="ts">
 import { nextTick, provide, ref, onMounted } from 'vue';
 import { useUserStore } from './store/user-store';
-
 const userStore = useUserStore()
 const isRouterAlive = ref(true)
+
 onMounted(() => {
   userStore.setLoginStatus()
 })

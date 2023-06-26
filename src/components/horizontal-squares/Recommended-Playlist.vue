@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-start flex-wrap justify-around w-full h-full" style="min-width: 500px;">
+    <div class="flex items-start flex-wrap justify-between w-full h-full" style="min-width: 500px;">
         <div v-for="(item, index) in songList.values" :key="index" class="relative mb-4" style="width:18%">
             <div @click="toSongListPage(item.id)" class="relative">
                 <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"

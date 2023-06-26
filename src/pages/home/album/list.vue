@@ -1,10 +1,10 @@
 <template>
     <div>
         <div v-for="(item, index) in props.songs" :key="index" @click="playSong(item.id)"
-            class="list-background flex items-center justify-start rounded-xl duration-200 ease-out cursor-pointer"
+            class="list-background flex items-center justify-start mb-2 rounded-xl duration-200 ease-out cursor-pointer"
             style="padding: 8px;height: 50px;width: 100%;" :style="{
-                backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
-            }">
+                    backgroundColor: item.id === nowPlayingId ? 'var(--primary-light-color)' : ''
+                }">
             <div class="flex items-center" style="height: 100%;width: 30px;">
                 <span class="text-gray-600 font-bold">{{ index + 1 }}</span>
             </div>
@@ -13,24 +13,30 @@
                     color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
                 }">{{ item.name }}</p>
                 <p v-for="(aliaName, aliaIndex) in item.alia" :key="aliaIndex" class=" ml-3 text-xs  text-gray-500" :style="{
-                    color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
-                }">{{ aliaName }}</p>
+                        color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                    }">{{ aliaName }}</p>
                 <div v-if="item.fee === 1" class="vip-icon w-7 h-4 ml-2 rounded-sm flex items-center justify-center">
                     <span class=" font-bold" style="font-size: xx-small;">VIP</span>
                 </div>
             </div>
-            <div class="flex items-center" style="width: 12%;height: 100%;">
+            <div class="flex items-center relative" style="width: 12%;height: 100%;">
+                <div v-if="item.isLike" class=" flex items-start absolute" style="left: -50px;">
+                    <SvgIcon iconClass="liked" class=""
+                        style="width: 30px;padding:0px 5px;color: var(--primary-text-color);" />
+                </div>
                 <p class="text-xs font-bold text-gray-600" :style="{
-                    color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
-                }">{{ dt[index].min }} : {{ dt[index].sec }}</p>
+                        color: item.id === nowPlayingId ? 'var(--primary-text-color)' : ''
+                    }">{{ dt[index].min }} : {{ dt[index].sec }}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useHowlerStore } from '@/store/howler-store';
+import { useUserStore } from '@/store/user-store';
+import { getUserLikeSongs } from '@/request/api/user'
 import { storeToRefs } from 'pinia';
 const howlerStore = useHowlerStore()
 const { nowPlayingId } = storeToRefs(howlerStore)
@@ -45,6 +51,7 @@ const props = defineProps<{
         id: number
         fee: number
         dt: number
+        isLike: boolean
         al: {
             name: string
             picUrl: string
@@ -62,6 +69,24 @@ if (props.songs) {
             dt.push({ min: ~~(item.dt / 1000 / 60), sec: ~~(item.dt / 1000 % 60) })
         }
     }
+}
+const userStore = useUserStore()
+if (userStore.userProfile.userId) {
+    getUserLikeSongs(userStore.userProfile.userId).then((res) => {
+        if (props.songs) {
+            props.songs.forEach((item) => {
+                for (let index = 0; index < res.data.ids.length; index++) {
+                    if (item.id === res.data.ids[index]) {
+                        item.isLike = true
+                        break
+                    } else if (index === res.data.ids.length - 1) {
+                        item.isLike = false
+                    }
+                }
+            })
+        }
+    })
+
 }
 const playSong = (id: number) => {
     howlerStore.nowPlayingId = id

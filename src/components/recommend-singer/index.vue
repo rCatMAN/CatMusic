@@ -5,7 +5,7 @@
                 <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     @click="router.push({ path: '/artist', query: { id: item.id } })"
                     class="relative z-20 rounded-full cursor-pointer" :src="item.img1v1Url + '?param=500y500'" fit="cover"
-                    lazy />
+                    loading="lazy" />
                 <div class="shadow w-full duration-200 ease-out" style="max-width: 330px;"
                     :style="{ 'background-image': `url(${item.img1v1Url + '?param=500y500'})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>

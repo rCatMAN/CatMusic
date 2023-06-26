@@ -8,12 +8,12 @@
             <div class="relative">
                 <el-image @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                     @click="toAlbumPage(item.id)" :src="item.picUrl + '?param=1080y1080'"
-                    class="w-full cursor-pointer rounded-2xl z-10" lazy />
+                    class="w-full cursor-pointer rounded-2xl z-10" loading="lazy" />
                 <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
                     style="width: 25%;height: 25%; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
                     :style="{
-                        opacity: selectedIndex === index ? '1' : '0',
-                    }">
+                            opacity: selectedIndex === index ? '1' : '0',
+                        }">
                     <SvgIcon iconClass="play" class="text-white absolute"
                         style="width: 40%;left: 50%;top: 50%;transform: translate(-40%,-50%);" />
                 </div>

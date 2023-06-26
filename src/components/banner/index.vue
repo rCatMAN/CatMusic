@@ -1,27 +1,16 @@
 <template>
   <div v-if="bannerDetail.values" class="w-full">
-    <div
-      @mouseenter="clearTimerRecord()"
-      @mouseleave="startTimerRecord()"
-      class="container relative"
-      style="width: 65%; left: 50%; transform: translateX(-50%); aspect-ratio: 27/10"
-    >
-      <div
-        class="absolute h-1 z-20"
-        :style="{ width: progress * 100 + '%' }"
-        style="background-color: var(--primary-back-color)"
-      ></div>
+    <div @mouseenter="clearTimerRecord()" @mouseleave="startTimerRecord()" class="container relative"
+      style="width: 65%; left: 50%; transform: translateX(-50%); aspect-ratio: 27/10">
+      <div class="absolute h-1 z-20" :style="{ width: progress * 100 + '%' }"
+        style="background-color: var(--primary-back-color);border-radius: 5px;"></div>
       <div id="slide">
-        <div
-          v-for="(item, index) in bannerDetail.values"
-          :key="index"
-          class="item"
-          :style="{ 'background-image': `url(${item.imageUrl})` }"
-        >
+        <div v-for="(item, index) in bannerDetail.values" :key="index" class="item"
+          :style="{ 'background-image': `url(${item.imageUrl})` }">
           <div class="content">
             <div class="name"></div>
             <div class="des"></div>
-            <button class="">See More</button>
+            <button @click.prevent="seeMore(item.targetId, item.targetType, item.url)" class="">See More</button>
           </div>
         </div>
       </div>
@@ -29,11 +18,7 @@
         <div @click="last()" class="icon-box bg-white" style="width: 30px; height: 30px">
           <SvgIcon icon-class="back" style="width: 15px" />
         </div>
-        <div
-          @click="next()"
-          class="icon-box bg-white ml-3"
-          style="width: 30px; height: 30px"
-        >
+        <div @click="next()" class="icon-box bg-white ml-3" style="width: 30px; height: 30px">
           <SvgIcon icon-class="front" style="width: 15px" />
         </div>
       </div>
@@ -43,10 +28,15 @@
 
 <script setup lang="ts">
 import { bannerApi } from "@/request/api/Recommended";
+import { useRouter } from "vue-router";
 import { onMounted, reactive, onUnmounted, ref, watch } from "vue";
+const router = useRouter()
 type bannerDetailType = {
   values?: Array<{
     imageUrl: string;
+    targetType: number
+    targetId: number
+    url: string
   }>;
 };
 const bannerDetail = reactive<bannerDetailType>({
@@ -56,7 +46,6 @@ const bannerDetail = reactive<bannerDetailType>({
 let timer: NodeJS.Timer;
 const progress = ref(0);
 watch(progress, () => {
-  console.log("progress", progress.value);
   if (progress.value >= 1) {
     next();
     progress.value = 0;
@@ -80,6 +69,34 @@ onMounted(async () => {
     startTimerRecord();
   }
 });
+const seeMore = (id: number, type: number, url: string | null) => {
+  switch (type) {
+    case 10:
+      router.push({
+        path: `/album`,
+        query: { id: id }
+      })
+      break;
+    case 100:
+      router.push({
+        path: `/artist`,
+        query: { id: id }
+      })
+      break;
+    case 1000:
+      router.push({
+        path: `/songlist`,
+        query: { id: id }
+      })
+      break;
+    case 3000:
+      if (url)
+        window.open(url, "_blank")
+      break;
+    default:
+      break;
+  }
+}
 onUnmounted(() => {
   clearTimerRecord();
 });
@@ -119,7 +136,7 @@ const last = () => {
   top: 0;
   transform: translate(0, 0);
   background-position: top;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   box-shadow: none;

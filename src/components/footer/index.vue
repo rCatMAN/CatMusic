@@ -5,8 +5,8 @@
                 :style="{ width: `calc( ${progressBarRatio} * 100vw)`, backgroundColor: 'var(--primary-back-color)' }">
             </div>
             <div v-show="selectIndex === 2 || isDraging === true" class=" absolute w-3 h-3 rounded-full -top-2" :style="{
-                left: `calc( (${progressBarRatio} * 100vw) - 6px )`, backgroundColor: 'var(--primary-back-color)'
-            }">
+                    left: `calc( (${progressBarRatio} * 100vw) - 6px )`, backgroundColor: 'var(--primary-back-color)'
+                }">
 
             </div>
             <div @mouseenter="selectIndex = 2" @mouseleave="selectIndex = 100" ref="bar" @mousedown="addMouseMoveListener()"
@@ -18,15 +18,15 @@
             <div v-if="!(nowPlayingId === 1)" @click="showPlayer()" @mouseenter="selectIndex = 1"
                 @mouseleave="selectIndex = 100" class="absolute bg-black duration-200 ease-out cursor-pointer"
                 style="width: 80px;height: 80px;" :style="{
-                    opacity: selectIndex === 1 ? '0.3' : '0'
-                }">
+                        opacity: selectIndex === 1 ? '0.3' : '0'
+                    }">
             </div>
             <SvgIcon v-if="!(nowPlayingId === 1)" @click="showPlayer()" @mouseenter="selectIndex = 1"
                 iconClass="doubleuparrow" class=" absolute text-white duration-200 ease-out cursor-pointer"
                 style="left:40px;top: 40px;" :style="{
-                    opacity: selectIndex === 1 ? '0.8' : '0',
-                    transform: selectIndex === 1 ? 'translate(-50%,-45%)' : 'translate(-50%,-10%)'
-                }" />
+                        opacity: selectIndex === 1 ? '0.8' : '0',
+                        transform: selectIndex === 1 ? 'translate(-50%,-45%)' : 'translate(-50%,-10%)'
+                    }" />
             <div class="flex flex-col self-start mt-2">
                 <p v-if="songDetail.values" class="title mb-1 font-bold cursor-pointer">{{ songDetail.values.name }}</p>
                 <div class="flex items-center">
@@ -51,6 +51,9 @@
                     <SvgIcon iconClass="nextsong" style="width: 35px;" />
                 </div>
             </div>
+            <div class="options-icon icon-footer-box flex items-start absolute" style="right:23%;">
+                <SvgIcon :iconClass="isLiked ? 'liked' : 'unlike'" class="" style="width: 30px;padding:0px 5px;" />
+            </div>
             <div @click="switchLoopMode()" class="options-icon icon-footer-box flex items-start absolute"
                 style="right:20%;">
                 <SvgIcon :iconClass="howlerStore.isOneSongLoop ? 'onesong' : 'listloop'" class=""
@@ -65,8 +68,10 @@
 import { ref } from 'vue';
 import { useHowlerStore } from '@/store/howler-store'
 import { usekeepAliveStore } from '@/store/keepAlive-store';
+import { useUserStore } from '@/store/user-store';
 import { songUrlApi } from '@/request/api/url'
 import { songDetailApi } from '@/request/api/detail'
+import { getUserLikeSongs } from '@/request/api/user'
 import { watch, reactive, computed, onActivated, onDeactivated, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import VolumeBar from '@/components/volume-bar/index.vue'
@@ -123,12 +128,24 @@ const progressBarRatio = computed(() => {
     }
 })
 let timeRecorder: any
+const userStore = useUserStore()
+const isLiked = ref(false)
 watch(nowPlayingId, async (newid, oldid) => {
     const { data: songDetailRes } = await songDetailApi(nowPlayingId.value)
+    if (userStore.userProfile.userId) {
+        const { data: userLikeSongsListRes } = await getUserLikeSongs(userStore.userProfile.userId)
+        for (let index = 0; index < userLikeSongsListRes.ids.length; index++) {
+            if (newid === userLikeSongsListRes.ids[index]) {
+                isLiked.value = true
+                break
+            } else if (index === userLikeSongsListRes.ids.length - 1) {
+                isLiked.value = false
+            }
+        }
+    }
     songDetail.values = songDetailRes.songs[0]
     const { data: urlRes } = await songUrlApi(nowPlayingId.value)
     console.log('newid:', newid, 'oldid:', oldid)
-    console.log('url', urlRes)
     howlerStore.newHowl(urlRes.data[0].url, howlerStore)
 })
 watch(durationTime, () => {
@@ -196,7 +213,7 @@ const switchLoopMode = () => {
     if (howlerStore.howler)
         howlerStore.howler.loop(howlerStore.isOneSongLoop)
 }
-switchLoopMode
+
 </script>
 
 <style scoped>

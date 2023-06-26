@@ -1,13 +1,16 @@
 <template>
-    <div class=" fixed top-0 w-full h-16 bg-white  header">
+    <div class=" fixed top-0 w-full h-16 header">
         <div class="relative w-full h-full flex items-center">
             <SvgIcon @click="router.back()" iconClass="back" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 10%;" />
             <SvgIcon @click="router.forward()" iconClass="front" class="icon-Box absolute cursor-pointer rounded-lg"
                 style="left: 15%;" />
-            <div class="flex items-center absolute" style="left:45%">
+            <div class="flex items-center absolute" style="left:50%;transform: translateX(-50%);">
                 <div @click="router.push({ path: '/musichall' })" class="top-menu-box">
                     <span class=" text-lg font-bold">探索</span>
+                </div>
+                <div v-if="isLogin && userProfile" @click="router.push({ path: '/musicspace' })" class="top-menu-box ml-5">
+                    <span class=" text-lg font-bold">音乐空间</span>
                 </div>
             </div>
             <div @focusin="selectedIndex = 1" @focusout="selectedIndex = 0"
@@ -15,19 +18,20 @@
                 style="right:16%;background-color: rgba(209,209,214,0.28)">
                 <div class="flex items-center">
                     <SvgIcon iconClass="search" class="ml-2 duration-200" style="width: 20px;" :style="{
-                        color: selectedIndex === 1 ? 'var(--primary-text-color)' : '',
-                    }" />
+                            color: selectedIndex === 1 ? 'var(--primary-text-color)' : '',
+                        }" />
                     <input @keyup.enter="toSearchPage(keyWords)" v-model="keyWords" type="text" name="" id=""
                         class="search-input text-sm font-bold duration-200" :style="{
-                            color: selectedIndex === 1 ? 'var(--primary-text-color)' : '',
-                        }">
+                                color: selectedIndex === 1 ? 'var(--primary-text-color)' : '',
+                            }">
                 </div>
             </div>
-            <div @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0" v-if="isLogin && userProfile"
-                class="absolute z-10 flex items-center duration-300 ease-out" style="right: 11%;" :style="{
-                    scale: enterIndex ? '2.5' : '1',
-                    transform: enterIndex ? 'translate(-15%, 40%)' : ''
-                }">
+            <div @click="router.push({ path: '/musicspace' })" @mouseenter="enterIndex = 1" @mouseleave="enterIndex = 0"
+                v-if="isLogin && userProfile" class="absolute z-10 flex items-center duration-300 ease-out"
+                style="right: 11%;" :style="{
+                        scale: enterIndex ? '2.5' : '1',
+                        transform: enterIndex ? 'translate(-15%, 40%)' : ''
+                    }">
                 <div class=" rounded-full overflow-hidden w-8 cursor-pointer select-none">
                     <img :src="userProfile.avatarUrl" alt="">
                 </div>
@@ -37,7 +41,7 @@
                 style="width: 300px;padding: 14px;right: 11%;top: 68px;transform: translateX(41%);box-shadow: 0 10px 20px -10px #6b7280;"
                 :style="{
 
-                }">
+                    }">
                 <div class="flex flex-col items-center justify-center mt-8 cursor-default">
                     <span>{{ userProfile.nickname }}</span>
                     <div class="mt-4 bg-gray-300" style="width: 80%;height: 1px;">
@@ -61,11 +65,11 @@ export default defineComponent({
 </script>
 
 <script setup lang='ts'>
-import { onMounted, computed, ref, defineComponent,inject } from 'vue';
+import { onMounted, computed, ref, defineComponent, inject } from 'vue';
 import { useRouter } from 'vue-router'
 import { useUserStore } from "@/store/user-store/index"
 import { storeToRefs } from 'pinia';
-const reload = inject<Function>('reload',()=>{})
+const reload = inject<Function>('reload', () => { })
 const router = useRouter()
 const store = useUserStore()
 const { isLogin, userProfile } = storeToRefs(store)
@@ -83,9 +87,6 @@ const toSearchPage = (k: string) => {
         reload()
     }
 }
-
-
-
 const signOut = async () => {
     await store.signOut()
     store.setLoginStatus()

@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-left: 5%; padding-right: 5%;">
+    <div class="max-w-6xl">
         <VideoPlayer :type="1" />
         <div v-if="mvDetail.values" class="mt-8 flex items-center">
             <div class="truncate" style="max-width:800px ;">

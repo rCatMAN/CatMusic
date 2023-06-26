@@ -6,7 +6,7 @@
         <div v-for="(item, index) in similarArtistList.values" :key="index" class="mb-8" style="width: 15%;">
             <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                 <el-image @click="toArtistPage(item.id)" :src="item.picUrl + '?param=500y500'" alt=""
-                    class="rounded-full relative z-10" fit="cover" style="width:90%;aspect-ratio: 1/1;" lazy />
+                    class="rounded-full relative z-10" fit="cover" style="width:90%;aspect-ratio: 1/1;" loading="lazy" />
                 <div class="shadow duration-300 ease-out"
                     :style="{ 'background-image': `url(${item.picUrl})`, opacity: selectedIndex === index ? '1' : '0' }">
                 </div>

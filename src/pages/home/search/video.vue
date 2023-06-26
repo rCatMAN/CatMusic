@@ -9,7 +9,7 @@
                 <div @click="toVideoPage(item.vid, item.type)" @mouseenter="selectedIndex = index"
                     @mouseleave="selectedIndex = 100" class=" relative cursor-pointer">
                     <el-image :src="item.coverUrl" fit="cover" style="aspect-ratio:16/9;"
-                        class="w-full rounded-xl  relative z-10" lazy />
+                        class="w-full rounded-xl  relative z-10" loading="lazy" />
                     <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
                         style="height: 30%;aspect-ratio:1/1; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
                         :style="{

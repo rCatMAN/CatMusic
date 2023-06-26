@@ -7,7 +7,7 @@
             <div @mouseenter="selectedIndex = index" @mouseleave="selectedIndex = 100"
                 class="relative w-full cursor-pointer">
                 <el-image @click="router.push({ path: '/album', query: { id: item.id } })"
-                    :src="item.picUrl + '?param=800y800'" alt="" class="relative rounded-lg z-10" lazy />
+                    :src="item.picUrl + '?param=800y800'" alt="" class="relative rounded-lg z-10" loading="lazy" />
                 <div class="absolute rounded-full overflow-hidden duration-200 ease-out z-30"
                     style="width: 25%;height: 25%; left: 50%;top: 50%;transform: translate(-50%,-50%);background: hsla(0,0%,100%,.14);backdrop-filter: blur(8px);border: 1px solid hsla(0,0%,100%,.08);"
                     :style="{
