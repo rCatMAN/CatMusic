@@ -91,6 +91,7 @@ type albumDetailType = {
         alia: string[]
         id: number
         fee: number
+        isLike: boolean
         dt: number
         al: {
             name: string
